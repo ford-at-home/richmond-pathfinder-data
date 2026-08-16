@@ -11,7 +11,7 @@ export function SourceBadge({ count }: { count: number }) {
   );
 }
 
-export function SourceList({ sources, title = "Sources" }: { sources: Source[]; title?: string }) {
+export function SourceList({ sources, title = "Sources" }: { sources: Source[]; title?: string | undefined }) {
   return (
     <section aria-label={title} className="border border-border bg-surface">
       <header className="flex items-center justify-between border-b border-border px-4 py-3">
@@ -61,7 +61,7 @@ export function DataProvenance({ provenance }: { provenance: Provenance }) {
   );
 }
 
-function ProvenanceItem({ label, value, span }: { label: string; value: string; span?: boolean }) {
+function ProvenanceItem({ label, value, span }: { label: string; value: string; span?: boolean | undefined }) {
   return (
     <div className={span ? "sm:col-span-2" : undefined}>
       <dt className="label-sm">{label}</dt>

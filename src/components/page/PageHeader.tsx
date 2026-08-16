@@ -10,12 +10,12 @@ export function PageHeader({
   children,
   className,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: string;
-  lead?: string;
-  meta?: { label: string; value: string }[];
-  children?: ReactNode;
-  className?: string;
+  lead?: string | undefined;
+  meta?: { label: string; value: string }[] | undefined;
+  children?: ReactNode | undefined;
+  className?: string | undefined;
 }) {
   return (
     <header className={cn("border-b border-rule pb-8 pt-10 md:pt-14", className)}>
@@ -43,8 +43,8 @@ export function ProseContainer({
   width = "default",
 }: {
   children: ReactNode;
-  className?: string;
-  width?: "default" | "narrow" | "wide";
+  className?: string | undefined;
+  width?: "default" | "narrow" | "wide" | undefined;
 }) {
   return (
     <div
@@ -69,12 +69,12 @@ export function SectionIntro({
   className,
   children,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: string;
-  lead?: string;
-  as?: "h2" | "h3";
-  className?: string;
-  children?: ReactNode;
+  lead?: string | undefined;
+  as?: "h2" | "h3" | undefined;
+  className?: string | undefined;
+  children?: ReactNode | undefined;
 }) {
   return (
     <div className={cn("max-w-2xl", className)}>
@@ -95,9 +95,9 @@ export function PageSection({
   labelledBy,
 }: {
   children: ReactNode;
-  className?: string;
-  id?: string;
-  labelledBy?: string;
+  className?: string | undefined;
+  id?: string | undefined;
+  labelledBy?: string | undefined;
 }) {
   return (
     <section id={id} aria-labelledby={labelledBy} className={cn("py-12 md:py-16", className)}>

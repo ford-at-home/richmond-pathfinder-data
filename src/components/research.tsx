@@ -35,7 +35,7 @@ export function ResearchCard({ story }: { story: ResearchStory }) {
   );
 }
 
-export function RelatedResearch({ stories, title = "Related research" }: { stories: ResearchStory[]; title?: string }) {
+export function RelatedResearch({ stories, title = "Related research" }: { stories: ResearchStory[]; title?: string | undefined }) {
   if (stories.length === 0) return null;
   return (
     <section aria-labelledby="related-research" className="border-t border-rule pt-8">

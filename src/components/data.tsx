@@ -22,13 +22,13 @@ export function VisualizationFrame({
   children,
 }: {
   title: string;
-  description?: string;
+  description?: string | undefined;
   provenance: Provenance;
-  height?: "short" | "tall";
-  toolbar?: ReactNode;
-  legend?: ReactNode;
-  tableView?: ReactNode;
-  children?: ReactNode;
+  height?: "short" | "tall" | undefined;
+  toolbar?: ReactNode | undefined;
+  legend?: ReactNode | undefined;
+  tableView?: ReactNode | undefined;
+  children?: ReactNode | undefined;
 }) {
   const [showTable, setShowTable] = useState(false);
   const regionId = useId();
@@ -122,8 +122,8 @@ export function VisualizationLegend({
   items,
   note,
 }: {
-  items: { label: string; shape: string; note?: string; colorClass?: string }[];
-  note?: string;
+  items: { label: string; shape: string; note?: string | undefined; colorClass?: string | undefined }[];
+  note?: string | undefined;
 }) {
   return (
     <div>
@@ -160,12 +160,12 @@ export function FilterBar({
   filters,
   disabledNote,
 }: {
-  searchLabel?: string;
-  searchPlaceholder?: string;
-  value?: string;
-  onValueChange?: (v: string) => void;
-  filters?: ReactNode;
-  disabledNote?: string;
+  searchLabel?: string | undefined;
+  searchPlaceholder?: string | undefined;
+  value?: string | undefined;
+  onValueChange?: (v: string) => void | undefined;
+  filters?: ReactNode | undefined;
+  disabledNote?: string | undefined;
 }) {
   const inputId = useId();
   return (
@@ -240,9 +240,9 @@ export function DataTable({
   emptyLabel = "Not yet migrated",
 }: {
   caption: string;
-  columns: { key: string; label: string; numeric?: boolean }[];
+  columns: { key: string; label: string; numeric?: boolean | undefined }[];
   rows: Record<string, string | null>[];
-  emptyLabel?: string;
+  emptyLabel?: string | undefined;
 }) {
   return (
     <div className="overflow-x-auto">
@@ -296,7 +296,7 @@ export function EmptyState({
 }: {
   title: string;
   body: string;
-  action?: ReactNode;
+  action?: ReactNode | undefined;
 }) {
   return (
     <div className="border border-dashed border-rule bg-inset px-6 py-12 text-center">
@@ -307,7 +307,7 @@ export function EmptyState({
   );
 }
 
-export function LoadingState({ label = "Loading" }: { label?: string }) {
+export function LoadingState({ label = "Loading" }: { label?: string | undefined }) {
   return (
     <div role="status" aria-live="polite" className="flex items-center gap-3 border border-border bg-inset px-4 py-6">
       <Loader2 className="size-4 animate-spin text-muted-foreground" aria-hidden="true" />
@@ -321,9 +321,9 @@ export function ErrorState({
   body = "Try again. If the problem continues, the underlying data source may be unavailable.",
   onRetry,
 }: {
-  title?: string;
-  body?: string;
-  onRetry?: () => void;
+  title?: string | undefined;
+  body?: string | undefined;
+  onRetry?: () => void | undefined;
 }) {
   return (
     <div role="alert" className="border border-destructive/40 bg-destructive/8 px-4 py-5">
