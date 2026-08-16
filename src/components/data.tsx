@@ -163,7 +163,7 @@ export function FilterBar({
   searchLabel?: string | undefined;
   searchPlaceholder?: string | undefined;
   value?: string | undefined;
-  onValueChange?: (v: string) => void | undefined;
+  onValueChange?: ((v: string) => void) | undefined;
   filters?: ReactNode | undefined;
   disabledNote?: string | undefined;
 }) {
@@ -323,7 +323,7 @@ export function ErrorState({
 }: {
   title?: string | undefined;
   body?: string | undefined;
-  onRetry?: () => void | undefined;
+  onRetry?: (() => void) | undefined;
 }) {
   return (
     <div role="alert" className="border border-destructive/40 bg-destructive/8 px-4 py-5">
