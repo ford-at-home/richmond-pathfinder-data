@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
-import { LimitationNote, PlaceholderBadge } from "@/components/editorial";
+import { LimitationNote } from "@/components/editorial";
 import {
   PageHeader,
   PageSection,
@@ -9,171 +9,144 @@ import {
   SectionIntro,
 } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
-import { siteConfig } from "@/config/site";
+import { PLACEMENT, REPORTS } from "@/content/figures";
 import { researchStories } from "@/content/research";
+import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Richmond Workforce Transition — Overview" },
+      {
+        title: "AI Exposure and Employment Change in the Richmond Metropolitan Area",
+      },
       {
         name: "description",
         content:
-          "A public-interest view of how workers move between occupations in the Richmond, Virginia region, and whether the region can support those moves.",
+          "Occupation-level evidence on where AI-exposed work sits in the Richmond, Virginia economy, what happened to employment in that work between May 2023 and May 2025, and what it would take to move the people affected.",
       },
-      { property: "og:title", content: "Richmond Workforce Transition — Overview" },
+      {
+        property: "og:title",
+        content: "AI Exposure and Employment Change in the Richmond Metropolitan Area",
+      },
       {
         property: "og:description",
         content:
-          "How workers move between occupations in the Richmond region, and whether the region has the capacity to support those moves.",
+          "523 detailed occupations, 88.4% of metropolitan employment, joined from Anthropic observed task-exposure scores and BLS occupational employment estimates.",
       },
     ],
   }),
   component: Overview,
 });
 
-const entryPanels = [
-  {
-    to: "/transition-map" as const,
-    eyebrow: "01",
-    title: "Transition Map",
-    body: "How a worker may move from one occupation to an adjacent occupation, and how far apart those occupations are.",
-  },
-  {
-    to: "/transition-capacity" as const,
-    eyebrow: "02",
-    title: "Transition Capacity",
-    body: "Whether the region has the jobs, training seats, funding, and employer demand to make those moves realistic at scale.",
-  },
-  {
-    to: "/richmond-region" as const,
-    eyebrow: "03",
-    title: "Richmond Region Data",
-    body: "Regional labor-market conditions, exposure, hiring demand, training resources, geography, and constraints.",
-  },
-];
-
-const audienceQuestions = [
-  {
-    audience: "Employers",
-    question: "Where can I find people who are already close to the roles I need to fill?",
-    to: "/transition-map" as const,
-  },
-  {
-    audience: "Workers",
-    question: "If my occupation changes, what work is adjacent to what I already do?",
-    to: "/transition-map" as const,
-  },
-  {
-    audience: "Regional leaders",
-    question: "Can this region actually absorb and retrain the workers who need to move?",
-    to: "/transition-capacity" as const,
-  },
-];
+function liveCount(slug: string): number {
+  const placement = PLACEMENT[slug] ?? {};
+  return Object.values(placement).reduce((n, ids) => n + ids.length, 0);
+}
 
 function Overview() {
-  const featured = researchStories.slice(0, 3);
-
   return (
     <>
       <ProseContainer>
         <PageHeader
-          eyebrow="Overview"
-          title="Workforce transition in the Richmond region, examined openly."
-          lead={siteConfig.tagline}
+          eyebrow="Richmond VA MSA (BLS 40060)"
+          title="AI Exposure and Employment Change in the Richmond Metropolitan Area"
+          lead="523 detailed occupations, 88.4% of metropolitan employment, joined from Anthropic's observed task-exposure scores and Bureau of Labor Statistics occupational employment estimates."
         >
           <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            This site is being built in the open. The interface below is complete; the research,
-            data, and citations are migrated separately. Nothing here should be read as a finding
-            yet.
+            Two of the most quotable numbers in this analysis are labelled{" "}
+            <strong className="text-foreground">not supportable</strong> by the analysis itself. The
+            interactive figures set into the reports exist so that a reader can take those numbers
+            apart rather than repeat them.
           </p>
-          <PlaceholderBadge className="mt-5">
-            Scaffold release — content not migrated
-          </PlaceholderBadge>
         </PageHeader>
       </ProseContainer>
 
       <ProseContainer>
-        <PageSection labelledBy="entry-points">
-          <h2 id="entry-points" className="sr-only">
-            Main sections
-          </h2>
-          <div className="grid gap-px bg-rule md:grid-cols-3">
-            {entryPanels.map((panel) => (
-              <Link
-                key={panel.to}
-                to={panel.to}
-                className="group flex flex-col bg-background p-6 transition-colors hover:bg-surface"
-              >
-                <span className="numeric text-xs text-highlight">{panel.eyebrow}</span>
-                <h3 className="mt-4 font-display text-2xl leading-tight text-foreground">
-                  {panel.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{panel.body}</p>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                  Open section
-                  <ArrowRight
-                    className="size-4 transition-transform group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </PageSection>
-
-        <PageSection labelledBy="questions" className="rule-t">
+        <PageSection labelledBy="reports">
           <SectionIntro
-            eyebrow="Where to begin"
-            title="Start with the question you have"
-            lead="Each section answers a different kind of question. These are the questions we hear most often."
+            eyebrow="The reports"
+            title="The evidence base, reproduced in full"
+            lead="Where a claim has an interactive figure, the figure sits in the section that makes the claim."
           >
-            <span id="questions" className="sr-only">
-              Start with the question you have
+            <span id="reports" className="sr-only">
+              The reports
             </span>
           </SectionIntro>
-          <ul className="mt-8 grid gap-px bg-rule md:grid-cols-3">
-            {audienceQuestions.map((q) => (
-              <li key={q.audience} className="bg-background p-5">
-                <p className="label-sm">{q.audience}</p>
-                <p className="mt-3 font-display text-lg leading-snug text-foreground">
-                  “{q.question}”
-                </p>
-                <Link
-                  to={q.to}
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm text-primary underline-offset-4 hover:underline"
-                >
-                  Where this is addressed
-                  <ArrowRight className="size-3.5" aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
+          <ul className="mt-8 grid gap-5 md:grid-cols-3">
+            {REPORTS.map((r) => {
+              const story = researchStories.find((s) => s.slug === r.slug);
+              const n = liveCount(r.slug);
+              return (
+                <li key={r.slug}>
+                  {story ? <ResearchCard story={story} /> : null}
+                  <p className="mt-2 annotation">
+                    {n > 0 ? `${n} interactive figure${n === 1 ? "" : "s"}` : "Generated tables"}
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </PageSection>
 
-        <PageSection labelledBy="featured" className="rule-t">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionIntro
-              eyebrow="Research"
-              title="Featured research"
-              lead="Editorial pages that explain one question at a time, with their sources and limits in view."
-            />
-            <Link
-              to="/research"
-              className="text-sm text-primary underline-offset-4 hover:underline"
-            >
-              All research
-            </Link>
-          </div>
-          <span id="featured" className="sr-only">
-            Featured research
-          </span>
-          <ul className="mt-8 grid gap-5 md:grid-cols-3">
-            {featured.map((story) => (
-              <li key={story.slug}>
-                <ResearchCard story={story} />
-              </li>
-            ))}
+        <PageSection labelledBy="other-views" className="rule-t">
+          <SectionIntro
+            eyebrow="Other views of the same tables"
+            title="Map, capacity, and region"
+            lead="These routes keep the Lovable information architecture. They present the published pairs, the capacity report, and the MSA / QCEW geography — they do not add a network graph, a gap calculator, or a city map the source did not have."
+          >
+            <span id="other-views" className="sr-only">
+              Other views
+            </span>
+          </SectionIntro>
+          <ul className="mt-8 grid gap-px bg-rule md:grid-cols-3">
+            <li className="bg-background p-6">
+              <h3 className="font-display text-2xl leading-tight text-foreground">
+                Transition Map
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Screened origin–destination pairs from pathways_reachable.csv. Not a Cytoscape
+                network; the source has none.
+              </p>
+              <Link
+                to="/transition-map"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+              >
+                Open section
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </li>
+            <li className="bg-background p-6">
+              <h3 className="font-display text-2xl leading-tight text-foreground">
+                Transition Capacity
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                The published findings and the pathways figure. The six-stage gap calculator stays
+                empty because that chain is not in the source.
+              </p>
+              <Link
+                to="/transition-capacity"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+              >
+                Open section
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </li>
+            <li className="bg-background p-6">
+              <h3 className="font-display text-2xl leading-tight text-foreground">
+                Richmond Region Data
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                MSA definition (BLS 40060) and QCEW industry series on the current 17-county set.
+                Not a city choropleth.
+              </p>
+              <Link
+                to="/richmond-region"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+              >
+                Open section
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </li>
           </ul>
         </PageSection>
 
@@ -182,7 +155,7 @@ function Overview() {
             <SectionIntro
               eyebrow="Source integrity"
               title="How this site handles evidence"
-              lead="Every figure will show its source, geography, unit, and reference period. Every visualization will be readable as a table. Where the evidence is thin, the page will say so."
+              lead="Every figure shows its source, geography, unit, and reference period. Zero exposure is absence of measurement, not safety. The 4.37% aggregate and the placebo screen stay labelled Not supportable."
             >
               <span id="integrity" className="sr-only">
                 Source integrity
@@ -197,9 +170,22 @@ function Overview() {
             </SectionIntro>
             <LimitationNote title="What this site does not do" tone="note">
               It does not rank employers, providers, or localities, does not make causal claims, and
-              does not determine eligibility for any program.
+              does not determine eligibility for any program. The employer and worker demonstrators
+              from the source site are not on this site (unresolved U1): those pages run on invented
+              employers and a simulated roster, and the source itself says the demonstrator is not
+              evidence.
             </LimitationNote>
           </div>
+        </PageSection>
+
+        <PageSection labelledBy="pin" className="rule-t">
+          <p id="pin" className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            Reports and figures are reproduced from{" "}
+            <a href={pinCommitUrl} className="text-primary underline-offset-4 hover:underline">
+              {pinRepo}
+            </a>{" "}
+            at commit <code>{pinShort}</code>, synced {pinSynced}.
+          </p>
         </PageSection>
       </ProseContainer>
     </>

@@ -1,19 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import {
-  DataTable,
-  VisualizationFrame,
-  VisualizationLegend,
-  VisualizationStagePlaceholder,
-} from "@/components/data";
-import { EvidencePanel, LimitationNote, MetricCallout } from "@/components/editorial";
+import { DataTable, VisualizationFrame, VisualizationStagePlaceholder } from "@/components/data";
+import { LimitationNote, MetricCallout } from "@/components/editorial";
 import {
   PageHeader,
   PageSection,
   ProseContainer,
   SectionIntro,
 } from "@/components/page/PageHeader";
-import { localities, regionLimitations, regionMeasures } from "@/content/region";
+import { qcewSeries, regionLimitations, regionMeasures } from "@/content/region";
+import { GEOGRAPHY } from "@/lib/geography";
 
 export const Route = createFileRoute("/richmond-region")({
   head: () => ({
@@ -22,30 +18,36 @@ export const Route = createFileRoute("/richmond-region")({
       {
         name: "description",
         content:
-          "Regional labor-market conditions, AI exposure, hiring demand, training resources, geography, and workforce constraints across the Richmond, Virginia region.",
+          "Richmond VA MSA (BLS 40060) geography, join coverage, and QCEW industry employment on the current 17-county set.",
       },
       { property: "og:title", content: "Richmond Region Data — Richmond Workforce Transition" },
       {
         property: "og:description",
         content:
-          "Locality-level labor-market conditions and constraints across the Richmond region.",
+          "MSA definition and QCEW industry series. Not a City of Richmond map and not occupation-by-locality exposure.",
       },
     ],
   }),
   component: RichmondRegionPage,
 });
 
+function fmt(n: number | null): string | null {
+  return n == null ? null : n.toLocaleString("en-US");
+}
+
 function RichmondRegionPage() {
+  const current = qcewSeries.filter((r) => r.countySet === "current_17");
+
   return (
     <ProseContainer width="wide">
       <PageHeader
         eyebrow="Section 03"
         title="Richmond Region Data"
-        lead="The conditions the region is working with: where employment sits, where hiring demand shows up, where training capacity exists, and how those differ across localities."
+        lead="Geography is the Richmond, VA metropolitan statistical area, BLS area code 40060, unless stated otherwise. That is not the City of Richmond."
         meta={[
-          { label: "Geography", value: "Richmond, Virginia region" },
-          { label: "Localities", value: "Defined at migration" },
-          { label: "Status", value: "Structure only — data not migrated" },
+          { label: "Geography", value: GEOGRAPHY },
+          { label: "QCEW set", value: "Current 17-county (2020 standards)" },
+          { label: "OEWS join", value: "523 occupations, 88.4% of metro employment" },
         ]}
       />
 
@@ -53,13 +55,13 @@ function RichmondRegionPage() {
         <SectionIntro
           eyebrow="Regional overview"
           title="Key measures"
-          lead="A short set of headline measures, each carrying its own source, unit, and reference period."
+          lead="Headline counts taken from the codebook and the QCEW fixed-geography table. Hiring demand and training providers have no source file and stay empty."
         >
           <span id="measures" className="sr-only">
             Key measures
           </span>
         </SectionIntro>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {regionMeasures.map((m) => (
             <MetricCallout
               key={m.id}
@@ -78,70 +80,66 @@ function RichmondRegionPage() {
           Regional map
         </span>
         <VisualizationFrame
-          title="Regional map of the Richmond area"
-          description="Locality-level view of employment, exposure, demand, and training locations."
+          title="MapLibre choropleth — not in the source"
+          description="The source site has no map library. A locality choropleth of AI exposure cannot be built from these files (U5)."
           provenance={{
-            source: "Pending migration",
-            geography: "Richmond, Virginia region",
-            unit: "Varies by layer",
-            period: "Pending migration",
-            note: "Layer definitions and the regional boundary are set during migration.",
+            source: "None — no geographic occupation layer in the pinned analysis",
+            geography: GEOGRAPHY,
+            unit: "Not applicable",
+            period: "Not applicable",
+            note: "QCEW is industry × county-set, not occupation × locality.",
           }}
-          legend={
-            <VisualizationLegend
-              items={[
-                { label: "City", shape: "circle", colorClass: "bg-chart-1" },
-                { label: "County", shape: "square", colorClass: "bg-chart-3" },
-                { label: "Training location", shape: "diamond", colorClass: "bg-chart-2" },
-                { label: "No data", shape: "hatched", colorClass: "bg-muted" },
+          tableView={
+            <DataTable
+              caption="QCEW annual average employment, current 17-county Richmond MSA (2020 standards)."
+              columns={[
+                { key: "naics", label: "NAICS" },
+                { key: "industry", label: "Industry" },
+                { key: "emp2019", label: "2019", numeric: true },
+                { key: "emp2023", label: "2023", numeric: true },
+                { key: "emp2025", label: "2025", numeric: true },
+                { key: "supp", label: "Suppressed cells", numeric: true },
               ]}
-              note="Each map symbol is distinguished by shape as well as color."
+              rows={current.map((r) => ({
+                naics: r.naics,
+                industry: r.industry,
+                emp2019: fmt(r.emp2019),
+                emp2023: fmt(r.emp2023),
+                emp2025: fmt(r.emp2025),
+                supp: r.suppressedCells == null ? null : String(r.suppressedCells),
+              }))}
             />
           }
-          tableView={<LocalityTable />}
         >
           <VisualizationStagePlaceholder
-            library="a MapLibre GL JS map"
-            purpose="An interactive locality map with switchable layers for employment, exposure, hiring demand, and training locations."
+            library="MapLibre GL JS (not in the source)"
+            purpose="Reserved for a future geographic layer. The table is the migrated regional series."
           />
         </VisualizationFrame>
       </PageSection>
 
-      <PageSection labelledBy="comparison" className="rule-t">
-        <SectionIntro
-          eyebrow="Comparison"
-          title="Locality comparison"
-          lead="The map's fallback: the same values in a sortable, readable table."
-        >
-          <span id="comparison" className="sr-only">
-            Locality comparison
-          </span>
-        </SectionIntro>
-        <div className="mt-8 border border-border bg-surface p-4">
-          <LocalityTable />
-        </div>
-      </PageSection>
-
-      <PageSection labelledBy="patterns" className="rule-t">
-        <span id="patterns" className="sr-only">
-          Occupational patterns and demand
-        </span>
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          <EvidencePanel title="Occupational patterns" note="Which occupations concentrate where.">
-            <p className="annotation">Reserved for migrated occupational composition data.</p>
-          </EvidencePanel>
-          <EvidencePanel title="Employer demand" note="What regional employers are hiring for.">
-            <p className="annotation">Reserved for migrated postings or survey data.</p>
-          </EvidencePanel>
-          <EvidencePanel title="Training locations" note="Where programs are physically delivered.">
-            <p className="annotation">Reserved for migrated provider and program locations.</p>
-          </EvidencePanel>
+      <PageSection labelledBy="delineation" className="rule-t">
+        <div className="grid gap-8 lg:grid-cols-2">
+          <SectionIntro
+            eyebrow="Delineation"
+            title="The metro changed between May 2023 and May 2024"
+            lead="Caroline County left and King and Queen County entered. QCEW tables hold a 17-county current set so industry series can be compared on constant geography."
+          >
+            <span id="delineation" className="sr-only">
+              Delineation
+            </span>
+          </SectionIntro>
+          <LimitationNote title="QCEW cannot confirm occupation change" tone="caution">
+            QCEW has no occupational dimension, so it cannot confirm or refute the OEWS clerical
+            employment change directly; it can only show whether the industries that employ the most
+            clerical workers moved in a consistent direction.
+          </LimitationNote>
         </div>
       </PageSection>
 
       <PageSection labelledBy="limits" className="rule-t">
         <span id="limits" className="sr-only">
-          Data limitations
+          Limitations
         </span>
         <div className="grid gap-4 md:grid-cols-2">
           {regionLimitations.map((l) => (
@@ -152,27 +150,5 @@ function RichmondRegionPage() {
         </div>
       </PageSection>
     </ProseContainer>
-  );
-}
-
-function LocalityTable() {
-  return (
-    <DataTable
-      caption="Locality comparison — placeholder rows, no values migrated."
-      columns={[
-        { key: "name", label: "Locality" },
-        { key: "type", label: "Type" },
-        { key: "employment", label: "Employment", numeric: true },
-        { key: "ai-exposure", label: "AI exposure", numeric: true },
-        { key: "hiring-demand", label: "Hiring demand", numeric: true },
-      ]}
-      rows={localities.map((l) => ({
-        name: l.name,
-        type: l.type,
-        employment: l.measures["employment"] ?? null,
-        "ai-exposure": l.measures["ai-exposure"] ?? null,
-        "hiring-demand": l.measures["hiring-demand"] ?? null,
-      }))}
-    />
   );
 }

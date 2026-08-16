@@ -8,8 +8,18 @@ import {
   SectionIntro,
 } from "@/components/page/PageHeader";
 import { SourceList } from "@/components/sources";
-import { definitions, methodologyLimitations, sourceHandling } from "@/content/methodology";
+import {
+  definitions,
+  methodologyHtml,
+  methodologyLimitations,
+  robustnessHtml,
+  sourceHandling,
+} from "@/content/methodology";
 import { sources } from "@/content/research";
+import { GEOGRAPHY } from "@/lib/geography";
+import { pinShort, pinSynced } from "@/lib/pin";
+
+import "@/visualizations/source-report.css";
 
 export const Route = createFileRoute("/methodology")({
   head: () => ({
@@ -18,13 +28,13 @@ export const Route = createFileRoute("/methodology")({
       {
         name: "description",
         content:
-          "Definitions, limitations, and source handling for the Richmond regional workforce transition project.",
+          "Join, metrics, and limits for the Richmond VA MSA analysis of observed-task exposure and OEWS employment.",
       },
       { property: "og:title", content: "Methodology — Richmond Workforce Transition" },
       {
         property: "og:description",
         content:
-          "How terms are defined, how sources are handled, and what this project does not claim.",
+          "How exposure is joined to OEWS, what the metrics are, and the limits that travel with any claim.",
       },
     ],
   }),
@@ -37,10 +47,11 @@ function MethodologyPage() {
       <PageHeader
         eyebrow="Reference"
         title="Methodology, definitions, and limitations"
-        lead="What the words on this site mean, how evidence is handled, and where the analysis stops."
+        lead="The construction, the metrics, and the limits that any use of the data needs to carry. Body text below is the pinned methodology document, not a paraphrase."
         meta={[
-          { label: "Status", value: "Scaffold — methodology text not migrated" },
-          { label: "Last reviewed", value: "Pending migration" },
+          { label: "Geography", value: GEOGRAPHY },
+          { label: "Analysis pin", value: pinShort },
+          { label: "Synced", value: pinSynced },
         ]}
       />
 
@@ -62,11 +73,43 @@ function MethodologyPage() {
         </div>
       </PageSection>
 
+      <PageSection labelledBy="document" className="rule-t">
+        <SectionIntro
+          eyebrow="Pinned document"
+          title="Methodology"
+          lead="Reproduced from data/source/docs/methodology.md."
+        >
+          <span id="document" className="sr-only">
+            Methodology document
+          </span>
+        </SectionIntro>
+        <div
+          className="source-report source-figure prose mt-8 max-w-3xl"
+          dangerouslySetInnerHTML={{ __html: methodologyHtml }}
+        />
+      </PageSection>
+
+      <PageSection labelledBy="robustness" className="rule-t">
+        <SectionIntro
+          eyebrow="Pinned companion"
+          title="Robustness"
+          lead="The methodology says to run this before making any exposure claim. Reproduced from data/source/docs/robustness.md."
+        >
+          <span id="robustness" className="sr-only">
+            Robustness
+          </span>
+        </SectionIntro>
+        <div
+          className="source-report source-figure prose mt-8 max-w-3xl"
+          dangerouslySetInnerHTML={{ __html: robustnessHtml }}
+        />
+      </PageSection>
+
       <PageSection labelledBy="handling" className="rule-t">
         <SectionIntro
           eyebrow="Source handling"
           title="How evidence is presented"
-          lead="These rules apply to every page, chart, map, and table on the site."
+          lead="These rules apply to every page, chart, and table on the site."
         >
           <span id="handling" className="sr-only">
             Source handling

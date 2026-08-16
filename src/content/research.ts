@@ -1,154 +1,136 @@
-import type { ResearchStory, Source } from "./types";
+import exposureMd from "../../data/source/reports/ai-exposure-and-employment-change.md?raw";
+import capacityMd from "../../data/source/reports/transition-capacity.md?raw";
+import appendixMd from "../../data/source/reports/technical-appendix.md?raw";
+
+import { REPORTS } from "./figures";
+import type { ResearchSection, ResearchStory, Source } from "./types";
+import { numberedFindings, readingMinutes, splitReport } from "@/lib/reports";
 
 /**
- * PLACEHOLDER research entries.
- * Titles, findings, dates and sources below are structural demonstrations only.
- * Replace wholesale during migration (JSON, MDX, or API response).
+ * Source register. Titles, dates, and retrieval notes are taken from the
+ * pinned technical appendix (Section A) and data/source/docs/data-sources.md.
+ * Do not add a source that those documents do not name.
  */
-
 export const sources: Source[] = [
   {
-    id: "placeholder-source-a",
-    title: "Placeholder source A — replace during migration",
-    publisher: "Placeholder publisher",
-    date: "2026-01-01",
+    id: "anthropic-economic-index",
+    title: "Occupational observed-task exposure (job_exposure.csv)",
+    publisher: "Anthropic Economic Index",
+    date: "2026-03-05",
+    accessed: "2026-07",
+    url: "https://huggingface.co/datasets/Anthropic/EconomicIndex",
+    pages: "labor_market_impacts/job_exposure.csv; 756 occupations; CC BY 4.0",
     kind: "dataset",
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   {
-    id: "placeholder-source-b",
-    title: "Placeholder source B — replace during migration",
-    publisher: "Placeholder publisher",
-    date: "2026-01-01",
+    id: "bls-oews",
+    title: "Occupational Employment and Wage Statistics, Richmond VA MSA (BLS 40060)",
+    publisher: "U.S. Bureau of Labor Statistics",
+    date: "2025-05",
+    accessed: "2026-07",
+    url: "https://www.bls.gov/oes/special-requests/",
+    pages: "May 2010–May 2025 metro and national releases used in the panel",
+    kind: "dataset",
+    isPlaceholder: false,
+  },
+  {
+    id: "onet",
+    title: "Related Occupations and Job Zones",
+    publisher: "O*NET",
+    accessed: "2026-07",
+    url: "https://www.onetcenter.org/database.html",
+    pages: "adjacency and job zones for the capacity analysis",
+    kind: "dataset",
+    isPlaceholder: false,
+  },
+  {
+    id: "bls-qcew",
+    title: "Quarterly Census of Employment and Wages, county files",
+    publisher: "U.S. Bureau of Labor Statistics",
+    date: "2025",
+    accessed: "2026-07",
+    url: "https://www.bls.gov/cew/",
+    pages: "seventeen counties of the current Richmond MSA, 2019–2025; private ownership",
+    kind: "dataset",
+    isPlaceholder: false,
+  },
+  {
+    id: "grp-employers",
+    title: "Richmond-VA-Largest-Employers.pdf",
+    publisher: "Greater Richmond Partnership",
+    date: "2026-02",
     kind: "report",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-source-c",
-    title: "Placeholder source C — replace during migration",
-    publisher: "Placeholder publisher",
-    date: "2026-01-01",
-    kind: "administrative",
-    isPlaceholder: true,
+    isPlaceholder: false,
+    pages:
+      "Named in the technical appendix source table; not used as occupational evidence on this site",
   },
 ];
 
-export const researchTopics = ["Transitions", "Capacity", "Regional data", "Training"] as const;
+const RAW: Record<string, string> = {
+  "ai-exposure-and-employment-change": exposureMd,
+  "transition-capacity": capacityMd,
+  "technical-appendix": appendixMd,
+};
 
-export const researchStories: ResearchStory[] = [
-  {
-    slug: "placeholder-story-one",
-    title: "Placeholder research story one",
-    topic: "Transitions",
-    thesis:
-      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
-    publishedAt: "2026-01-01",
-    updatedAt: "2026-01-01",
-    readingMinutes: 7,
-    sourceIds: ["placeholder-source-a", "placeholder-source-b"],
-    keyFindings: [
-      "Placeholder key finding — replace with migrated, sourced text.",
-      "Placeholder key finding — replace with migrated, sourced text.",
-      "Placeholder key finding — replace with migrated, sourced text.",
-    ],
-    sections: [
-      {
-        heading: "What the question is",
-        body: "Placeholder section body. Migration should place the story's framing here, written as editorial prose with inline references to the source list.",
-      },
-      {
-        heading: "What the evidence shows",
-        body: "Placeholder section body. The visual evidence stage above this section is reserved for a chart or diagram with its own unit, geography, period, and source line.",
-      },
-      {
-        heading: "Where the picture is incomplete",
-        body: "Placeholder section body. Gaps in coverage, timing, or comparability belong here rather than in the findings.",
-      },
-    ],
-    limitations: [
-      "Placeholder limitation — replace with the real caveat text at migration.",
-      "Placeholder limitation — replace with the real caveat text at migration.",
-    ],
-    whatThisMeans:
-      "Placeholder interpretation. Scaffold text makes no causal claim, recommendation, ranking, or eligibility determination.",
-    relatedSlugs: ["placeholder-story-two", "placeholder-story-three"],
-    isPlaceholder: true,
-  },
-  {
-    slug: "placeholder-story-two",
-    title: "Placeholder research story two",
-    topic: "Capacity",
-    thesis:
-      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
-    publishedAt: "2026-01-01",
-    readingMinutes: 5,
-    sourceIds: ["placeholder-source-b"],
-    keyFindings: [
-      "Placeholder key finding — replace with migrated, sourced text.",
-      "Placeholder key finding — replace with migrated, sourced text.",
-    ],
-    sections: [
-      {
-        heading: "What the question is",
-        body: "Placeholder section body for the capacity-oriented story template.",
-      },
-      {
-        heading: "What the evidence shows",
-        body: "Placeholder section body reserved for migrated analysis.",
-      },
-    ],
-    limitations: ["Placeholder limitation — replace during migration."],
-    whatThisMeans: "Placeholder interpretation reserved for migrated text.",
-    relatedSlugs: ["placeholder-story-one"],
-    isPlaceholder: true,
-  },
-  {
-    slug: "placeholder-story-three",
-    title: "Placeholder research story three",
-    topic: "Regional data",
-    thesis:
-      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
-    publishedAt: "2026-01-01",
-    readingMinutes: 9,
-    sourceIds: ["placeholder-source-a", "placeholder-source-c"],
-    keyFindings: ["Placeholder key finding — replace with migrated, sourced text."],
-    sections: [
-      {
-        heading: "What the question is",
-        body: "Placeholder section body for the regional-data story template.",
-      },
-      {
-        heading: "What the evidence shows",
-        body: "Placeholder section body reserved for migrated analysis.",
-      },
-    ],
-    limitations: ["Placeholder limitation — replace during migration."],
-    whatThisMeans: "Placeholder interpretation reserved for migrated text.",
-    relatedSlugs: ["placeholder-story-one", "placeholder-story-two"],
-    isPlaceholder: true,
-  },
-  {
-    slug: "placeholder-story-four",
-    title: "Placeholder research story four",
-    topic: "Training",
-    thesis:
-      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
-    publishedAt: "2026-01-01",
-    readingMinutes: 4,
-    sourceIds: ["placeholder-source-c"],
-    keyFindings: ["Placeholder key finding — replace with migrated, sourced text."],
-    sections: [
-      {
-        heading: "What the question is",
-        body: "Placeholder section body for the training-oriented story template.",
-      },
-    ],
-    limitations: ["Placeholder limitation — replace during migration."],
-    whatThisMeans: "Placeholder interpretation reserved for migrated text.",
-    relatedSlugs: ["placeholder-story-two"],
-    isPlaceholder: true,
-  },
-];
+const RELATED: Record<string, string[]> = {
+  "ai-exposure-and-employment-change": ["transition-capacity", "technical-appendix"],
+  "transition-capacity": ["ai-exposure-and-employment-change", "technical-appendix"],
+  "technical-appendix": ["ai-exposure-and-employment-change", "transition-capacity"],
+};
+
+const SOURCE_IDS: Record<string, string[]> = {
+  "ai-exposure-and-employment-change": ["anthropic-economic-index", "bls-oews"],
+  "transition-capacity": ["anthropic-economic-index", "bls-oews", "onet"],
+  "technical-appendix": [
+    "anthropic-economic-index",
+    "bls-oews",
+    "onet",
+    "bls-qcew",
+    "grp-employers",
+  ],
+};
+
+function toStory(slug: string): ResearchStory {
+  const raw = RAW[slug];
+  if (!raw) throw new Error(`No markdown for report ${slug}`);
+  const split = splitReport(slug, raw);
+  const meta = REPORTS.find((r) => r.slug === slug);
+  if (!meta) throw new Error(`No REPORTS entry for ${slug}`);
+
+  const summary = split.sections.find((s) => s.heading.toLowerCase().includes("summary"));
+  const findings = summary ? numberedFindings(summary.markdown) : [];
+
+  const sections: ResearchSection[] = split.sections.map((s) => ({
+    heading: s.heading,
+    body: s.markdown.slice(0, 280),
+    html: s.html,
+    number: s.number,
+    anchor: s.anchor,
+    figureIds: s.figureIds,
+  }));
+
+  return {
+    slug,
+    title: split.title,
+    topic: meta.short,
+    thesis: meta.blurb,
+    publishedAt: "2026-07",
+    readingMinutes: readingMinutes(raw),
+    sourceIds: SOURCE_IDS[slug] ?? [],
+    keyFindings: findings,
+    preambleHtml: split.preambleHtml,
+    sections,
+    limitations: [],
+    whatThisMeans: "",
+    relatedSlugs: RELATED[slug] ?? [],
+    isPlaceholder: false,
+  };
+}
+
+export const researchStories: ResearchStory[] = REPORTS.map((r) => toStory(r.slug));
+
+export const researchTopics = [...new Set(researchStories.map((s) => s.topic))];
 
 export function getStory(slug: string): ResearchStory | undefined {
   return researchStories.find((s) => s.slug === slug);

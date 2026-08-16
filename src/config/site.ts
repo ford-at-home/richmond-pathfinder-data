@@ -6,10 +6,11 @@
 export const siteConfig = {
   name: "Richmond Workforce Transition",
   shortName: "RWT",
-  tagline: "Understanding how workers move between occupations in the Richmond, Virginia region.",
-  region: "Richmond, Virginia region",
-  /** Placeholder scaffold — replace during content migration. */
-  isScaffold: true,
+  tagline:
+    "Occupation-level evidence on where AI-exposed work sits in the Richmond, Virginia metropolitan area, what happened to employment in that work between May 2023 and May 2025, and what it would take to move the people affected.",
+  region: "Richmond, VA metropolitan statistical area (BLS 40060)",
+  /** Remaining gaps (employer/worker demos, capacity calculator, locality map) stay labelled. */
+  isScaffold: false,
 } as const;
 
 export type NavItem = {

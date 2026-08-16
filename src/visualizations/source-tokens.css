@@ -1,0 +1,146 @@
+/* =============================================================================
+   Every colour, typeface and edge on this site is defined here and nowhere else.
+
+   This is a deliberately undesigned system. It exists so that the information
+   architecture, the copy and the data encodings can be reviewed without anyone
+   reacting to a palette an engineer invented. A designer replaces the values in
+   this file; nothing downstream needs to change.
+
+   Read docs/DESIGN-HANDOFF.md before altering anything below.
+   ========================================================================== */
+
+/* Scoped onto .source-figure so these names cannot override the Lovable tokens
+   --rule and --accent on :root. */
+.source-figure {
+  /* ---- the only palette: a neutral ramp -----------------------------------
+     Evenly spaced in lightness so that any ordered scale built from it stays
+     ordered in greyscale, in print, and to a colour-blind reader. */
+  --g0: #ffffff;
+  --g1: #f4f4f4;
+  --g2: #e4e4e4;
+  --g3: #d0d0d0;
+  --g4: #a5a5a5;
+  --g5: #767676;
+  --g6: #5c5c5c;
+  --g7: #454545;
+  --g8: #2b2b2b;
+  --g9: #111111;
+
+  /* ---- surfaces and text ---- */
+  --paper: var(--g0);
+  --wash: var(--g1);
+  --panel: var(--g1);
+  --rule: var(--g3);
+  --rule-strong: var(--g5);
+  --ink: var(--g9);
+  --ink-soft: var(--g7);
+  --ink-faint: var(--g5);
+  --ink-invert: var(--g0);
+
+  /* No accent colour has been chosen. Emphasis is carried by weight and rule
+     thickness until one is. */
+  --accent: var(--g9);
+
+  /* ---- type --------------------------------------------------------------
+     Two families, both deliberately unremarkable. Numerals are set in the mono
+     face throughout so that columns of figures align without a decision about
+     which proportional face has tabular figures. */
+  --sans: Arial, Helvetica, "Liberation Sans", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --serif: var(--sans); /* No display face is in use. Aliased so nothing breaks. */
+
+  --measure: 34rem;
+  --wide: 76rem;
+}
+
+/* =============================================================================
+   Semantic scales
+
+   Colour in the figures is not decoration. It is the only carrier of meaning
+   for several encodings, so each one is reduced by kind rather than by hue.
+
+   ORDERED scales become an ordered grey ramp. Lightness carries the ordering,
+   so they survive desaturation, photocopying and print.
+
+   UNORDERED and OPPOSED scales must not become a ramp, because a ramp asserts
+   a sequence that the data does not have. They are distinguished by fill
+   against outline, and by shape, and always carry a written label as well.
+   ========================================================================== */
+
+/* Scoped onto .source-figure so these names cannot override the Lovable tokens
+   --rule and --accent on :root. */
+.source-figure {
+  /* ---- exposure severity: ORDERED, five steps ---- */
+  --heat-severe: var(--g9);
+  --heat-high: var(--g7);
+  --heat-moderate: var(--g5);
+  --heat-low: var(--g4);
+  --heat-durable: var(--g3);
+
+  /* Exposure of exactly zero is NOT the bottom of that ramp and must never be
+     rendered as though it were. It means the occupation never appeared in the
+     sampled interactions: an absence of measurement, not a finding of safety.
+     Rendered as an empty mark so it reads as a hole in the data rather than as
+     the safe end of a scale. See UNOBSERVED_NOTE in src/demo/data.ts. */
+  --heat-unobserved: var(--paper);
+  --heat-unobserved-edge: var(--g6);
+
+  /* Every heat mark is outlined, or the pale end of the ramp vanishes on
+     white paper. */
+  --heat-edge: var(--g6);
+
+  /* ---- employment change: OPPOSED, not a ramp ----------------------------
+     Two directions and two kinds of not-knowing. Rendering these as four
+     shades would imply that "grew" and "fell" sit at opposite ends of one
+     quantity, and that indeterminate sits between them. Neither is true.
+     Direction is carried by fill against outline; the absence of a direction
+     is carried by a broken outline. */
+  --dir-fell-fill: var(--g9);
+  --dir-fell-edge: var(--g9);
+  --dir-grew-fill: var(--paper);
+  --dir-grew-edge: var(--g9);
+  --dir-indeterminate-fill: var(--g3);
+  --dir-indeterminate-edge: var(--g5);
+  --dir-unknown-fill: var(--paper);
+  --dir-unknown-edge: var(--g4);
+
+  /* ---- action status: UNORDERED, four kinds ------------------------------
+     Ready, caution, blocked and external are kinds of thing, not degrees of
+     one thing. Carried by border treatment and by the word itself. */
+  --status-ready: var(--g9);
+  --status-caution: var(--g6);
+  --status-blocked: var(--g5);
+  --status-external: var(--g4);
+
+  /* ---- verdict shading ----------------------------------------------------
+     Where a verdict is attached to a sentence, the sentence carries it and
+     these flatten to ink. */
+  --good: var(--g9);
+  --warn: var(--g7);
+  --bad: var(--g9);
+
+  /* ---- stacked bar segments ----------------------------------------------
+     A segment of a bar has no sentence attached, so it cannot fall back on
+     wording the way a verdict can. These three are an ordered ramp — best
+     outcome darkest — and are the one place where a proportion is read off
+     lightness alone. Each stack states its counts in text beside it.
+
+     The unfilled remainder of the bar is a fourth value in the same ramp and
+     is declared here with them: the ramp has to stay clear of its own track,
+     or the lightest segment reads as an empty bar. Keep --seg-track lighter
+     than --seg-c by at least one step of the grey ramp. */
+  --seg-a: var(--g9);
+  --seg-b: var(--g6);
+  --seg-c: var(--g4);
+  --seg-track: var(--g2);
+
+  /* ---- the reader's own row, in the worker view ---- */
+  --you: var(--g9);
+
+  /* ---- washes -------------------------------------------------------------
+     Panels used to be lifted off a dark background with a translucent white.
+     On paper the same job is done by a translucent black. Kept translucent
+     rather than flat grey so that nested panels still separate. */
+  --tint: rgba(0, 0, 0, 0.035);
+  --tint-strong: rgba(0, 0, 0, 0.07);
+}

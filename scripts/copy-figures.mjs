@@ -8,21 +8,19 @@
 //
 // PNG only. The PDF siblings exist for print and would double the payload.
 
-import { copyFileSync, mkdirSync, readdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { copyFileSync, mkdirSync, readdirSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FROM = join(ROOT, 'vendor', 'analysis', 'reports', 'figures');
-const TO = join(ROOT, 'public', 'figures');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const FROM = join(ROOT, "data", "source", "reports", "figures");
+const TO = join(ROOT, "public", "figures");
 
 let names;
 try {
-  names = readdirSync(FROM).filter((f) => f.endsWith('.png'));
+  names = readdirSync(FROM).filter((f) => f.endsWith(".png"));
 } catch {
-  console.error(
-    `No figures at ${FROM}. Run \`npm run sync\` to populate vendor/ before building.`,
-  );
+  console.error(`No figures at ${FROM}. Run \`npm run sync\` to populate vendor/ before building.`);
   process.exit(1);
 }
 

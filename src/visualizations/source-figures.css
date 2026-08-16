@@ -1,0 +1,733 @@
+@import "./source-tokens.css";
+
+/* Nested so .grid/.dot/.badge cannot restyle the Lovable shell. */
+.source-figure {
+  /* Chart furniture copied from the source site's global.css (explorer through trajectory). Tokens come from source-tokens.css, scoped to .source-figure. */
+  /* The report tiers its own findings by how much challenge each withstands.
+   Carrying that tier onto the charts keeps a quotable number from travelling
+   without the caveat that belongs to it. */
+  .tier {
+    margin: 0 0 0.5rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .tier[data-tier="Defensible"]::before,
+  .tier[data-tier="Not supportable"]::before,
+  .tier[data-tier="Method"]::before {
+    content: "";
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    margin-right: 0.45rem;
+    vertical-align: 0.05em;
+  }
+
+  /* Three kinds of claim, not three degrees of one. Told apart by whether the
+   marker is filled, hollow or crossed, and by the word beside it. */
+  .tier[data-tier="Defensible"] {
+    color: var(--ink);
+  }
+
+  .tier[data-tier="Defensible"]::before {
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .tier[data-tier="Not supportable"] {
+    color: var(--ink);
+  }
+
+  .tier[data-tier="Not supportable"]::before {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+  }
+
+  .tier[data-tier="Method"]::before {
+    background: var(--paper);
+    border: 1px dashed var(--ink-faint);
+  }
+
+  .section__head {
+    max-width: var(--measure);
+    margin-bottom: 1.75rem;
+  }
+
+  .section__head h2 {
+    font-size: 1.6rem;
+  }
+
+  .section__head p {
+    color: var(--ink-soft);
+    margin: 0.6rem 0 0;
+  }
+
+  /* ---------- explorer ---------- */
+
+  .explorer {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: var(--paper);
+    padding: 1.25rem;
+  }
+
+  .explorer__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+  }
+
+  .explorer__search {
+    flex: 1 1 15rem;
+    min-width: 12rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    font: inherit;
+    font-size: 0.9rem;
+  }
+
+  .explorer__search:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .explorer__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper);
+    font: inherit;
+    font-size: 0.82rem;
+    color: var(--ink);
+    cursor: pointer;
+    transition:
+      opacity 120ms ease,
+      border-color 120ms ease;
+  }
+
+  .chip:hover {
+    border-color: var(--ink-faint);
+  }
+
+  .chip[aria-pressed="true"] {
+    border-color: var(--ink);
+  }
+
+  .chip[data-off] {
+    opacity: 0.38;
+  }
+
+  .chip--clear {
+    color: var(--ink-faint);
+  }
+
+  .chip__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 1px solid var(--ink);
+    flex: none;
+  }
+
+  .explorer__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .explorer__groups {
+    margin-top: 0.9rem;
+  }
+
+  .explorer__groups summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    list-style: none;
+  }
+
+  /* `display: flex` on a summary removes the native disclosure triangle, which
+   otherwise leaves the group filter looking like an inert label. */
+  .explorer__groups summary::marker,
+  .explorer__groups summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .explorer__groups summary::before {
+    content: "";
+    width: 0.32rem;
+    height: 0.32rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 140ms ease;
+  }
+
+  .explorer__groups[open] summary::before {
+    transform: rotate(-135deg);
+  }
+
+  .badge {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 999px;
+    padding: 0 0.45rem;
+    font-size: 0.72rem;
+  }
+
+  .explorer__grouplist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.7rem;
+  }
+
+  .explorer__count {
+    margin: 0.9rem 0 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .explorer__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 62rem) {
+    .explorer__stage {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .explorer__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .grid {
+    stroke: var(--rule);
+    stroke-width: 1;
+  }
+
+  .axis-tick {
+    stroke: var(--ink-faint);
+  }
+
+  .axis-label {
+    font-size: 11px;
+    fill: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .axis-title {
+    font-size: 12px;
+    fill: var(--ink-soft);
+  }
+
+  .gutter {
+    fill: var(--g1);
+  }
+
+  .gutter-label {
+    font-size: 9.5px;
+    fill: var(--ink-faint);
+    letter-spacing: 0.02em;
+  }
+
+  .threshold {
+    stroke: var(--ink-faint);
+    stroke-dasharray: 3 3;
+  }
+
+  .threshold-label {
+    font-size: 11px;
+    fill: var(--ink-faint);
+  }
+
+  /* Stroke is set per mark on the element, because it carries the direction.
+   Nothing here may set `stroke`, or a presentation attribute loses to it and
+   every circle reverts to one indistinguishable blob. */
+  .dot {
+    fill-opacity: 0.75;
+    stroke-width: 1;
+    cursor: pointer;
+    transition:
+      fill-opacity 120ms ease,
+      stroke-width 120ms ease;
+  }
+
+  .dot:hover,
+  .dot[data-active] {
+    fill-opacity: 1;
+    stroke-width: 2.5;
+  }
+
+  .dot:focus-visible {
+    outline: 2px solid var(--accent);
+  }
+
+  /* ---------- detail panel ---------- */
+
+  .explorer__detail {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--wash);
+    padding: 1rem;
+    min-height: 20rem;
+    font-size: 0.88rem;
+  }
+
+  .explorer__detail h3 {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+
+  .detail__meta {
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+    margin: 0.3rem 0 1rem;
+  }
+
+  .explorer__detail dl {
+    margin: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .explorer__detail dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .explorer__detail dt {
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+  }
+
+  .explorer__detail dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .detail__from {
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+  }
+
+  .detail__verdict {
+    margin: 1rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .detail__verdict[data-movement="indeterminate"] {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .detail__note {
+    margin: 0.75rem 0 0;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .detail__empty {
+    color: var(--ink-faint);
+  }
+
+  .detail__hint {
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .explorer__caveat {
+    margin: 1.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+
+  /* ---------- shared chart furniture ---------- */
+
+  .leverage,
+  .placebo,
+  .scarcity,
+  .premium,
+  .trajectory {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .leverage__svg,
+  .placebo__svg,
+  .premium__svg,
+  .trajectory__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .lev-zero {
+    stroke: var(--ink);
+    stroke-width: 1.25;
+  }
+
+  .lev-grid {
+    stroke: var(--rule);
+  }
+
+  .lev-tick,
+  .premium__value,
+  .placebo__value {
+    font-size: 11px;
+    fill: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- leverage ---------- */
+
+  /* The bar already reports its direction by which side of zero it sits on, so
+   fill is free to carry the same thing redundantly: solid for a decline,
+   hollow for a gain. */
+  .lev-bar {
+    fill: var(--dir-fell-fill);
+    stroke: var(--dir-fell-edge);
+    stroke-width: 1;
+    transition:
+      x 260ms ease,
+      width 260ms ease;
+  }
+
+  .lev-bar[data-positive],
+  .lev-head[data-positive] {
+    fill: var(--dir-grew-fill);
+    stroke: var(--dir-grew-edge);
+  }
+
+  .lev-head {
+    fill: var(--dir-fell-fill);
+    stroke: var(--paper);
+    stroke-width: 2;
+    transition: cx 260ms ease;
+  }
+
+  .lev-reference {
+    stroke: var(--ink-faint);
+    stroke-dasharray: 2 2;
+  }
+
+  .lev-reference-label {
+    font-size: 10.5px;
+    fill: var(--ink-faint);
+  }
+
+  .leverage__readout {
+    margin: 0.5rem 0 0;
+    font-size: 1.35rem;
+    font-family: var(--mono);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .leverage__removed {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+
+  .leverage__verdict {
+    margin: 0.35rem 0 1.1rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  .leverage__list {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+
+  .lev-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background: var(--wash);
+    font: inherit;
+    font-size: 0.84rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .lev-row:hover {
+    border-color: var(--ink-faint);
+  }
+
+  .lev-row[data-removed] {
+    opacity: 0.4;
+    background: transparent;
+  }
+
+  .lev-row[data-removed] .lev-row__title {
+    text-decoration: line-through;
+  }
+
+  .lev-row__jobs {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .lev-row[data-removed] .lev-row__jobs {
+    color: var(--ink-faint);
+  }
+
+  .leverage__actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- placebo ---------- */
+
+  .placebo__bar {
+    fill: var(--accent);
+    fill-opacity: 0.72;
+    cursor: pointer;
+    transition: fill-opacity 120ms ease;
+  }
+
+  .placebo__bar[data-pre] {
+    fill: var(--ink-faint);
+  }
+
+  .placebo__bar:hover,
+  .placebo__bar[data-active] {
+    fill-opacity: 1;
+  }
+
+  .placebo__detail,
+  .scarcity__detail dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.75rem 1.25rem;
+    margin: 1.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .placebo__detail dt {
+    font-size: 0.74rem;
+    color: var(--ink-faint);
+  }
+
+  .placebo__detail dd {
+    margin: 0.15rem 0 0;
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+  }
+
+  /* ---------- scarcity ---------- */
+
+  .scarcity__lede {
+    margin: 0 0 1rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    max-width: 64ch;
+  }
+
+  .scarcity__rows {
+    list-style: none;
+    margin: 0 0 0.85rem;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+
+  .scarcity__row {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) 4.5rem 1fr 3rem;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background: var(--wash);
+    font: inherit;
+    font-size: 0.82rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .scarcity__row:hover,
+  .scarcity__row[data-active] {
+    border-color: var(--ink-faint);
+  }
+
+  .scarcity__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .scarcity__lost {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+
+  .scarcity__waffle {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+
+  /* Presence against absence, so a filled cell against an empty one. */
+  .cell {
+    width: 9px;
+    height: 9px;
+    background: var(--paper);
+    border: 1px solid var(--g3);
+  }
+
+  .cell[data-viable] {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .scarcity__ratio {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+
+  .scarcity__row[data-none] .scarcity__ratio {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .scarcity__detail {
+    margin-top: 1.25rem;
+  }
+
+  .scarcity__detail h3 {
+    font-size: 1.05rem;
+  }
+
+  .scarcity__detail dt {
+    font-size: 0.74rem;
+    color: var(--ink-faint);
+  }
+
+  .scarcity__detail dd {
+    margin: 0.15rem 0 0;
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scarcity__viable dd {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* ---------- premium ---------- */
+
+  .premium__bar {
+    fill: var(--g7);
+    fill-opacity: 0.72;
+    cursor: pointer;
+    transition: fill-opacity 120ms ease;
+  }
+
+  .premium__bar:hover,
+  .premium__bar[data-active] {
+    fill-opacity: 1;
+  }
+
+  .premium__readout,
+  .trajectory__readout {
+    margin: 1rem 0 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.92rem;
+    max-width: 64ch;
+  }
+
+  /* ---------- trajectory ---------- */
+
+  .trajectory__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .trajectory__select {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.8rem;
+    max-width: 16rem;
+  }
+
+  .traj-band {
+    fill: var(--accent);
+    fill-opacity: 0.14;
+  }
+
+  .traj-line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+
+  .traj-dot {
+    fill: var(--accent);
+  }
+}

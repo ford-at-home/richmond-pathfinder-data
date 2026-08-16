@@ -31,7 +31,7 @@ export function SiteHeader() {
           className="flex flex-col justify-center py-3 pr-6 no-underline"
           aria-label={`${siteConfig.name} — home`}
         >
-          <span className="eyebrow">Richmond, Virginia region</span>
+          <span className="eyebrow">{siteConfig.region}</span>
           <span className="font-display text-[1.05rem] font-semibold leading-tight text-foreground">
             {siteConfig.name}
           </span>

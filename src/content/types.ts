@@ -27,7 +27,11 @@ export type Source = {
   publisher: string;
   /** ISO 8601 date string. */
   date?: string | undefined;
+  /** Date the analysis retrieved the source, when the source record states one. */
+  accessed?: string | undefined;
   url?: string | undefined;
+  /** Pages or sections supporting a claim, when the source record states them. */
+  pages?: string | undefined;
   kind: "dataset" | "report" | "article" | "interview" | "administrative" | "other";
   isPlaceholder: boolean;
 };
@@ -57,10 +61,19 @@ export type Occupation = {
 export type TransitionEdge = {
   fromId: string;
   toId: string;
-  /** 0–1 normalized distance; higher means a harder move. Placeholder only. */
+  fromTitle: string;
+  toTitle: string;
+  /** 0–1 normalized distance. The source table does not publish this; leave null. */
   distance: number | null;
-  /** Qualitative band used for the legend. */
+  /** Qualitative band used for the legend. Unused until a source definition exists. */
   band: "near" | "moderate" | "far" | "unknown";
+  /** Job-zone difference from pathways_reachable.csv. */
+  zoneGap: number | null;
+  /** Destination mean pay as a percentage of origin pay. */
+  replacement: number | null;
+  /** Screen tier from the published table, e.g. Primary-Short. */
+  tier: string;
+  originLost: number | null;
   transferableSkills: string[];
   skillGaps: string[];
   steps: string[];
@@ -96,18 +109,29 @@ export type Locality = {
   isPlaceholder: boolean;
 };
 
+export type ResearchSection = {
+  heading: string;
+  /** Plain-text excerpt for search; not a paraphrase of the HTML. */
+  body: string;
+  html: string;
+  number: number | null;
+  anchor: string;
+  figureIds: string[];
+};
+
 export type ResearchStory = {
   slug: string;
   title: string;
   topic: string;
-  /** One-sentence answer or thesis. */
+  /** One-sentence answer or thesis. Taken from the source report blurbs, not rewritten. */
   thesis: string;
   publishedAt: string;
   updatedAt?: string | undefined;
   readingMinutes: number;
   sourceIds: string[];
   keyFindings: string[];
-  sections: { heading: string; body: string }[];
+  preambleHtml: string;
+  sections: ResearchSection[];
   limitations: string[];
   whatThisMeans: string;
   relatedSlugs: string[];

@@ -1,9 +1,13 @@
 import type { CapacityStage, Limitation } from "./types";
 
 /**
- * PLACEHOLDER capacity progression.
- * Every value is null on purpose — the scaffold performs no calculations.
+ * The published transition-capacity report does not compute
+ * exposed-workers → openings → seats → funding → remaining-gap.
+ * Stage values stay null so this page cannot invent that chain (decision 6).
  */
+
+const notInSource =
+  "This six-stage calculator is not in the published analysis. Values stay empty until a human decides the chain exists in a sourced file.";
 
 export const capacityStages: CapacityStage[] = [
   {
@@ -12,7 +16,7 @@ export const capacityStages: CapacityStage[] = [
     question: "How many workers hold roles with meaningful exposure to change?",
     value: null,
     unit: "workers",
-    note: "Awaiting migrated exposure estimates.",
+    note: notInSource,
     isPlaceholder: true,
   },
   {
@@ -21,7 +25,7 @@ export const capacityStages: CapacityStage[] = [
     question: "Which adjacent occupations are realistic destinations?",
     value: null,
     unit: "occupations",
-    note: "Derived from the transition map once migrated.",
+    note: notInSource,
     isPlaceholder: true,
   },
   {
@@ -30,7 +34,7 @@ export const capacityStages: CapacityStage[] = [
     question: "How many regional openings exist in those destinations?",
     value: null,
     unit: "annual openings",
-    note: "Awaiting migrated demand data.",
+    note: notInSource,
     isPlaceholder: true,
   },
   {
@@ -39,7 +43,7 @@ export const capacityStages: CapacityStage[] = [
     question: "How many training seats can the region deliver?",
     value: null,
     unit: "seats per year",
-    note: "Awaiting migrated provider capacity data.",
+    note: notInSource,
     isPlaceholder: true,
   },
   {
@@ -48,7 +52,7 @@ export const capacityStages: CapacityStage[] = [
     question: "What funding and wraparound support is available?",
     value: null,
     unit: "dollars",
-    note: "Awaiting migrated program data.",
+    note: notInSource,
     isPlaceholder: true,
   },
   {
@@ -57,7 +61,7 @@ export const capacityStages: CapacityStage[] = [
     question: "What remains unserved after the steps above?",
     value: null,
     unit: "workers",
-    note: "Computed only after every upstream input is migrated.",
+    note: notInSource,
     isPlaceholder: true,
   },
 ];
@@ -67,12 +71,12 @@ export const evidenceSections = [
   {
     id: "demand",
     label: "Employer demand",
-    note: "What regional employers are actually hiring for.",
+    note: "What regional employers are actually hiring for. No postings file is in the source (U4).",
   },
   {
     id: "training",
     label: "Training capacity",
-    note: "Providers, programs, seats, and throughput.",
+    note: "Providers, programs, seats, and throughput. No seat-count file is in the source (U4).",
   },
   { id: "time", label: "Time", note: "How long a transition takes end to end." },
   { id: "cost", label: "Cost", note: "Direct cost, forgone wages, and who bears them." },
@@ -84,17 +88,23 @@ export const evidenceSections = [
 ] as const;
 
 export const scenarioControls = [
-  { id: "horizon", label: "Time horizon", state: "Not yet wired" },
-  { id: "geography", label: "Geography", state: "Not yet wired" },
-  { id: "cohort", label: "Worker cohort", state: "Not yet wired" },
-  { id: "training-throughput", label: "Training throughput", state: "Not yet wired" },
+  { id: "horizon", label: "Time horizon", state: "Not in the source report" },
+  { id: "geography", label: "Geography", state: "MSA 40060 — not a control" },
+  { id: "cohort", label: "Worker cohort", state: "Not in the source report" },
+  { id: "training-throughput", label: "Training throughput", state: "Not in the source report" },
 ] as const;
 
 export const capacityLimitations: Limitation[] = [
   {
-    id: "no-calculations",
-    title: "No calculations are performed in this scaffold",
-    body: "Stage values are intentionally empty. Any figure shown after migration must trace to a documented input and method.",
-    isPlaceholder: true,
+    id: "no-calculator",
+    title: "This page does not calculate a regional capacity gap",
+    body: "The published Transition Capacity report screens adjacent destinations for occupations that lost employment. It does not compute exposed workers minus openings minus seats. The six stages below are the scaffold's reserved calculator and remain empty.",
+    isPlaceholder: false,
+  },
+  {
+    id: "adjacency-not-ease",
+    title: "Adjacency is transferable skill, not an easy or likely move",
+    body: "The report's own summary: a destination is adjacent when the national skills database records substantial overlap, which indicates transferable skill rather than an easy or likely move.",
+    isPlaceholder: false,
   },
 ];

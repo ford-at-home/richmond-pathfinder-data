@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
 import { EmptyState, FilterBar, FilterGroup } from "@/components/data";
-import { PlaceholderBadge } from "@/components/editorial";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
 import { researchStories, researchTopics } from "@/content/research";
@@ -14,12 +13,13 @@ export const Route = createFileRoute("/research/")({
       {
         name: "description",
         content:
-          "Editorial research pages about workforce transition in the Richmond, Virginia region, each with its sources, date, and limitations in view.",
+          "The published reports on AI exposure, employment change, and transition capacity in the Richmond VA MSA, with sources and limits in view.",
       },
       { property: "og:title", content: "Research Library — Richmond Workforce Transition" },
       {
         property: "og:description",
-        content: "Research pages on transitions, capacity, regional data, and training.",
+        content:
+          "AI Exposure and Employment Change, Transition Capacity, and the Technical Appendix.",
       },
     ],
   }),
@@ -45,17 +45,13 @@ function ResearchLibrary() {
     <ProseContainer>
       <PageHeader
         eyebrow="Research"
-        title="Research Library"
-        lead="Each entry answers one question in plain language, shows its evidence, and states what it cannot tell you."
+        title="The reports"
+        lead="The evidence base, reproduced in full. Where a claim has an interactive figure, the figure sits in the section that makes the claim."
         meta={[
-          { label: "Entries", value: `${researchStories.length} placeholder` },
-          { label: "Status", value: "Structure only — no research migrated" },
+          { label: "Entries", value: String(researchStories.length) },
+          { label: "Geography", value: "Richmond VA MSA (BLS 40060)" },
         ]}
-      >
-        <PlaceholderBadge className="mt-5">
-          Demonstration entries — not real research titles
-        </PlaceholderBadge>
-      </PageHeader>
+      />
 
       <PageSection labelledBy="library">
         <span id="library" className="sr-only">
@@ -63,13 +59,12 @@ function ResearchLibrary() {
         </span>
         <FilterBar
           searchLabel="Search research"
-          searchPlaceholder="Search titles and theses"
+          searchPlaceholder="Search titles"
           value={query}
           onValueChange={setQuery}
           filters={
             <FilterGroup label="Topic" options={topicOptions} value={topic} onChange={setTopic} />
           }
-          disabledNote="Search and filters run against placeholder entries only."
         />
 
         <p className="mt-4 annotation" role="status" aria-live="polite">
@@ -80,7 +75,7 @@ function ResearchLibrary() {
           <div className="mt-6">
             <EmptyState
               title="No entries match"
-              body="Clear the search or choose a different topic. The library fills out as research is migrated."
+              body="Clear the search or choose a different topic."
             />
           </div>
         ) : (

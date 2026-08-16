@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { primaryNav, siteConfig } from "@/config/site";
+import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
 
 export function SiteFooter() {
   return (
@@ -12,8 +13,12 @@ export function SiteFooter() {
             {siteConfig.tagline}
           </p>
           <p className="mt-3 annotation max-w-md">
-            Scaffold release. Research findings, statistics, programs, and citations have not been
-            migrated yet; all demonstration content is labeled as placeholder.
+            Reports and figures are reproduced from{" "}
+            <a href={pinCommitUrl} className="underline-offset-4 hover:underline">
+              {pinRepo}
+            </a>{" "}
+            at commit <code>{pinShort}</code>, synced {pinSynced}. Geography is the Richmond VA MSA
+            (BLS 40060), not the City of Richmond.
           </p>
         </div>
 

@@ -1,77 +1,68 @@
+import { csvParse } from "d3-dsv";
+
+import pathwaysCsv from "../../data/source/output/pathways_reachable.csv?raw";
+import { occupations as analysisOccupations } from "./occupations";
 import type { Occupation, TransitionEdge } from "./types";
 
+function num(v: string | undefined): number | null {
+  if (v == null || v === "") return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+const rows = csvParse(pathwaysCsv);
+
 /**
- * PLACEHOLDER transition-map structure.
- * No real occupations, distances, skills, or steps. Replace at migration with
- * the graph export (nodes + edges) that the Cytoscape.js view will consume.
+ * Screened origin→destination pairs from pathways_reachable.csv.
+ * Skill lists and a 0–1 distance are not in that file; they stay empty / null.
  */
+export const transitions: TransitionEdge[] = rows.map((row) => {
+  const fromId = row["src"] ?? "";
+  const toId = row["dst"] ?? "";
+  return {
+    fromId,
+    toId,
+    fromTitle: row["src_title"] ?? fromId,
+    toTitle: row["dst_title"] ?? toId,
+    distance: null,
+    band: "unknown",
+    zoneGap: num(row["zone_gap"]),
+    replacement: num(row["replacement"]),
+    tier: row["tier"] ?? "",
+    originLost: num(row["src_lost"]),
+    transferableSkills: [],
+    skillGaps: [],
+    steps: [],
+    isPlaceholder: false,
+  };
+});
 
-export const occupations: Occupation[] = [
-  { id: "role-a", title: "Placeholder role A", cluster: "Cluster one", isPlaceholder: true },
-  { id: "role-b", title: "Placeholder role B", cluster: "Cluster one", isPlaceholder: true },
-  { id: "role-c", title: "Placeholder role C", cluster: "Cluster two", isPlaceholder: true },
-  { id: "role-d", title: "Placeholder role D", cluster: "Cluster two", isPlaceholder: true },
-  { id: "role-e", title: "Placeholder role E", cluster: "Cluster three", isPlaceholder: true },
-];
+const nodeIds = new Set<string>();
+for (const t of transitions) {
+  nodeIds.add(t.fromId);
+  nodeIds.add(t.toId);
+}
 
-export const transitions: TransitionEdge[] = [
-  {
-    fromId: "role-a",
-    toId: "role-b",
-    distance: null,
-    band: "unknown",
-    transferableSkills: ["Placeholder transferable skill", "Placeholder transferable skill"],
-    skillGaps: ["Placeholder skill gap"],
-    steps: ["Placeholder step one", "Placeholder step two"],
-    isPlaceholder: true,
-  },
-  {
-    fromId: "role-a",
-    toId: "role-c",
-    distance: null,
-    band: "unknown",
-    transferableSkills: ["Placeholder transferable skill"],
-    skillGaps: ["Placeholder skill gap", "Placeholder skill gap"],
-    steps: ["Placeholder step one"],
-    isPlaceholder: true,
-  },
-  {
-    fromId: "role-c",
-    toId: "role-d",
-    distance: null,
-    band: "unknown",
-    transferableSkills: ["Placeholder transferable skill"],
-    skillGaps: ["Placeholder skill gap"],
-    steps: ["Placeholder step one", "Placeholder step two", "Placeholder step three"],
-    isPlaceholder: true,
-  },
-  {
-    fromId: "role-d",
-    toId: "role-e",
-    distance: null,
-    band: "unknown",
-    transferableSkills: ["Placeholder transferable skill"],
-    skillGaps: ["Placeholder skill gap"],
-    steps: ["Placeholder step one"],
-    isPlaceholder: true,
-  },
-];
+export const occupations: Occupation[] = [...nodeIds].sort().map((id) => {
+  const fromEdge = transitions.find((t) => t.fromId === id);
+  const toEdge = transitions.find((t) => t.toId === id);
+  const title = fromEdge?.fromTitle ?? toEdge?.toTitle ?? id;
+  const analysis = analysisOccupations.find((o) => o.code === id);
+  return {
+    id,
+    code: id,
+    title,
+    cluster: analysis?.group ?? "Not in the 523-occupation join",
+    isPlaceholder: false,
+  };
+});
 
-/** Legend bands pair a color token with a shape/label so meaning is never color-only. */
 export const transitionBands = [
-  { band: "near", label: "Near transition", shape: "circle", note: "Placeholder band definition." },
-  {
-    band: "moderate",
-    label: "Moderate transition",
-    shape: "square",
-    note: "Placeholder band definition.",
-  },
-  { band: "far", label: "Far transition", shape: "triangle", note: "Placeholder band definition." },
   {
     band: "unknown",
-    label: "Not yet migrated",
+    label: "Screened pair (no distance band in source)",
     shape: "diamond",
-    note: "Distance values arrive with the data migration.",
+    note: "pathways_reachable.csv publishes zone_gap and wage replacement, not a near/moderate/far distance band.",
   },
 ] as const;
 

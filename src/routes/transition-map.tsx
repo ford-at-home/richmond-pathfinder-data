@@ -1,22 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
   DataTable,
   FilterBar,
   FilterGroup,
   VisualizationFrame,
-  VisualizationLegend,
   VisualizationStagePlaceholder,
 } from "@/components/data";
-import { EvidencePanel, LimitationNote, PlaceholderBadge } from "@/components/editorial";
+import { EvidencePanel, LimitationNote } from "@/components/editorial";
 import {
   PageHeader,
   PageSection,
   ProseContainer,
   SectionIntro,
 } from "@/components/page/PageHeader";
-import { occupationTitle, occupations, transitionBands, transitions } from "@/content/transitions";
+import { occupationTitle, occupations, transitions } from "@/content/transitions";
+import { GEOGRAPHY, REPORT_PERIOD } from "@/lib/geography";
 
 export const Route = createFileRoute("/transition-map")({
   head: () => ({
@@ -25,30 +25,34 @@ export const Route = createFileRoute("/transition-map")({
       {
         name: "description",
         content:
-          "How a worker may move from one occupation to an adjacent occupation in the Richmond region, including the distance and difficulty of each move.",
+          "Screened origin–destination occupation pairs for the Richmond VA MSA from the published pathways_reachable table.",
       },
       { property: "og:title", content: "Transition Map — Richmond Workforce Transition" },
       {
         property: "og:description",
         content:
-          "Occupation-to-occupation moves, transition distance, transferable skills, and skill gaps.",
+          "Adjacent, growing, better-paid destinations that survive the published screen. Not a recommendation and not a network graph.",
       },
     ],
   }),
   component: TransitionMapPage,
 });
 
-const clusters = ["All clusters", ...Array.from(new Set(occupations.map((o) => o.cluster)))];
+const clusters = ["All groups", ...Array.from(new Set(occupations.map((o) => o.cluster))).sort()];
 
 function TransitionMapPage() {
   const [query, setQuery] = useState("");
-  const [cluster, setCluster] = useState<string>("All clusters");
+  const [cluster, setCluster] = useState<string>("All groups");
   const [selectedId, setSelectedId] = useState(occupations[0]?.id ?? "");
 
-  const visible = occupations.filter(
-    (o) =>
-      (cluster === "All clusters" || o.cluster === cluster) &&
-      o.title.toLowerCase().includes(query.trim().toLowerCase()),
+  const visible = useMemo(
+    () =>
+      occupations.filter(
+        (o) =>
+          (cluster === "All groups" || o.cluster === cluster) &&
+          o.title.toLowerCase().includes(query.trim().toLowerCase()),
+      ),
+    [cluster, query],
   );
   const selected = occupations.find((o) => o.id === selectedId);
   const selectedEdges = transitions.filter((t) => t.fromId === selectedId);
@@ -58,11 +62,12 @@ function TransitionMapPage() {
       <PageHeader
         eyebrow="Section 01"
         title="Transition Map"
-        lead="A view of how one occupation connects to the occupations next to it, and how far apart those occupations really are."
+        lead="Screened origin–destination pairs from the published analysis. A pair is in this table because it survived the capacity report's adjacency, exposure, growth, and wage-replacement screen — not because a network layout scored it."
         meta={[
-          { label: "Geography", value: "Richmond, Virginia region" },
+          { label: "Geography", value: GEOGRAPHY },
           { label: "Unit", value: "Occupation pairs" },
-          { label: "Status", value: "Structure only — data not migrated" },
+          { label: "Pairs", value: String(transitions.length) },
+          { label: "Period", value: REPORT_PERIOD },
         ]}
       />
 
@@ -71,98 +76,83 @@ function TransitionMapPage() {
           <SectionIntro
             eyebrow="Orientation"
             title="How to read this"
-            lead="Each node is an occupation. Each connection is an observed or modeled move between two occupations. The distance of a connection describes how much retraining, credentialing, or experience the move is expected to require."
+            lead="Each row is a published destination for an occupation that lost employment. Zone gap is the O*NET job-zone difference. Replacement is destination mean pay as a percentage of origin pay. Neither is a person-level score."
           >
             <span id="how-to-read" className="sr-only">
               How to read this
             </span>
           </SectionIntro>
-          <LimitationNote title="A connection is not a recommendation" tone="note">
-            A link between two occupations means a move has been observed or modeled — not that it
-            is advisable, available today, or open to any particular worker.
+          <LimitationNote title="A pair is not a recommendation" tone="note">
+            The source report is explicit: adjacency indicates transferable skill rather than an
+            easy or likely move. This page does not rank workers, invent skill-gap lists, or draw a
+            Cytoscape network — the source site had none.
           </LimitationNote>
         </div>
       </PageSection>
 
       <PageSection labelledBy="graph" className="rule-t">
         <span id="graph" className="sr-only">
-          Transition network
+          Screened pairs
         </span>
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
           <VisualizationFrame
-            title="Occupation transition network"
-            description="Nodes are occupations; edges are transitions weighted by distance."
+            title="Screened origin–destination pairs"
+            description="The source behavior is this table. A network canvas is reserved and labelled as not in the source."
             provenance={{
-              source: "Pending migration",
-              geography: "Richmond, Virginia region",
-              unit: "Occupation pairs",
-              period: "Pending migration",
-              note: "The network renders once the occupation graph is migrated.",
+              source: "pathways_reachable.csv, pinned analysis output",
+              geography: GEOGRAPHY,
+              unit: "Occupation pairs that survive the published screen",
+              period: REPORT_PERIOD,
+              note: "transferableSkills, skillGaps, and a 0–1 distance are not columns in this file and are not filled in.",
             }}
             toolbar={
               <FilterBar
                 searchLabel="Find an occupation"
-                searchPlaceholder="Placeholder role"
+                searchPlaceholder="Occupation title"
                 value={query}
                 onValueChange={setQuery}
                 filters={
                   <FilterGroup
-                    label="Cluster"
+                    label="Job family"
                     options={clusters}
                     value={cluster}
                     onChange={setCluster}
                   />
                 }
-                disabledNote="Filters operate on placeholder records only."
-              />
-            }
-            legend={
-              <VisualizationLegend
-                items={transitionBands.map((b) => ({
-                  label: b.label,
-                  shape: b.shape,
-                  colorClass:
-                    b.band === "near"
-                      ? "bg-chart-1"
-                      : b.band === "moderate"
-                        ? "bg-chart-3"
-                        : b.band === "far"
-                          ? "bg-chart-2"
-                          : "bg-muted",
-                }))}
-                note="Shape and label carry the same meaning as color, so the legend is readable without color."
               />
             }
             tableView={
               <DataTable
-                caption="Non-graph fallback: the same transitions as a table."
+                caption="Every screened pair in pathways_reachable.csv."
                 columns={[
-                  { key: "from", label: "From occupation" },
-                  { key: "to", label: "To occupation" },
-                  { key: "band", label: "Transition band" },
-                  { key: "distance", label: "Distance", numeric: true },
+                  { key: "from", label: "From" },
+                  { key: "to", label: "To" },
+                  { key: "tier", label: "Tier" },
+                  { key: "replacement", label: "Wage replacement %", numeric: true },
+                  { key: "zoneGap", label: "Job-zone gap", numeric: true },
                 ]}
                 rows={transitions.map((t) => ({
-                  from: occupationTitle(t.fromId),
-                  to: occupationTitle(t.toId),
-                  band: t.band === "unknown" ? null : t.band,
-                  distance: t.distance === null ? null : String(t.distance),
+                  from: t.fromTitle,
+                  to: t.toTitle,
+                  tier: t.tier,
+                  replacement: t.replacement == null ? null : t.replacement.toFixed(1),
+                  zoneGap: t.zoneGap == null ? null : String(t.zoneGap),
                 }))}
               />
             }
           >
             <VisualizationStagePlaceholder
-              library="a Cytoscape.js network"
-              purpose="An interactive graph of occupations and the transitions between them, filterable by cluster and distance."
+              library="Cytoscape.js (not in the source)"
+              purpose="The source site never shipped a node–edge graph. The table fallback is the migrated behavior. Do not treat this placeholder as a missing finding."
             />
           </VisualizationFrame>
 
           <div className="space-y-6">
             <EvidencePanel
-              title="Select a role"
-              note="Placeholder roles stand in for the migrated occupation list."
+              title="Occupations in the screened table"
+              note={`${visible.length} of ${occupations.length} unique origin or destination codes.`}
             >
-              <ul className="space-y-1">
+              <ul className="max-h-[28rem] space-y-1 overflow-y-auto">
                 {visible.map((o) => (
                   <li key={o.id}>
                     <button
@@ -176,29 +166,30 @@ function TransitionMapPage() {
                       }
                     >
                       {o.title}
-                      <span className="block annotation">{o.cluster}</span>
+                      <span className="block annotation">
+                        {o.code} · {o.cluster}
+                      </span>
                     </button>
                   </li>
                 ))}
                 {visible.length === 0 ? (
-                  <li className="px-3 py-4 text-sm text-muted-foreground">
-                    No placeholder roles match.
-                  </li>
+                  <li className="px-3 py-4 text-sm text-muted-foreground">No occupations match.</li>
                 ) : null}
               </ul>
             </EvidencePanel>
 
             <EvidencePanel
-              title={selected ? `Detail: ${selected.title}` : "Selected role detail"}
-              note="Reserved for transferable skills, skill gaps, and transition steps."
+              title={selected ? `From ${selected.title}` : "Selected occupation"}
+              note="Destinations published for this origin. Skill lists are omitted because they are not in the CSV."
             >
-              <PlaceholderBadge>Placeholder detail</PlaceholderBadge>
               {selectedEdges.length === 0 ? (
-                <p className="mt-3 text-sm text-muted-foreground">
-                  No placeholder transitions recorded from this role.
+                <p className="text-sm text-muted-foreground">
+                  {selected
+                    ? `${selected.title} appears as a destination or has no published outgoing pair.`
+                    : "Select an occupation."}
                 </p>
               ) : (
-                <dl className="mt-4 space-y-4">
+                <dl className="space-y-4">
                   {selectedEdges.map((edge) => (
                     <div
                       key={`${edge.fromId}-${edge.toId}`}
@@ -209,18 +200,15 @@ function TransitionMapPage() {
                       </dt>
                       <dd className="mt-2 space-y-2 annotation">
                         <p>
-                          <span className="label-sm">Distance</span>{" "}
-                          {edge.distance === null ? "Not yet migrated" : edge.distance}
+                          <span className="label-sm">Tier</span> {edge.tier || "—"}
                         </p>
                         <p>
-                          <span className="label-sm">Transferable skills</span>{" "}
-                          {edge.transferableSkills.join(", ")}
+                          <span className="label-sm">Wage replacement</span>{" "}
+                          {edge.replacement == null ? "—" : `${edge.replacement.toFixed(1)}%`}
                         </p>
                         <p>
-                          <span className="label-sm">Skill gaps</span> {edge.skillGaps.join(", ")}
-                        </p>
-                        <p>
-                          <span className="label-sm">Steps</span> {edge.steps.join(" → ")}
+                          <span className="label-sm">Job-zone gap</span>{" "}
+                          {edge.zoneGap == null ? "—" : String(edge.zoneGap)}
                         </p>
                       </dd>
                     </div>
@@ -229,24 +217,6 @@ function TransitionMapPage() {
               )}
             </EvidencePanel>
           </div>
-        </div>
-      </PageSection>
-
-      <PageSection labelledBy="distance" className="rule-t">
-        <div className="grid gap-8 lg:grid-cols-2">
-          <SectionIntro
-            eyebrow="Definition"
-            title="What transition distance means"
-            lead="Distance is a summary of how much a worker would need to add — skills, credentials, or supervised experience — to be a plausible candidate for the destination occupation. The exact construction is documented in the methodology and will be published with the data."
-          >
-            <span id="distance" className="sr-only">
-              Transition distance
-            </span>
-          </SectionIntro>
-          <LimitationNote title="Distance is a modeled quantity" tone="caution">
-            It summarizes similarity between occupations. It does not account for an individual's
-            circumstances, employer hiring practices, or local availability of training.
-          </LimitationNote>
         </div>
       </PageSection>
     </ProseContainer>

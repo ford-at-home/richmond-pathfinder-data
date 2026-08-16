@@ -9,21 +9,21 @@
 // rather than zero, and an employment change is reported alongside the sampling
 // error it has to clear before it means anything.
 
-import { csvParse } from 'd3-dsv';
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { csvParse } from "d3-dsv";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const VENDOR = join(ROOT, 'vendor', 'analysis');
-const OUT = join(ROOT, 'src', 'data', 'generated');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const VENDOR = join(ROOT, "data", "source");
+const OUT = join(ROOT, "src", "content", "data");
 
-const readOutput = (f) => csvParse(readFileSync(join(VENDOR, 'output', f), 'utf8'));
+const readOutput = (f) => csvParse(readFileSync(join(VENDOR, "output", f), "utf8"));
 
 // BLS withholds estimates that would disclose an individual establishment. An
 // empty cell means "not published", which is not a quantity and must never be
 // coerced to 0.
-const num = (v) => (v === '' || v == null ? null : Number(v));
+const num = (v) => (v === "" || v == null ? null : Number(v));
 const round = (v, places) => (v == null ? null : Number(v.toFixed(places)));
 
 const EXPOSED = 0.25;
@@ -37,17 +37,17 @@ function check(label, actual, expected, tolerance) {
 
 // ---------------------------------------------------------------- occupations
 
-const base = readOutput('richmond_exposure_2025.csv');
-const threePoint = readOutput('richmond_three_point.csv');
-const panel = readOutput('richmond_panel_2010_2025.csv');
-const binding = readOutput('binding_constraints.csv');
+const base = readOutput("richmond_exposure_2025.csv");
+const threePoint = readOutput("richmond_three_point.csv");
+const panel = readOutput("richmond_panel_2010_2025.csv");
+const binding = readOutput("binding_constraints.csv");
 
 const changeByCode = new Map(threePoint.map((r) => [r.occ_code, r]));
 
 // vintage -> occ_code -> { emp, prse, wage }
 const byVintage = new Map();
 for (const row of panel) {
-  if (row.o_group !== 'detailed') continue;
+  if (row.o_group !== "detailed") continue;
   const vintage = Number(row.vintage);
   if (!byVintage.has(vintage)) byVintage.set(vintage, new Map());
   byVintage.get(vintage).set(row.occ_code, {
@@ -104,8 +104,8 @@ const weightedMeanWage = (set) =>
 const reference = wageable.filter((o) => o.exposure <= 0.05);
 const referenceWage = weightedMeanWage(reference);
 
-check('wage premium reference occupations', reference.length, 316, 0);
-check('wage premium reference wage', Math.round(referenceWage), 55_419, 1);
+check("wage premium reference occupations", reference.length, 316, 0);
+check("wage premium reference wage", Math.round(referenceWage), 55_419, 1);
 
 const PREMIUM_CUTS = [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6];
 const PUBLISHED_PREMIUM = {
@@ -145,13 +145,28 @@ const groupChange = (set) => {
 };
 
 const exposedSet = comparable.filter((o) => o.exposure >= EXPOSED);
-check('leverage exposed baseline', groupChange(exposedSet), -4.37, 0.01);
-check('leverage others baseline', groupChange(comparable.filter((o) => o.exposure < EXPOSED)), 2.91, 0.01);
+check("leverage exposed baseline", groupChange(exposedSet), -4.37, 0.01);
+check(
+  "leverage others baseline",
+  groupChange(comparable.filter((o) => o.exposure < EXPOSED)),
+  2.91,
+  0.01,
+);
 
 // Dropping the largest losses in order should walk the aggregate across zero.
 const byLoss = [...exposedSet].sort((a, b) => a.emp - a.emp23 - (b.emp - b.emp23));
-for (const [n, expected] of [[1, -1.92], [2, -0.24], [3, 0.84], [4, 1.99]]) {
-  check(`leverage minus ${n}`, groupChange(exposedSet.filter((o) => !byLoss.slice(0, n).includes(o))), expected, 0.01);
+for (const [n, expected] of [
+  [1, -1.92],
+  [2, -0.24],
+  [3, 0.84],
+  [4, 1.99],
+]) {
+  check(
+    `leverage minus ${n}`,
+    groupChange(exposedSet.filter((o) => !byLoss.slice(0, n).includes(o))),
+    expected,
+    0.01,
+  );
 }
 
 // ----------------------------------------------------------- placebo windows
@@ -278,17 +293,17 @@ for (const code of trajectoryCodes) {
 
 // robustness.txt section 7 prints the sixteen-year series for the three named
 // occupations; spot-check the ends of one of them.
-const csr = trajectories['43-4051'];
-check('customer service 2010', csr?.at(0)?.e, 9_460, 0);
-check('customer service 2025', csr?.at(-1)?.e, 10_960, 0);
-check('customer service vintages', csr?.length, 16, 0);
+const csr = trajectories["43-4051"];
+check("customer service 2010", csr?.at(0)?.e, 9_460, 0);
+check("customer service 2025", csr?.at(-1)?.e, 10_960, 0);
+check("customer service vintages", csr?.length, 16, 0);
 
 // ------------------------------------------------------------------- write
 
 if (failures.length) {
-  console.error('\nComputed figures disagree with the published analysis:\n');
+  console.error("\nComputed figures disagree with the published analysis:\n");
   for (const f of failures) console.error(`  ${f}`);
-  console.error('\nResolve before building.\n');
+  console.error("\nResolve before building.\n");
   process.exit(1);
 }
 
@@ -298,11 +313,11 @@ const write = (name, value) => {
   return `${name} ${(JSON.stringify(value).length / 1024).toFixed(0)} KB`;
 };
 
-console.log(write('occupations.json', occupations));
-console.log(write('wage-premium.json', wagePremium));
-console.log(write('placebo.json', placebo));
-console.log(write('constraints.json', constraints));
-console.log(write('trajectories.json', trajectories));
+console.log(write("occupations.json", occupations));
+console.log(write("wage-premium.json", wagePremium));
+console.log(write("placebo.json", placebo));
+console.log(write("constraints.json", constraints));
+console.log(write("trajectories.json", trajectories));
 
 const withChange = occupations.filter((o) => o.pct != null);
 console.log(

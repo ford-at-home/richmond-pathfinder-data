@@ -36,6 +36,18 @@ export function SourceList({
                 {s.publisher}
                 {s.date ? ` · ${s.date}` : ""} · {s.kind}
               </p>
+              {s.url ? (
+                <p className="mt-1">
+                  <a
+                    href={s.url}
+                    className="text-xs text-primary underline-offset-4 hover:underline"
+                  >
+                    {s.url}
+                  </a>
+                </p>
+              ) : null}
+              {s.pages ? <p className="mt-1 annotation">{s.pages}</p> : null}
+              {s.accessed ? <p className="mt-1 annotation">Retrieved {s.accessed}</p> : null}
               {s.isPlaceholder ? (
                 <PlaceholderBadge className="mt-2">Not a real citation</PlaceholderBadge>
               ) : null}

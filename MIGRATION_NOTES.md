@@ -52,17 +52,33 @@ migration of `richmond-ai-impact-site` into `ford-at-home/richmond-pathfinder-da
 
 ## Unresolved — stop and ask before filling
 
-| ID | Question | Why it matters |
-| --- | --- | --- |
-| U1 | Should `/employer` and `/worker` exist here at all, even with the four-tier provenance tags? | Changes intended audience and mixes simulated entities into a sourced-only scaffold. |
-| U2 | Should `/transition-capacity` be the full report (same as `/research/transition-capacity`) or a shorter briefing that only quotes published findings? | Duplicate routes vs a paraphrase risk. |
-| U3 | The scaffold nav asks “where can I find people…” (employer) and “if my occupation changes…” (worker). Keep that framing, or match the source home which leads with the reports? | Audience / claims. |
-| U4 | Hiring-demand / job-postings and training-seat counts have no file in the source. Leave null forever, or wait for a new dataset? | Inventing them would be a new analysis. |
-| U5 | Per-locality comparison table: QCEW in the source is industry × county-set, not occupation × locality. A city/county table of AI exposure cannot be built from these files. | Substituting Richmond city for the MSA. |
+| ID  | Question                                                                                                                                                                        | Why it matters                                                                       |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| U1  | Should `/employer` and `/worker` exist here at all, even with the four-tier provenance tags?                                                                                    | Changes intended audience and mixes simulated entities into a sourced-only scaffold. |
+| U2  | Should `/transition-capacity` be the full report (same as `/research/transition-capacity`) or a shorter briefing that only quotes published findings?                           | Duplicate routes vs a paraphrase risk.                                               |
+| U3  | The scaffold nav asks “where can I find people…” (employer) and “if my occupation changes…” (worker). Keep that framing, or match the source home which leads with the reports? | Audience / claims.                                                                   |
+| U4  | Hiring-demand / job-postings and training-seat counts have no file in the source. Leave null forever, or wait for a new dataset?                                                | Inventing them would be a new analysis.                                              |
+| U5  | Per-locality comparison table: QCEW in the source is industry × county-set, not occupation × locality. A city/county table of AI exposure cannot be built from these files.     | Substituting Richmond city for the MSA.                                              |
+
+## Interim decisions during this pass
+
+10. **`/transition-capacity` quotes the published summary and hosts the pathways figure.**
+    The full document is `/research/transition-capacity`. Duplicating the entire
+    markdown on two routes would create two documents to keep in sync. Paraphrasing
+    it would change the research. U2 remains open if a shorter unique briefing is
+    wanted later.
+
+11. **Home leads with the three reports**, matching the source home. Scaffold nav
+    labels stay (Transition Map, Transition Capacity, Richmond Region Data) because
+    those routes exist. Employer/worker questions are not used as the lead framing
+    (U3 still open for nav copy).
+
+12. **`/report/$slug` redirects to `/research/$slug`.** Source URLs keep working.
 
 ## Follow-up
 
 - Port Playwright coverage for figure interaction (source `tests/report.spec.ts`).
-- Wire `scripts/build-data.mjs` so JSON in `src/content/data/` regenerates from `data/source/output/` inside this repo.
-- Add `/report/$slug` redirects once the research routes render.
-- If U1 is yes, copy the demo as a clearly labelled sandbox with `isPlaceholder`/`simulated` on every invented record — never on the occupation figures.
+- Confirm `node scripts/build-data.mjs` still matches every published check after the path change.
+- If U1 is yes, copy the demo as a clearly labelled sandbox with `simulated` on every invented record — never on the occupation figures.
+- Visual comparison of each report against the Astro site in Chrome (mobile, tablet, laptop, wide).
+- Keyboard walkthrough of the occupation explorer and destination scarcity figure.
