@@ -1,0 +1,83 @@
+# Which constraint blocks each pathway
+
+For every declining exposed occupation, each O*NET-adjacent destination is
+tested against four conditions. A destination counts as viable only if it
+passes all four. The columns below count how many adjacent destinations fail
+each condition, so the binding constraint is visible per occupation.
+
+  absent    not present in the Richmond OEWS data, or under 500 jobs
+  exposed   destination exposure at or above 0.15
+  shrinking destination lost employment 2023 to 2025
+  pays less destination mean wage below the source wage
+
+SOC      Occupation                                 Lost  Nbrs  Absent  Exposed  Shrink  PaysLess  Viable
+43-4051  Customer Service Representatives          3,950    23      13        7       6         4       1
+43-3031  Bookkeeping, Accounting, and Auditing     2,280    19      10        5       4         5       2
+43-4171  Receptionists and Information Clerks      1,340    23      12        7       5         2       3
+43-6014  Secretaries and Administrative Assista    1,290    17       6        6       6         4       2
+43-4111  Interviewers, Except Eligibility and L      770    10       3        5       4         5       1
+41-1011  First-Line Supervisors of Retail Sales      710    15       5        3       5         5       2
+13-2052  Personal Financial Advisors                 530    17       8        6       4         8       0
+23-2011  Paralegals and Legal Assistants             400    13       5        4       4         5       2
+29-2072  Medical Records Specialists                 390    15       6        4       3         4       2
+13-1071  Human Resources Specialists                 340    12       5        2       4         4       1
+15-1232  Computer User Support Specialists           340    11       2        9       6         0       0
+15-2031  Operations Research Analysts                280    12       5        7       4         3       0
+27-1024  Graphic Designers                           240    13      11        1       2         1       0
+15-1231  Computer Network Support Specialists        230     8       0        8       6         1       0
+15-1252  Software Developers                         210    22      10       12      10        11       0
+15-1211  Computer Systems Analysts                   170    30      11       14      11        12       2
+43-9021  Data Entry Keyers                           110    12       6        2       2         0       3
+29-9021  Health Information Technologists and M       90    13       5        5       4         2       1
+15-1253  Software Quality Assurance Analysts an       80    10       5        4       3         2       0
+25-1071  Health Specialties Teachers, Postsecon       50    12      10        0       0         1       1
+27-3091  Interpreters and Translators                 40    10       7        2       0         2       1
+15-1242  Database Administrators                      40    17       7       10       7         3       0
+27-3042  Technical Writers                            40    10       7        3       1         0       0
+41-3031  Securities, Commodities, and Financial       20    19      10        7       5         6       0
+13-2054  Financial Risk Specialists                   20    15       4        8       5         7       1
+25-4012  Curators                                     20    11      10        1       0         1       0
+25-2022  Middle School Teachers, Except Special       10    19      11        2       2         6       1
+15-1244  Network and Computer Systems Administr       10    10       1        9       7         3       0
+25-1011  Business Teachers, Postsecondary             10    14      12        2       1         2       0
+25-1042  Biological Science Teachers, Postsecon       10    11      10        1       1         0       0
+19-4061  Social Science Research Assistants           10    15      12        3       1         0       0
+41-3021  Insurance Sales Agents                       10    14       6        5       5         2       2
+25-1066  Psychology Teachers, Postsecondary           10    13      12        1       1         0       0
+
+Share of lost jobs in occupations where the constraint appears at all:
+  absent         98%
+  exposed       100%
+  shrinking      99%
+  pays_less      96%
+
+Occupations with no viable destination: 16 of 33, 2,080 of 14,050 jobs lost (15%).
+
+## The largest single loss, in full
+
+43-4051 Customer Service Representatives: 3,950 jobs lost, $44,520, 23 adjacent occupations.
+
+SOC      Adjacent occupation                            Exp     Chg     Wage  fails
+43-9041  Insurance Claims and Policy Processing Cle    0.15    -400   45,800  shrinking
+43-3021  Billing and Posting Clerks                    0.19    -180   49,780  exposed, shrinking
+43-4171  Receptionists and Information Clerks          0.43  -1,340   36,750  exposed, shrinking, pays_less
+43-3011  Bill and Account Collectors                   0.30     +10   46,640  exposed
+41-2011  Cashiers                                      0.08    -850   31,910  shrinking, pays_less
+41-2021  Counter and Rental Clerks                     0.20    -120   50,050  exposed, shrinking
+41-2031  Retail Salespersons                           0.32    +580   35,460  exposed, pays_less
+41-3021  Insurance Sales Agents                        0.32     -10   77,940  exposed, shrinking
+43-6013  Medical Secretaries and Administrative Ass    0.36  +1,900   44,230  exposed, pays_less
+
+A further 13 adjacent occupations are absent from Richmond or fall below the 500-job floor.
+
+## Relaxing the wage condition
+
+If a displaced worker is permitted to land at 90% of prior pay rather than
+100%, how much does absorption improve?
+
+  wage floor 100%: 17 of 33 occupations covered, 28 pathways, +6,350 gross destination capacity
+  wage floor 90%: 18 of 33 occupations covered, 35 pathways, +7,770 gross destination capacity
+  wage floor 80%: 19 of 33 occupations covered, 39 pathways, +10,320 gross destination capacity
+
+Capacity is counted once per pathway here, so destinations serving several
+sources are double counted. It is an upper bound.

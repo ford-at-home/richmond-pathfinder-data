@@ -1,0 +1,29 @@
+# National benchmark and Richmond-specific shortfall
+
+US employment, all occupations, May 2025 : 155,495,730
+
+Group                                   US 2025  US share  RVA 2025  RVA share     LQ
+Business & Financial                 10,537,240     6.78%    61,390      9.30%  1.372
+Computer & Mathematical               5,260,110     3.38%    24,420      3.70%  1.093
+Sales                                13,424,300     8.63%    61,370      9.29%  1.076
+Office & Administrative Support      17,753,430    11.42%    73,590     11.14%  0.976
+
+## Office & administrative support: isolating the Richmond-specific decline
+
+US all occupations   2023 -> 2025  : 151,853,870 -> 155,495,730
+US office support    2023 -> 2025  : 18,533,450 -> 17,753,430
+
+US share    2023 -> 2025           : 12.20% -> 11.42% (-0.79 pp)
+Richmond    2023 -> 2025           : 12.79% -> 11.14% (-1.65 pp)
+Location quotient                  : 1.048 -> 0.976
+Richmond decline vs national       : 2.09x
+
+Counterfactual 2025 employment     : 79,261
+Actual 2025 employment             : 73,590
+Richmond-specific shortfall        : 5,671
+
+Both national vintages are measured. No derived quantity remains here.
+
+[cross-check] The LQ-derived 2023 US share was 12.29% against a measured
+[cross-check] 12.20% — an overstatement of 0.09 pp, which understated the shortfall by
+[cross-check] roughly 586 jobs. Detail coverage was 96.9%.

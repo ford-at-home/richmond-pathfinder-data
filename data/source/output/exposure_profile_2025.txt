@@ -1,0 +1,184 @@
+# Richmond MSA — AI exposure profile (May 2025 vintage)
+
+Richmond detailed occupations   : 566
+Matched to exposure scores      : 523
+Also measured nationally        : 523
+Employment covered              : 584,030
+Richmond total, all occupations : 660,350
+Coverage                        : 88.4%
+Exposure-weighted jobs          : 79,400
+
+## National comparison (measured)
+
+Common occupation set           : 523 occupations
+Richmond employment in set      : 584,030
+National employment in set      : 136,065,030
+Richmond mean exposure          : 0.1360
+National mean exposure          : 0.1329
+Richmond vs national            : +2.3%
+
+Exposure scores are national constants applied to both areas, so the whole
+gap is occupational composition: Richmond employs a more exposed mix, not
+more exposed versions of the same jobs.
+
+### Largest contributors to the gap
+
+SOC      Occupation                                         RVA   Nat%   RVA%    Exp  Contrib
+13-1111  Management Analysts                              6,340   0.66   1.09  0.243    10.36
+13-2011  Accountants and Auditors                         7,920   1.07   1.36  0.348    10.11
+13-1161  Market Research Analysts and Marketing Speci     4,550   0.66   0.78  0.648     7.65
+15-1212  Information Security Analysts                    1,690   0.14   0.29  0.486     7.25
+41-3031  Securities, Commodities, and Financial Servi     2,990   0.36   0.51  0.441     6.71
+13-1071  Human Resources Specialists                      4,540   0.67   0.78  0.403     4.31
+27-3031  Public Relations Specialists                     1,760   0.21   0.30  0.453     4.22
+15-2031  Operations Research Analysts                     1,020   0.08   0.17  0.429     4.07
+13-1199  Business Operations Specialists, All Other       5,880   0.80   1.01  0.185     3.84
+15-1211  Computer Systems Analysts                        2,990   0.38   0.51  0.276     3.60
+41-2021  Counter and Rental Clerks                        2,610   0.29   0.45  0.205     3.12
+13-1151  Training and Development Specialists             2,530   0.34   0.43  0.279     2.69
+
+### Largest offsets
+
+43-6014  Secretaries and Administrative Assistants, E     4,940   1.25   0.85  0.453   -18.50
+15-1232  Computer User Support Specialists                2,350   0.53   0.40  0.469    -5.84
+43-3031  Bookkeeping, Accounting, and Auditing Clerks     4,890   1.01   0.84  0.310    -5.35
+11-2021  Marketing Managers                               1,090   0.29   0.19  0.320    -3.32
+15-1299  Computer Occupations, All Other                  1,280   0.32   0.22  0.311    -3.13
+41-2031  Retail Salespersons                             16,210   2.86   2.78  0.322    -2.87
+
+Contributions are in units of 1e-4 exposure points.
+
+## Exposure by major occupational group
+
+Group                                   Emp  ExpJobs  MeanExp   Share     Wage
+Office & Administrative Support      71,030   23,603    0.332   29.7%   50,539
+Sales                                52,780   14,167    0.268   17.8%   51,808
+Business & Financial                 49,740   13,893    0.279   17.5%   91,242
+Computer & Mathematical              23,940    8,397    0.351   10.6%  117,369
+Management                           39,280    5,535    0.141    7.0%  149,784
+Education & Library                  28,360    5,181    0.183    6.5%   69,436
+Healthcare Practitioners             39,130    2,129    0.054    2.7%  101,146
+Arts, Design & Media                  7,460    1,553    0.208    2.0%   58,434
+Legal                                 6,430    1,355    0.211    1.7%  132,835
+Life, Physical & Social Science       5,300      534    0.101    0.7%   81,697
+Installation & Repair                26,080      457    0.018    0.6%   61,659
+Protective Service                   14,910      454    0.030    0.6%   61,129
+Food Preparation & Serving           52,240      454    0.009    0.6%   37,501
+Construction & Extraction            28,030      365    0.013    0.5%   57,898
+Personal Care & Service              14,610      314    0.021    0.4%   33,799
+Architecture & Engineering            8,450      299    0.035    0.4%  100,729
+Community & Social Service            7,280      289    0.040    0.4%   60,528
+Healthcare Support                   15,370      169    0.011    0.2%   45,169
+Building & Grounds                   18,790      112    0.006    0.1%   37,802
+Production                           19,330       94    0.005    0.1%   52,436
+Transportation & Material Moving     54,980       42    0.001    0.1%   46,250
+Farming, Fishing & Forestry             510        5    0.009    0.0%   46,125
+
+Top 4 groups: 75.6% of exposure in 33.8% of employment
+
+## Top 30 occupations by exposure-weighted jobs
+
+SOC      Occupation                                             Emp    Exp  ExpJobs    LQ     Wage
+43-4051  Customer Service Representatives                    10,960  0.701    7,684  0.99   44,520
+41-2031  Retail Salespersons                                 16,210  0.322    5,223  0.98   35,460
+43-9061  Office Clerks, General                              10,890  0.450    4,905  1.04   47,700
+41-4012  Sales Representatives, Wholesale and Manufacturi     5,080  0.628    3,190  0.97   83,320
+13-1161  Market Research Analysts and Marketing Specialis     4,550  0.648    2,950  1.19   96,240
+13-2011  Accountants and Auditors                             7,920  0.348    2,755  1.29   93,210
+43-6014  Secretaries and Administrative Assistants, Excep     4,940  0.453    2,237  0.68   48,460
+15-1252  Software Developers                                  7,680  0.288    2,212  1.07  139,340
+11-1021  General and Operations Managers                     15,770  0.138    2,173  1.06  134,880
+13-1071  Human Resources Specialists                          4,540  0.403    1,831  1.17   83,110
+13-1111  Management Analysts                                  6,340  0.243    1,544  1.66  101,350
+43-4171  Receptionists and Information Clerks                 3,550  0.434    1,540  0.92   36,750
+43-3031  Bookkeeping, Accounting, and Auditing Clerks         4,890  0.310    1,518  0.84   53,580
+43-6013  Medical Secretaries and Administrative Assistant     4,140  0.362    1,500  1.01   44,230
+11-3031  Financial Managers                                   3,480  0.391    1,360  0.97  192,080
+41-3031  Securities, Commodities, and Financial Services      2,990  0.441    1,319  1.44  107,070
+41-1011  First-Line Supervisors of Retail Sales Workers       5,000  0.263    1,314  1.05   54,000
+25-2031  Secondary School Teachers, Except Special and Ca     4,420  0.290    1,282  0.98   66,610
+41-2011  Cashiers                                            14,460  0.085    1,223  1.10   31,910
+43-1011  First-Line Supervisors of Office and Administrat     6,490  0.186    1,205  1.06   70,760
+15-1232  Computer User Support Specialists                    2,350  0.469    1,101  0.77   64,990
+13-1199  Business Operations Specialists, All Other           5,880  0.185    1,085  1.27   83,780
+29-1141  Registered Nurses                                   15,700  0.059      934  1.09   92,010
+13-2051  Financial and Investment Analysts                    1,630  0.572      932  1.06  113,900
+15-1211  Computer Systems Analysts                            2,990  0.276      826  1.35  113,840
+15-1212  Information Security Analysts                        1,690  0.486      821  2.09  126,940
+25-2022  Middle School Teachers, Except Special and Caree     2,760  0.297      820  1.05   65,160
+27-3031  Public Relations Specialists                         1,760  0.453      797  1.46   82,880
+13-1151  Training and Development Specialists                 2,530  0.279      707  1.30   79,200
+41-3021  Insurance Sales Agents                               2,040  0.319      650  1.00   77,940
+
+## Over-concentration: exposure >= 0.25 and LQ >= 1.10
+
+Occupations: 27   Employment: 41,510   Exposed jobs: 16,239 (20.5% of metro exposure)
+Share of covered employment: 7.1%
+
+SOC      Occupation                                             Emp    Exp    LQ     Wage
+13-1161  Market Research Analysts and Marketing Specialis     4,550  0.648  1.19   96,240
+13-2011  Accountants and Auditors                             7,920  0.348  1.29   93,210
+13-1071  Human Resources Specialists                          4,540  0.403  1.17   83,110
+41-3031  Securities, Commodities, and Financial Services      2,990  0.441  1.44  107,070
+15-1211  Computer Systems Analysts                            2,990  0.276  1.35  113,840
+15-1212  Information Security Analysts                        1,690  0.486  2.09  126,940
+27-3031  Public Relations Specialists                         1,760  0.453  1.46   82,880
+13-1151  Training and Development Specialists                 2,530  0.279  1.30   79,200
+23-2011  Paralegals and Legal Assistants                      1,930  0.293  1.15   67,940
+15-1244  Network and Computer Systems Administrators          1,660  0.337  1.24  103,730
+13-2052  Personal Financial Advisors                          1,350  0.350  1.19  158,910
+15-2031  Operations Research Analysts                         1,020  0.429  2.22  105,800
+25-1071  Health Specialties Teachers, Postsecondary           1,430  0.304  1.53  130,720
+43-3011  Bill and Account Collectors                          1,040  0.299  1.54   46,640
+15-1243  Database Architects                                    440  0.579  1.53  138,240
+15-1242  Database Administrators                                600  0.332  2.00  102,460
+43-4161  Human Resources Assistants, Except Payroll and T       470  0.405  1.23   53,300
+25-1011  Business Teachers, Postsecondary                       400  0.307  1.16  115,140
+19-4031  Chemical Technicians                                   360  0.315  1.47   55,060
+13-2054  Financial Risk Specialists                             380  0.265  1.40  119,620
+25-1022  Mathematical Science Teachers, Postsecondary           230  0.430  1.11   89,340
+25-1081  Education Teachers, Postsecondary                      370  0.262  1.42   76,720
+25-1042  Biological Science Teachers, Postsecondary             300  0.291  1.39   92,030
+23-1023  Judges, Magistrate Judges, and Magistrates             220  0.311  2.11  125,220
+23-1021  Administrative Law Judges, Adjudicators, and Hea       210  0.305  2.96  101,970
+25-4012  Curators                                                80  0.412  1.47   74,460
+19-3022  Survey Researchers                                      50  0.432  1.33   87,250
+
+## Low-exposure occupations with scale (absorption candidates)
+
+SOC      Occupation                                             Emp    Exp    LQ     Wage
+35-3023  Fast Food and Counter Workers                       17,100  0.000  1.04   31,080
+53-7065  Stockers and Order Fillers                          12,300  0.000  1.02   38,260
+53-3032  Heavy and Tractor-Trailer Truck Drivers             11,760  0.000  1.34   60,130
+53-7062  Laborers and Freight, Stock, and Material Movers    10,550  0.000  0.84   42,130
+37-2011  Janitors and Cleaners, Except Maids and Housekee     9,270  0.000  0.99   35,220
+35-3031  Waiters and Waitresses                               9,120  0.000  0.95   45,010
+31-1131  Nursing Assistants                                   6,660  0.000  1.08   41,770
+35-2014  Cooks, Restaurant                                    6,160  0.012  1.03   37,100
+49-9071  Maintenance and Repair Workers, General              5,520  0.000  0.85   52,520
+53-7051  Industrial Truck and Tractor Operators               5,150  0.000  1.56   48,530
+53-3033  Light Truck Drivers                                  4,790  0.000  1.15   44,220
+33-9032  Security Guards                                      4,630  0.000  0.85   42,150
+47-2061  Construction Laborers                                4,560  0.028  0.98   42,970
+47-1011  First-Line Supervisors of Construction Trades an     4,460  0.030  1.29   79,030
+43-5071  Shipping, Receiving, and Inventory Clerks            4,420  0.000  1.28   45,020
+37-3011  Landscaping and Groundskeeping Workers               4,360  0.000  1.08   39,940
+47-2111  Electricians                                         3,600  0.000  1.12   62,360
+37-2012  Maids and Housekeeping Cleaners                      3,280  0.000  0.90   33,850
+31-9092  Medical Assistants                                   3,210  0.048  0.92   43,060
+47-2031  Carpenters                                           3,070  0.000  1.08   53,520
+49-3023  Automotive Service Technicians and Mechanics         2,930  0.000  0.98   61,160
+35-2021  Food Preparation Workers                             2,890  0.000  0.76   34,120
+49-9021  Heating, Air Conditioning, and Refrigeration Mec     2,700  0.019  1.55   58,490
+39-9011  Childcare Workers                                    2,610  0.012  1.19   33,240
+29-2061  Licensed Practical and Licensed Vocational Nurse     2,570  0.000  0.93   66,110
+
+## Wage exposure
+
+Total annual wage bill              : $40,077,559,200
+Exposure-weighted wage bill         : $6,241,235,145
+Share of payroll in exposed tasks   : 15.6%
+
+Mean wage, exposure >= 0.25         : $76,905  (71 occs, 143,640 jobs)
+Mean wage, exposure <= 0.05         : $55,419  (316 occs, 282,740 jobs)
+Premium                             : +38.8%

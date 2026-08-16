@@ -1,0 +1,109 @@
+# Absorption capacity — Richmond MSA, 2023 to 2025
+
+Displaced population: occupations with observed exposure at or above 0.25
+that lost employment between May 2023 and May 2025.
+
+Destination: an occupation with exposure below 0.15, at least 500 jobs,
+employment growing over the same period, and a mean wage at or above the
+reference wage. Adjacent destinations are the subset that O*NET records as a
+primary related occupation for at least one displaced occupation, in either
+direction.
+
+## All declining exposed occupations
+
+Occupations                                : 33
+Jobs lost                                  : 14,050
+Reference wage, weighted by jobs lost      : $59,092
+Annual wages attached to lost jobs         : $830,247,700
+
+Durable, growing, equal-or-better hiring   : 54 occupations, +12,840 jobs  (91% of losses)
+  of which adjacent to a displaced worker  : 17 occupations, +4,830 jobs  (34% of losses)
+  reachable share of available capacity    : 38%
+
+Adjacent destinations:
+  SOC      Occupation                                    Added   Exp     Wage
+  29-1141  Registered Nurses                            +1,960  0.06   92,010
+  13-1041  Compliance Officers                            +660  0.12   81,370
+  13-1031  Claims Adjusters, Examiners, and Investiga     +580  0.08   79,920
+  11-9199  Managers, All Other                            +300  0.07  160,240
+  13-2053  Insurance Underwriters                         +250  0.06   92,670
+  29-1127  Speech-Language Pathologists                   +240  0.00   97,870
+  11-9111  Medical and Health Services Managers           +140  0.07  143,730
+  29-1171  Nurse Practitioners                            +130  0.09  123,420
+  49-1011  First-Line Supervisors of Mechanics, Insta     +130  0.10   83,910
+  11-3121  Human Resources Managers                       +120  0.00  163,900
+  25-2012  Kindergarten Teachers, Except Special Educ      +80  0.00   61,570
+  17-2112  Industrial Engineers                            +70  0.04  111,430
+  43-6012  Legal Secretaries and Administrative Assis      +50  0.00   68,480
+  11-9032  Education Administrators, Kindergarten thr      +40  0.05  107,770
+  11-2022  Sales Managers                                  +30  0.04  182,190
+  13-2081  Tax Examiners and Collectors, and Revenue       +30  0.03   62,560
+  13-1131  Fundraisers                                     +20  0.05   75,760
+
+Largest non-adjacent destinations:
+  SOC      Occupation                                    Added   Exp     Wage
+  11-1021  General and Operations Managers              +2,090  0.14  134,880
+  53-3032  Heavy and Tractor-Trailer Truck Drivers      +1,190  0.00   60,130
+  33-3051  Police and Sheriff's Patrol Officers           +400  0.12   69,660
+  47-2152  Plumbers, Pipefitters, and Steamfitters        +400  0.01   60,940
+  51-9011  Chemical Equipment Operators and Tenders       +310  0.00   62,590
+  47-4011  Construction and Building Inspectors           +310  0.05   75,950
+  29-1021  Dentists, General                              +280  0.03  212,020
+  29-2034  Radiologic Technologists and Technicians       +240  0.00   81,670
+  17-2071  Electrical Engineers                           +220  0.06  118,040
+  47-1011  First-Line Supervisors of Construction Tra     +200  0.03   79,030
+
+## Office and administrative support only
+
+Occupations                                : 6
+Jobs lost                                  : 9,740
+Reference wage, weighted by jobs lost      : $46,480
+Annual wages attached to lost jobs         : $452,714,400
+
+Durable, growing, equal-or-better hiring   : 73 occupations, +16,460 jobs  (169% of losses)
+  of which adjacent to a displaced worker  : 7 occupations, +1,270 jobs  (13% of losses)
+  reachable share of available capacity    : 8%
+
+Adjacent destinations:
+  SOC      Occupation                                    Added   Exp     Wage
+  13-1031  Claims Adjusters, Examiners, and Investiga     +580  0.08   79,920
+  43-4031  Court, Municipal, and License Clerks           +330  0.10   46,500
+  43-5053  Postal Service Mail Sorters, Processors, a     +120  0.00   56,630
+  29-2099  Health Technologists and Technicians, All      +110  0.04   55,900
+  43-3051  Payroll and Timekeeping Clerks                  +50  0.05   58,960
+  43-6012  Legal Secretaries and Administrative Assis      +50  0.00   68,480
+  13-2081  Tax Examiners and Collectors, and Revenue       +30  0.03   62,560
+
+Largest non-adjacent destinations:
+  SOC      Occupation                                    Added   Exp     Wage
+  11-1021  General and Operations Managers              +2,090  0.14  134,880
+  29-1141  Registered Nurses                            +1,960  0.06   92,010
+  53-3032  Heavy and Tractor-Trailer Truck Drivers      +1,190  0.00   60,130
+  13-1041  Compliance Officers                            +660  0.12   81,370
+  47-2031  Carpenters                                     +490  0.00   53,520
+  49-9099  Installation, Maintenance, and Repair Work     +420  0.00   48,340
+  47-2152  Plumbers, Pipefitters, and Steamfitters        +400  0.01   60,940
+  33-3051  Police and Sheriff's Patrol Officers           +400  0.12   69,660
+  53-7081  Refuse and Recyclable Material Collectors      +380  0.00   47,760
+  47-4011  Construction and Building Inspectors           +310  0.05   75,950
+
+## Summary
+
+Population                                    Lost  Capacity  Adjacent   Reach
+All declining exposed occupations           14,050   +12,840    +4,830     38%
+Office and administrative support only       9,740   +16,460    +1,270      8%
+
+## Sensitivity to the adjacency assumption
+
+Reading O*NET's relatedness as published, without adding reverse edges,
+narrows the reachable set further. The finding does not depend on the choice.
+
+Population                                   Symmetric  As published
+All declining exposed occupations               +4,830        +3,170
+Office and administrative support               +1,270          +330
+
+The region generated nearly enough durable, better-paid hiring to cover the
+jobs it lost. Almost none of that hiring is adjacent to the people who lost
+them. The constraint is the distance between the two, not the volume of
+either. Capacity is also not reserved for displaced workers, so these are
+upper bounds on what could be absorbed without intervention.

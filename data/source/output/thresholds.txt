@@ -1,0 +1,139 @@
+# Threshold sensitivity — Richmond MSA exposure analysis
+
+Two cut points appear in the report: observed exposure at or above 0.25,
+and a location quotient at or above 1.10. Neither is designated as
+meaningful by the source data or by prior research. This recomputes each
+headline result across a range of alternatives.
+
+## 1. Distribution of observed exposure
+
+Occupations: 523   Employment covered: 584,030
+
+  Percentile   Exposure   (occupation-weighted)
+         50%      0.017
+         60%      0.047
+         70%      0.096
+         75%      0.131
+         80%      0.190
+         85%      0.243
+         90%      0.306
+         95%      0.404
+         99%      0.617
+
+Occupations scoring exactly zero   : 248 of 523 (47.4%)
+Employment in zero-scoring occs    : 225,650 (38.6%)
+Mean exposure, employment-weighted : 0.1360
+Median exposure, unweighted        : 0.0174
+
+0.25 sits at the 86th percentile of occupations, and separates
+143,640 jobs above from 440,390 below.
+
+## 2. Size of the exposed population
+
+ Threshold   Occs      Jobs   Share  Mean wage
+      0.10    150   231,390   39.6%     83,790
+      0.15    121   191,230   32.7%     81,047
+      0.20    101   163,440   28.0%     78,062
+      0.25     71   143,640   24.6%     76,905
+      0.30     56   112,260   19.2%     73,050
+      0.40     28    61,740   10.6%     68,802
+      0.50      9    24,910    4.3%     71,145
+      0.60      6    22,120    3.8%     65,346
+
+## 3. Finding 1 — occupations declining in both intervals
+
+Declining 2023 to 2024 and again 2024 to 2025, excluding the secretarial
+recode at 43-6014. Wages are 2025 mean wages applied to jobs lost.
+
+ Threshold   Occs   Jobs lost       Wage bill
+      0.10     30     -12,740$    682,294,700
+      0.15     25     -11,930$    638,470,900
+      0.20     20     -10,490$    545,970,200
+      0.25     12      -9,510$    476,185,400
+      0.30     12      -9,510$    476,185,400
+      0.40      7      -6,080$    286,225,300
+      0.50      2      -4,060$    180,393,700
+      0.60      2      -4,060$    180,393,700
+
+For comparison, occupations declining in both intervals that are NOT exposed:
+  below 0.25: 72 occupations, -10,910 jobs, $688,368,600
+
+## 4. The wage separation
+
+Employment-weighted mean wage of exposed occupations against the least
+exposed (0.05 or below), at each cut point. This is the finding reviewers
+identified as strongest, so its robustness matters most.
+
+Reference: exposure <= 0.05 → 316 occupations, 282,740 jobs, $55,419
+
+ Threshold   Occs  Mean wage   Premium
+      0.10    149     83,790       51%
+      0.15    121     81,047       46%
+      0.20    101     78,062       41%
+      0.25     71     76,905       39%
+      0.30     56     73,050       32%
+      0.40     28     68,802       24%
+      0.50      9     71,145       28%
+      0.60      6     65,346       18%
+
+The premium is positive at every threshold tested, so the wage separation
+does not depend on the choice of 0.25.
+
+## 5. Mean wage by exposure band, not cumulative
+
+Cumulative thresholds hide that the relationship reverses at the top.
+
+          Band   Occs      Jobs  Mean wage
+  0.00–0.05      316   282,740     55,419
+  0.05–0.10       54    67,050     74,948
+  0.10–0.25       78    87,690     95,066
+  0.25–0.40       43    81,900     83,015
+  0.40–0.60       22    39,620     70,731
+  0.60–1.01        6    22,120     65,346
+
+## 6. Finding 3 — over-concentration, across both thresholds
+
+Occupations combining exposure at or above the row value with a 2025
+location quotient at or above the column value. Cells show occupations
+and jobs.
+
+ exposure           1.00           1.05           1.10           1.15           1.20           1.25           1.50
+     0.20    55 /  95,250    49 /  77,160    40 /  55,730    36 /  55,100    31 /  42,330    27 /  39,630    14 /  18,580
+     0.25    36 /  76,950    31 /  59,570    25 /  41,240    24 /  41,010    19 /  28,240    17 /  26,110     7 /   6,430
+     0.30    26 /  51,970    21 /  34,590    18 /  31,700    17 /  31,470    13 /  20,630    11 /  18,500     6 /   5,390
+     0.40    12 /  30,290    11 /  19,400    10 /  17,770     9 /  17,540     7 /   8,450     6 /   7,980     3 /   3,150
+
+Wage bill in the over-concentrated set, at 0.25 exposure:
+  LQ floor   Occs      Jobs  Mean wage       Wage bill
+      1.00     36    76,950     87,211$  6,710,912,300
+      1.05     31    59,570     97,668$  5,818,110,800
+      1.10     25    41,240     96,957$  3,998,524,500
+      1.15     24    41,010     97,000$  3,977,976,300
+      1.20     19    28,240     98,125$  2,771,056,200
+      1.25     17    26,110     98,576$  2,573,813,400
+      1.50      7     6,430    109,113$    701,595,100
+
+## 7. Coverage and what is excluded
+
+Detailed occupations in the Richmond May 2025 release : 598
+Occupations carried into the analysis                 : 523
+Excluded                                             : 75
+Employment in excluded occupations                    : 56,020
+
+Largest exclusions, by employment:
+  31-1120  Home Health and Personal Care Aides                     11,570
+  13-1082  Project Management Specialists                           6,380
+  41-3091  Sales Representatives of Services, Except Advertisin     5,710
+  25-3031  Substitute Teachers, Short-Term                          4,160
+  21-1018  Substance Abuse, Behavioral Disorder, and Mental Hea     4,150
+  13-1020  Buyers and Purchasing Agents                             4,000
+  25-9045  Teaching Assistants, Except Postsecondary                3,770
+  51-2090  Miscellaneous Assemblers and Fabricators                 2,970
+  53-1047  First-Line Supervisors of Transportation and Materia     2,830
+  43-9199  Office and Administrative Support Workers, All Other     1,190
+  21-1099  Community and Social Service Specialists, All Other      1,160
+  25-2052  Special Education Teachers, Kindergarten and Element       910
+
+Exclusions arise where an occupation has no counterpart in the exposure
+file, or no separately measured national employment figure for the same
+code. They are not dropped for having low or zero exposure.

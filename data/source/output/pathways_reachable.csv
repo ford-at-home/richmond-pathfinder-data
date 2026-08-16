@@ -1,0 +1,29 @@
+src,src_title,src_lost,src_wage,src_exp,src_zone,dst,dst_title,tier,dst_emp,dst_chg,dst_exp,dst_wage,dst_lq,dst_zone,replacement,zone_gap
+43-4051,Customer Service Representatives,3950.0,44520.0,0.7011,2,13-1031,"Claims Adjusters, Examiners, and Investigators",Primary-Short,1790.0,580.0,0.0818,79920.0,1.3,4,179.51482479784366,2
+43-3031,"Bookkeeping, Accounting, and Auditing Clerks",2280.0,53580.0,0.3104,3,13-2081,"Tax Examiners and Collectors, and Revenue Agents",Primary-Short,570.0,30.0,0.0275,62560.0,2.38,3,116.75998506905562,0
+43-3031,"Bookkeeping, Accounting, and Auditing Clerks",2280.0,53580.0,0.3104,3,43-3051,Payroll and Timekeeping Clerks,Primary-Short,630.0,50.0,0.0487,58960.0,0.97,3,110.04106009705114,0
+43-4171,Receptionists and Information Clerks,1340.0,36750.0,0.4338,2,29-2099,"Health Technologists and Technicians, All Other",Primary-Long,820.0,110.0,0.0445,55900.0,1.05,3,152.10884353741497,1
+43-4171,Receptionists and Information Clerks,1340.0,36750.0,0.4338,2,43-4031,"Court, Municipal, and License Clerks",Primary-Long,860.0,330.0,0.102,46500.0,1.12,2,126.53061224489795,0
+43-4171,Receptionists and Information Clerks,1340.0,36750.0,0.4338,2,43-6012,Legal Secretaries and Administrative Assistants,Primary-Long,560.0,50.0,0.0,68480.0,0.84,3,186.34013605442178,1
+43-6014,"Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",1290.0,48460.0,0.4528,2,43-3051,Payroll and Timekeeping Clerks,Primary-Long,630.0,50.0,0.0487,58960.0,0.97,3,121.66735451919108,1
+43-6014,"Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",1290.0,48460.0,0.4528,2,43-6012,Legal Secretaries and Administrative Assistants,Primary-Short,560.0,50.0,0.0,68480.0,0.84,3,141.312422616591,1
+43-4111,"Interviewers, Except Eligibility and Loan",770.0,49870.0,0.3851,3,29-2099,"Health Technologists and Technicians, All Other",Primary-Short,820.0,110.0,0.0445,55900.0,1.05,3,112.09143773811911,0
+41-1011,First-Line Supervisors of Retail Sales Workers,710.0,54000.0,0.2627,2,11-2022,Sales Managers,Primary-Long,1320.0,30.0,0.0433,182190.0,0.49,4,337.3888888888889,2
+41-1011,First-Line Supervisors of Retail Sales Workers,710.0,54000.0,0.2627,2,49-1011,"First-Line Supervisors of Mechanics, Installers, and Repairers",Primary-Long,2980.0,130.0,0.1015,83910.0,1.14,3,155.38888888888889,1
+23-2011,Paralegals and Legal Assistants,400.0,67940.0,0.2927,3,13-1041,Compliance Officers,Primary-Long,2910.0,660.0,0.1211,81370.0,1.64,4,119.76744186046511,1
+23-2011,Paralegals and Legal Assistants,400.0,67940.0,0.2927,3,43-6012,Legal Secretaries and Administrative Assistants,Primary-Short,560.0,50.0,0.0,68480.0,0.84,3,100.79481895790403,0
+29-2072,Medical Records Specialists,390.0,56530.0,0.6674,3,13-1041,Compliance Officers,Primary-Short,2910.0,660.0,0.1211,81370.0,1.64,4,143.94127012205908,1
+29-2072,Medical Records Specialists,390.0,56530.0,0.6674,3,43-6012,Legal Secretaries and Administrative Assistants,Primary-Long,560.0,50.0,0.0,68480.0,0.84,3,121.13921811427561,0
+13-1071,Human Resources Specialists,340.0,83110.0,0.4034,4,11-3121,Human Resources Managers,Primary-Short,960.0,120.0,0.0,163900.0,1.02,4,197.20851883046564,0
+15-1211,Computer Systems Analysts,170.0,113840.0,0.2763,5,11-9111,Medical and Health Services Managers,Primary-Short,1760.0,140.0,0.0659,143730.0,0.7,4,126.256148981026,-1
+15-1211,Computer Systems Analysts,170.0,113840.0,0.2763,5,29-1171,Nurse Practitioners,Primary-Short,1440.0,130.0,0.0944,123420.0,1.05,5,108.41531974701336,0
+43-9021,Data Entry Keyers,110.0,41270.0,0.6707,2,43-3051,Payroll and Timekeeping Clerks,Primary-Long,630.0,50.0,0.0487,58960.0,0.97,3,142.86406590743883,1
+43-9021,Data Entry Keyers,110.0,41270.0,0.6707,2,43-5053,"Postal Service Mail Sorters, Processors, and Processing Machine Operators",Primary-Long,1090.0,120.0,0.0,56630.0,2.43,2,137.2183183910831,0
+43-9021,Data Entry Keyers,110.0,41270.0,0.6707,2,43-5071,"Shipping, Receiving, and Inventory Clerks",Primary-Long,4420.0,1160.0,0.0,45020.0,1.28,2,109.08650351344802,0
+29-9021,Health Information Technologists and Medical Registrars,90.0,65060.0,0.3063,3,11-9111,Medical and Health Services Managers,Primary-Long,1760.0,140.0,0.0659,143730.0,0.7,4,220.91915155241315,1
+25-1071,"Health Specialties Teachers, Postsecondary",50.0,130720.0,0.3045,5,11-9111,Medical and Health Services Managers,Primary-Long,1760.0,140.0,0.0659,143730.0,0.7,4,109.95257037943696,-1
+27-3091,Interpreters and Translators,40.0,72950.0,0.4304,4,29-1127,Speech-Language Pathologists,Primary-Short,770.0,240.0,0.0,97870.0,0.98,5,134.16038382453735,1
+13-2054,Financial Risk Specialists,20.0,119620.0,0.2649,4,11-9199,"Managers, All Other",Primary-Long,2060.0,300.0,0.0686,160240.0,0.78,4,133.9575321852533,0
+25-2022,"Middle School Teachers, Except Special and Career/Technical Education",10.0,65160.0,0.2972,4,11-9032,"Education Administrators, Kindergarten through Secondary",Primary-Long,1230.0,40.0,0.0525,107770.0,0.88,5,165.39287906691223,1
+41-3021,Insurance Sales Agents,10.0,77940.0,0.3188,4,13-1031,"Claims Adjusters, Examiners, and Investigators",Primary-Long,1790.0,580.0,0.0818,79920.0,1.3,4,102.540415704388,0
+41-3021,Insurance Sales Agents,10.0,77940.0,0.3188,4,13-2053,Insurance Underwriters,Primary-Long,950.0,250.0,0.0625,92670.0,2.11,4,118.8991531947652,0

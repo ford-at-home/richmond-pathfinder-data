@@ -1,0 +1,36 @@
+# Richmond employment change vs AI exposure, May 2023 to May 2025
+
+Metro total: 647,440 -> 660,350 (+2.0%)
+
+BLS states OEWS estimates are not designed for cross-year comparison.
+Treat the direction as suggestive; do not read point estimates as causal.
+
+Group                                 Exp     2023     2025     Chg     Pct  vsMetro
+Computer & Mathematical             0.353   25,500   24,420  -1,080   -4.2%    -6.2%
+Office & Administrative Support     0.331   82,810   73,590  -9,220  -11.1%   -13.1%
+Business & Financial                0.278   57,620   61,390   3,770    6.5%     4.5%
+Sales                               0.269   61,000   61,370     370    0.6%    -1.4%
+Legal                               0.208    6,420    6,750     330    5.1%     3.1%
+Arts, Design & Media                0.200    8,760    8,170    -590   -6.7%    -8.7%
+Education & Library                 0.182   37,050   38,670   1,620    4.4%     2.4%
+Management                          0.141   36,060   39,710   3,650   10.1%     8.1%
+Life, Physical & Social Science     0.100    5,910    6,870     960   16.2%    14.2%
+Healthcare Practitioners            0.054   42,060   42,560     500    1.2%    -0.8%
+Architecture & Engineering          0.037    8,500    8,800     300    3.5%     1.5%
+Community & Social Service          0.036   13,560   13,990     430    3.2%     1.2%
+Protective Service                  0.030   16,970   18,820   1,850   10.9%     8.9%
+Personal Care & Service             0.021   14,230   15,140     910    6.4%     4.4%
+Installation & Repair               0.018   26,090   26,430     340    1.3%    -0.7%
+Healthcare Support                  0.016   24,450   27,580   3,130   12.8%    10.8%
+Construction & Extraction           0.013   28,270   29,810   1,540    5.4%     3.5%
+Farming, Fishing & Forestry         0.010      710      590    -120  -16.9%   -18.9%
+Food Preparation & Serving          0.009   50,860   52,500   1,640    3.2%     1.2%
+Building & Grounds                  0.006   18,170   18,870     700    3.9%     1.9%
+Production                          0.005   23,610   25,330   1,720    7.3%     5.3%
+Transportation & Material Moving    0.001   58,830   58,980     150    0.3%    -1.7%
+
+Pearson correlation (exposure vs % change)  : -0.283
+Spearman rank correlation                   : -0.150
+
+Groups with exposure >= 0.20 (6): 242,110 -> 235,690 (-2.7%)
+Groups with exposure <  0.20 (16): 405,330 -> 424,650 (+4.8%)

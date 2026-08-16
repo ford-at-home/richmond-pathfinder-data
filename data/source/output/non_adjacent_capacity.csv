@@ -1,0 +1,38 @@
+occ_code,bls_title,employment,loc_quotient,annual_mean,title,observed_exposure,nat_employment,nat_annual_mean,group,exposed_jobs,wage_bill,emp_23,chg,zone,adjacent
+11-1021,General and Operations Managers,15770.0,1.06,134880.0,General and Operations Managers,0.1378,3503020,134940.0,Management,2173.106,2127057600.0,13680.0,2090.0,4,False
+53-3032,Heavy and Tractor-Trailer Truck Drivers,11760.0,1.34,60130.0,Heavy and Tractor-Trailer Truck Drivers,0.0,2062040,59710.0,Transportation & Material Moving,0.0,707128800.0,10570.0,1190.0,2,False
+33-3051,Police and Sheriff's Patrol Officers,3410.0,1.2,69660.0,Police and Sheriff's Patrol Officers,0.1234,670520,79200.0,Protective Service,420.794,237540600.0,3010.0,400.0,3,False
+47-2152,"Plumbers, Pipefitters, and Steamfitters",2340.0,1.18,60940.0,"Plumbers, Pipefitters, and Steamfitters",0.0116,465840,72170.0,Construction & Extraction,27.144,142599600.0,1940.0,400.0,3,False
+51-9011,Chemical Equipment Operators and Tenders,760.0,1.29,62590.0,Chemical Equipment Operators and Tenders,0.0,139630,60710.0,Production,0.0,47568400.0,450.0,310.0,2,False
+47-4011,Construction and Building Inspectors,1140.0,1.83,75950.0,Construction and Building Inspectors,0.0481,146720,77730.0,Construction & Extraction,54.834,86583000.0,830.0,310.0,3,False
+29-1021,"Dentists, General",650.0,1.23,212020.0,"Dentists, General",0.0309,124390,191350.0,Healthcare Practitioners,20.085,137813000.0,370.0,280.0,5,False
+29-2034,Radiologic Technologists and Technicians,1130.0,1.16,81670.0,Radiologic Technologists and Technicians,0.0,230490,83840.0,Healthcare Practitioners,0.0,92287100.0,890.0,240.0,3,False
+17-2071,Electrical Engineers,1160.0,1.38,118040.0,Electrical Engineers,0.059,198750,125100.0,Architecture & Engineering,68.44,136926400.0,940.0,220.0,4,False
+47-1011,First-Line Supervisors of Construction Trades and Extraction Workers,4460.0,1.29,79030.0,First-Line Supervisors of Construction Trades and Extraction Workers,0.0296,812210,86450.0,Construction & Extraction,132.01600000000002,352473800.0,4260.0,200.0,3,False
+31-2021,Physical Therapist Assistants,560.0,1.18,71380.0,Physical Therapist Assistants,0.0,112430,68730.0,Healthcare Support,0.0,39972800.0,390.0,170.0,3,False
+47-2111,Electricians,3600.0,1.12,62360.0,Electricians,0.0,757220,71490.0,Construction & Extraction,0.0,224496000.0,3430.0,170.0,3,False
+19-2041,"Environmental Scientists and Specialists, Including Health",780.0,2.05,84450.0,"Environmental Scientists and Specialists, Including Health",0.0548,89250,91680.0,"Life, Physical & Social Science",42.744,65871000.0,640.0,140.0,5,False
+19-4021,Biological Technicians,500.0,1.69,62090.0,Biological Technicians,0.0599,69620,61380.0,"Life, Physical & Social Science",29.95,31045000.0,360.0,140.0,4,False
+51-4121,"Welders, Cutters, Solderers, and Brazers",1260.0,0.71,59720.0,"Welders, Cutters, Solderers, and Brazers",0.0,416210,56760.0,Production,0.0,75247200.0,1120.0,140.0,2,False
+33-1012,First-Line Supervisors of Police and Detectives,690.0,1.05,107600.0,First-Line Supervisors of Police and Detectives,0.0,154610,112190.0,Protective Service,0.0,74244000.0,550.0,140.0,2,False
+49-3023,Automotive Service Technicians and Mechanics,2930.0,0.98,61160.0,Automotive Service Technicians and Mechanics,0.0,704640,56420.0,Installation & Repair,0.0,179198800.0,2800.0,130.0,3,False
+29-1122,Occupational Therapists,740.0,1.07,103370.0,Occupational Therapists,0.008,162450,101280.0,Healthcare Practitioners,5.92,76493800.0,610.0,130.0,5,False
+49-9041,Industrial Machinery Mechanics,1900.0,1.02,69110.0,Industrial Machinery Mechanics,0.0239,439640,68460.0,Installation & Repair,45.41,131309000.0,1790.0,110.0,3,False
+29-1126,Respiratory Therapists,630.0,1.07,85780.0,Respiratory Therapists,0.0,139790,87300.0,Healthcare Practitioners,0.0,54041400.0,530.0,100.0,3,False
+21-1012,"Educational, Guidance, and Career Counselors and Advisors",1480.0,0.98,70100.0,"Educational, Guidance, and Career Counselors and Advisors",0.1182,353310,71430.0,Community & Social Service,174.936,103748000.0,1380.0,100.0,5,False
+11-3071,"Transportation, Storage, and Distribution Managers",630.0,0.67,129800.0,"Transportation, Storage, and Distribution Managers",0.0956,221180,121600.0,Management,60.228,81774000.0,530.0,100.0,4,False
+17-2141,Mechanical Engineers,640.0,0.51,106960.0,Mechanical Engineers,0.0813,296810,113610.0,Architecture & Engineering,52.032,68454400.0,550.0,90.0,4,False
+29-1071,Physician Assistants,620.0,0.9,127600.0,Physician Assistants,0.0,162150,141280.0,Healthcare Practitioners,0.0,79112000.0,530.0,90.0,5,False
+33-2011,Firefighters,2020.0,1.37,62440.0,Firefighters,0.0,345990,63630.0,Protective Service,0.0,126128800.0,1930.0,90.0,3,False
+29-1123,Physical Therapists,1300.0,1.14,103840.0,Physical Therapists,0.0174,267330,105280.0,Healthcare Practitioners,22.62,134992000.0,1220.0,80.0,5,False
+21-1021,"Child, Family, and School Social Workers",1530.0,0.92,64830.0,"Child, Family, and School Social Workers",0.0074,392550,64000.0,Community & Social Service,11.322,99189900.0,1460.0,70.0,4,False
+49-3031,Bus and Truck Mechanics and Diesel Engine Specialists,1400.0,1.14,61740.0,Bus and Truck Mechanics and Diesel Engine Specialists,0.0,289960,64320.0,Installation & Repair,0.0,86436000.0,1340.0,60.0,3,False
+11-9033,"Education Administrators, Postsecondary",540.0,0.7,157420.0,"Education Administrators, Postsecondary",0.0644,180470,126540.0,Management,34.776,85006800.0,480.0,60.0,5,False
+11-9021,Construction Managers,1270.0,0.79,126100.0,Construction Managers,0.1186,380360,124360.0,Management,150.622,160147000.0,1220.0,50.0,4,False
+49-3021,Automotive Body and Related Repairers,600.0,0.95,65560.0,Automotive Body and Related Repairers,0.0,149310,59690.0,Installation & Repair,0.0,39336000.0,550.0,50.0,2,False
+51-1011,First-Line Supervisors of Production and Operating Workers,2210.0,0.77,77140.0,First-Line Supervisors of Production and Operating Workers,0.0,673430,76600.0,Production,0.0,170479400.0,2160.0,50.0,3,False
+33-1021,First-Line Supervisors of Firefighting and Prevention Workers,500.0,1.18,101930.0,First-Line Supervisors of Firefighting and Prevention Workers,0.0,99140,96930.0,Protective Service,0.0,50965000.0,460.0,40.0,3,False
+21-1022,Healthcare Social Workers,530.0,0.67,70980.0,Healthcare Social Workers,0.0916,187630,71790.0,Community & Social Service,48.548,37619400.0,510.0,20.0,5,False
+49-2098,Security and Fire Alarm Systems Installers,500.0,1.37,59640.0,Security and Fire Alarm Systems Installers,0.0303,86340,60960.0,Installation & Repair,15.15,29820000.0,480.0,20.0,3,False
+29-1292,Dental Hygienists,780.0,0.83,105660.0,Dental Hygienists,0.0,222740,98990.0,Healthcare Practitioners,0.0,82414800.0,760.0,20.0,3,False
+11-9041,Architectural and Engineering Managers,570.0,0.61,174740.0,Architectural and Engineering Managers,0.0306,220260,181540.0,Management,17.442,99601800.0,560.0,10.0,5,False

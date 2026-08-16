@@ -1,0 +1,119 @@
+# Findings summary
+
+## Finding 1 — realized contraction in exposed clerical work
+
+Office & admin detail occupations   : 41
+Employment 2023 / 2024 / 2025       : 79,650 / 74,270 / 70,870
+Net change                          : -8,780 (-11.0%)
+
+Monotonic decliners, all occupations : 85, -21,710 jobs
+  of which exposure >= 0.25          : 13, -10,800 jobs
+  excluding 43-6014               : 12, -9,510 jobs
+  wages lost at 2025 rates, excl.    : $476,185,400
+  wages lost incl. 43-6014         : $538,698,800
+
+SOC      Occupation                                     2023   2024   2025    chg   chg%   Exp     Wage
+43-4051  Customer Service Representatives             14,910 11,870 10,960 -3,950  -26.5  0.70   44,520
+43-3031  Bookkeeping, Accounting, and Auditing Cler    7,170  6,420  4,890 -2,280  -31.8  0.31   53,580
+43-4171  Receptionists and Information Clerks          4,890  4,200  3,550 -1,340  -27.4  0.43   36,750
+43-6014  Secretaries and Administrative Assistants,    6,230  5,620  4,940 -1,290  -20.7  0.45   48,460
+43-4111  Interviewers, Except Eligibility and Loan     1,000    460    230   -770  -77.0  0.39   49,870
+15-1232  Computer User Support Specialists             2,690  2,520  2,350   -340  -12.6  0.47   64,990
+15-2031  Operations Research Analysts                  1,300  1,070  1,020   -280  -21.5  0.43  105,800
+27-1024  Graphic Designers                             1,000    960    760   -240  -24.0  0.37   70,860
+43-9021  Data Entry Keyers                               590    530    480   -110  -18.6  0.67   41,270
+29-9021  Health Information Technologists and Medic      200    130    110    -90  -45.0  0.31   65,060
+25-1071  Health Specialties Teachers, Postsecondary    1,480  1,460  1,430    -50   -3.4  0.30  130,720
+27-3042  Technical Writers                               220    190    180    -40  -18.2  0.47   84,420
+25-4012  Curators                                        100     90     80    -20  -20.0  0.41   74,460
+
+### Secretarial cluster — testing 43-6014 against its adjacent codes
+
+SOC      Occupation                                     2023   2025    chg  US chg%
+43-6011  Executive Secretaries and Executive Admini    2,280  2,060   -220     -4.9
+43-6012  Legal Secretaries and Administrative Assis      510    560    +50     +2.3
+43-6013  Medical Secretaries and Administrative Ass    2,240  4,140 +1,900    +28.3
+43-6014  Secretaries and Administrative Assistants,    6,230  4,940 -1,290     -4.4
+                                                     cluster net          +440
+
+The cluster nets positive in Richmond while its largest component falls, and
+medical secretaries grow nationally too. The 43-6014 decline is therefore held
+out of the Finding 1 total as a coding and sector shift, not a realized loss.
+
+### Richmond-specific excess decline, by occupation
+
+SOC      Occupation                                 RVA %    US %  excess   Exp
+43-4111  Interviewers, Except Eligibility and L     -77.0    -7.8   -69.2  0.39
+29-9021  Health Information Technologists and M     -45.0   +10.7   -55.7  0.31
+43-3031  Bookkeeping, Accounting, and Auditing      -31.8    -8.5   -23.3  0.31
+43-4171  Receptionists and Information Clerks       -27.4    -9.3   -18.1  0.43
+43-4051  Customer Service Representatives           -26.5    -9.2   -17.3  0.70
+25-4012  Curators                                   -20.0    -2.9   -17.1  0.41
+27-1024  Graphic Designers                          -24.0    -7.0   -17.0  0.37
+15-1232  Computer User Support Specialists          -12.6    +4.0   -16.6  0.47
+15-2031  Operations Research Analysts               -21.5    -7.9   -13.6  0.43
+27-3042  Technical Writers                          -18.2    -5.1   -13.0  0.47
+25-1071  Health Specialties Teachers, Postsecon      -3.4    -1.8    -1.6  0.30
+43-9021  Data Entry Keyers                          -18.6   -17.6    -1.0  0.67
+
+Occupations whose decline tracks the national rate (within 5 points): 2 of 12
+  25-1071 (exp 0.30), 43-9021 (exp 0.67)
+
+Total decline, 12 occupations          : -9,510 jobs
+  predicted by national rates          : -2,707
+  Richmond-specific excess             : -6,803
+
+Restricted to occupations with 1,000+ jobs in 2023 (8 of 12), which excludes
+the small bases where OEWS sampling noise dominates:
+  decline                              : -9,250 jobs
+  Richmond-specific excess             : -6,639
+
+Exposed occupations that lost above-national concentration : 12
+  employment 2023 -> 2025 : 45,970 -> 35,790 (-10,180)
+
+## Finding 2 — what remains over-concentrated is professional and not contracting
+
+Occupations                         : 25
+Employment 2025                     : 41,240
+Mean wage (employment-weighted)     : $96,957
+Annual wage bill                    : $3,998,524,500
+Net employment change 2023-2025     : -30 (-0.1%)
+
+  growing : 11 occupations, +1,870 jobs
+  falling : 14 occupations, -1,900 jobs
+
+SOC      Occupation                                     2023   2025   chg%  LQ25   Exp     Wage
+13-2011  Accountants and Auditors                      7,540  7,920    5.0  1.29  0.35   93,210
+13-1161  Market Research Analysts and Marketing Spe    3,720  4,550   22.3  1.19  0.65   96,240
+13-1071  Human Resources Specialists                   4,880  4,540   -7.0  1.17  0.40   83,110
+15-1211  Computer Systems Analysts                     3,160  2,990   -5.4  1.35  0.28  113,840
+41-3031  Securities, Commodities, and Financial Ser    3,010  2,990   -0.7  1.44  0.44  107,070
+15-1212  Information Security Analysts                 1,650  1,690    2.4  2.09  0.49  126,940
+13-2052  Personal Financial Advisors                   1,880  1,350  -28.2  1.19  0.35  158,910
+13-1151  Training and Development Specialists          2,500  2,530    1.2  1.30  0.28   79,200
+25-1071  Health Specialties Teachers, Postsecondary    1,480  1,430   -3.4  1.53  0.30  130,720
+15-1244  Network and Computer Systems Administrator    1,670  1,660   -0.6  1.24  0.34  103,730
+27-3031  Public Relations Specialists                  1,470  1,760   19.7  1.46  0.45   82,880
+23-2011  Paralegals and Legal Assistants               2,330  1,930  -17.2  1.15  0.29   67,940
+15-2031  Operations Research Analysts                  1,300  1,020  -21.5  2.22  0.43  105,800
+15-1242  Database Administrators                         640    600   -6.2  2.00  0.33  102,460
+15-1243  Database Architects                             390    440   12.8  1.53  0.58  138,240
+43-3011  Bill and Account Collectors                   1,030  1,040    1.0  1.54  0.30   46,640
+25-1011  Business Teachers, Postsecondary                410    400   -2.4  1.16  0.31  115,140
+13-2054  Financial Risk Specialists                      400    380   -5.0  1.40  0.26  119,620
+25-1081  Education Teachers, Postsecondary               360    370    2.8  1.42  0.26   76,720
+25-1042  Biological Science Teachers, Postsecondary      310    300   -3.2  1.39  0.29   92,030
+43-4161  Human Resources Assistants, Except Payroll      460    470    2.2  1.23  0.40   53,300
+23-1021  Administrative Law Judges, Adjudicators, a      210    210    0.0  2.96  0.30  101,970
+25-1022  Mathematical Science Teachers, Postseconda      210    230    9.5  1.11  0.43   89,340
+19-4031  Chemical Technicians                            160    360  125.0  1.47  0.31   55,060
+25-4012  Curators                                        100     80  -20.0  1.47  0.41   74,460
+
+## The contrast the report has to hold
+
+exposed, under $60k        :  18 occs    72,380 ->   64,950    -7,430  (-10.3%)
+exposed, $60k and above    :  48 occs    77,410 ->   78,300      +890  (+1.1%)
+
+Exposure alone does not predict decline. Wage tier separates the two groups:
+the same exposure scores accompany contraction below the line and growth above
+it, which is why Finding 2 is posed as a question rather than a forecast.

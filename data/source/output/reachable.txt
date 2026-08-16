@@ -1,0 +1,181 @@
+# Reachable destinations — Richmond MSA
+
+O*NET adjacency, tiers Primary-Short and Primary-Long: 11,736 occupation pairs.
+Job Zones matched to 523 of 523 Richmond occupations.
+
+Screen applied to every destination:
+  exposure below 0.15
+  employment at or above 500
+  employment grew 2023 to 2025
+  annual mean wage at or above the source occupation's wage
+  adjacent to the source in O*NET
+
+Source occupations examined: 33 (14,050 jobs lost)
+Source occupations with at least one reachable destination: 17
+Distinct pathways: 28
+
+## Pathways by source occupation
+
+### 43-4051 Customer Service Representatives
+Lost 3,950 jobs · exposure 0.70 · $44,520 · job zone 2
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+13-1031  Claims Adjusters, Examiners, and Investi     +580  1,790  0.08 1.30   79,920  180%  4 (+2)Primary-Short
+  capacity added across destinations: +580 against 3,950 lost
+
+### 43-3031 Bookkeeping, Accounting, and Auditing Clerks
+Lost 2,280 jobs · exposure 0.31 · $53,580 · job zone 3
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+43-3051  Payroll and Timekeeping Clerks                +50    630  0.05 0.97   58,960  110%   3 (=)Primary-Short
+13-2081  Tax Examiners and Collectors, and Revenu      +30    570  0.03 2.38   62,560  117%   3 (=)Primary-Short
+  capacity added across destinations: +80 against 2,280 lost
+
+### 43-4171 Receptionists and Information Clerks
+Lost 1,340 jobs · exposure 0.43 · $36,750 · job zone 2
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+43-4031  Court, Municipal, and License Clerks         +330    860  0.10 1.12   46,500  127%   2 (=) Primary-Long
+29-2099  Health Technologists and Technicians, Al     +110    820  0.04 1.05   55,900  152%  3 (+1) Primary-Long
+43-6012  Legal Secretaries and Administrative Ass      +50    560  0.00 0.84   68,480  186%  3 (+1) Primary-Long
+  capacity added across destinations: +490 against 1,340 lost
+
+### 43-6014 Secretaries and Administrative Assistants, Except Legal, Medical, and Executive
+Lost 1,290 jobs · exposure 0.45 · $48,460 · job zone 2
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+43-3051  Payroll and Timekeeping Clerks                +50    630  0.05 0.97   58,960  122%  3 (+1) Primary-Long
+43-6012  Legal Secretaries and Administrative Ass      +50    560  0.00 0.84   68,480  141%  3 (+1)Primary-Short
+  capacity added across destinations: +100 against 1,290 lost
+
+### 43-4111 Interviewers, Except Eligibility and Loan
+Lost 770 jobs · exposure 0.39 · $49,870 · job zone 3
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+29-2099  Health Technologists and Technicians, Al     +110    820  0.04 1.05   55,900  112%   3 (=)Primary-Short
+  capacity added across destinations: +110 against 770 lost
+
+### 41-1011 First-Line Supervisors of Retail Sales Workers
+Lost 710 jobs · exposure 0.26 · $54,000 · job zone 2
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+49-1011  First-Line Supervisors of Mechanics, Ins     +130  2,980  0.10 1.14   83,910  155%  3 (+1) Primary-Long
+11-2022  Sales Managers                                +30  1,320  0.04 0.49  182,190  337%  4 (+2) Primary-Long
+  capacity added across destinations: +160 against 710 lost
+
+### 23-2011 Paralegals and Legal Assistants
+Lost 400 jobs · exposure 0.29 · $67,940 · job zone 3
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+13-1041  Compliance Officers                          +660  2,910  0.12 1.64   81,370  120%  4 (+1) Primary-Long
+43-6012  Legal Secretaries and Administrative Ass      +50    560  0.00 0.84   68,480  101%   3 (=)Primary-Short
+  capacity added across destinations: +710 against 400 lost
+
+### 29-2072 Medical Records Specialists
+Lost 390 jobs · exposure 0.67 · $56,530 · job zone 3
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+13-1041  Compliance Officers                          +660  2,910  0.12 1.64   81,370  144%  4 (+1)Primary-Short
+43-6012  Legal Secretaries and Administrative Ass      +50    560  0.00 0.84   68,480  121%   3 (=) Primary-Long
+  capacity added across destinations: +710 against 390 lost
+
+### 13-1071 Human Resources Specialists
+Lost 340 jobs · exposure 0.40 · $83,110 · job zone 4
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+11-3121  Human Resources Managers                     +120    960  0.00 1.02  163,900  197%   4 (=)Primary-Short
+  capacity added across destinations: +120 against 340 lost
+
+### 15-1211 Computer Systems Analysts
+Lost 170 jobs · exposure 0.28 · $113,840 · job zone 5
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+11-9111  Medical and Health Services Managers         +140  1,760  0.07 0.70  143,730  126%  4 (-1)Primary-Short
+29-1171  Nurse Practitioners                          +130  1,440  0.09 1.05  123,420  108%   5 (=)Primary-Short
+  capacity added across destinations: +270 against 170 lost
+
+### 43-9021 Data Entry Keyers
+Lost 110 jobs · exposure 0.67 · $41,270 · job zone 2
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+43-5071  Shipping, Receiving, and Inventory Clerk   +1,160  4,420  0.00 1.28   45,020  109%   2 (=) Primary-Long
+43-5053  Postal Service Mail Sorters, Processors,     +120  1,090  0.00 2.43   56,630  137%   2 (=) Primary-Long
+43-3051  Payroll and Timekeeping Clerks                +50    630  0.05 0.97   58,960  143%  3 (+1) Primary-Long
+  capacity added across destinations: +1,330 against 110 lost
+
+### 29-9021 Health Information Technologists and Medical Registrars
+Lost 90 jobs · exposure 0.31 · $65,060 · job zone 3
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+11-9111  Medical and Health Services Managers         +140  1,760  0.07 0.70  143,730  221%  4 (+1) Primary-Long
+  capacity added across destinations: +140 against 90 lost
+
+### 25-1071 Health Specialties Teachers, Postsecondary
+Lost 50 jobs · exposure 0.30 · $130,720 · job zone 5
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+11-9111  Medical and Health Services Managers         +140  1,760  0.07 0.70  143,730  110%  4 (-1) Primary-Long
+  capacity added across destinations: +140 against 50 lost
+
+### 27-3091 Interpreters and Translators
+Lost 40 jobs · exposure 0.43 · $72,950 · job zone 4
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+29-1127  Speech-Language Pathologists                 +240    770  0.00 0.98   97,870  134%  5 (+1)Primary-Short
+  capacity added across destinations: +240 against 40 lost
+
+### 13-2054 Financial Risk Specialists
+Lost 20 jobs · exposure 0.26 · $119,620 · job zone 4
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+11-9199  Managers, All Other                          +300  2,060  0.07 0.78  160,240  134%   4 (=) Primary-Long
+  capacity added across destinations: +300 against 20 lost
+
+### 25-2022 Middle School Teachers, Except Special and Career/Technical Education
+Lost 10 jobs · exposure 0.30 · $65,160 · job zone 4
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+11-9032  Education Administrators, Kindergarten t      +40  1,230  0.05 0.88  107,770  165%  5 (+1) Primary-Long
+  capacity added across destinations: +40 against 10 lost
+
+### 41-3021 Insurance Sales Agents
+Lost 10 jobs · exposure 0.32 · $77,940 · job zone 4
+SOC      Destination                                 Added   2025   Exp   LQ     Wage  Repl  Zone           Tier
+13-1031  Claims Adjusters, Examiners, and Investi     +580  1,790  0.08 1.30   79,920  103%   4 (=) Primary-Long
+13-2053  Insurance Underwriters                       +250    950  0.06 2.11   92,670  119%   4 (=) Primary-Long
+  capacity added across destinations: +830 against 10 lost
+
+## Sources with no reachable destination
+
+16 of 33 declining exposed occupations have no adjacent
+destination that is durable, growing, present at scale and equal-or-better paid.
+They account for 2,080 of the 14,050 jobs lost.
+
+SOC      Occupation                                     Lost   Exp     Wage  Zone
+13-2052  Personal Financial Advisors                     530  0.35  158,910     4
+15-1232  Computer User Support Specialists               340  0.47   64,990     3
+15-2031  Operations Research Analysts                    280  0.43  105,800     5
+27-1024  Graphic Designers                               240  0.37   70,860     4
+15-1231  Computer Network Support Specialists            230  0.29   71,400     4
+15-1252  Software Developers                             210  0.29  139,340     4
+15-1253  Software Quality Assurance Analysts and Te       80  0.52  111,510     4
+15-1242  Database Administrators                          40  0.33  102,460     4
+27-3042  Technical Writers                                40  0.47   84,420     4
+41-3031  Securities, Commodities, and Financial Ser       20  0.44  107,070     4
+25-4012  Curators                                         20  0.41   74,460     5
+15-1244  Network and Computer Systems Administrator       10  0.34  103,730     4
+25-1011  Business Teachers, Postsecondary                 10  0.31  115,140     5
+25-1042  Biological Science Teachers, Postsecondary       10  0.29   92,030     5
+19-4061  Social Science Research Assistants               10  0.44   58,490     4
+25-1066  Psychology Teachers, Postsecondary               10  0.32   87,440     5
+
+## Destination concentration
+
+Where several sources converge on one destination, the capacity is shared, not
+additive. Counting it once per pathway would overstate absorption.
+
+SOC      Destination                                  Sources   Added   Exp     Wage
+43-5071  Shipping, Receiving, and Inventory Clerks          1  +1,160  0.00   45,020
+13-1041  Compliance Officers                                2    +660  0.12   81,370
+13-1031  Claims Adjusters, Examiners, and Investiga         2    +580  0.08   79,920
+43-4031  Court, Municipal, and License Clerks               1    +330  0.10   46,500
+11-9199  Managers, All Other                                1    +300  0.07  160,240
+13-2053  Insurance Underwriters                             1    +250  0.06   92,670
+29-1127  Speech-Language Pathologists                       1    +240  0.00   97,870
+11-9111  Medical and Health Services Managers               3    +140  0.07  143,730
+49-1011  First-Line Supervisors of Mechanics, Insta         1    +130  0.10   83,910
+29-1171  Nurse Practitioners                                1    +130  0.09  123,420
+43-5053  Postal Service Mail Sorters, Processors, a         1    +120  0.00   56,630
+11-3121  Human Resources Managers                           1    +120  0.00  163,900
+29-2099  Health Technologists and Technicians, All          2    +110  0.04   55,900
+43-3051  Payroll and Timekeeping Clerks                     3     +50  0.05   58,960
+43-6012  Legal Secretaries and Administrative Assis         4     +50  0.00   68,480
+11-9032  Education Administrators, Kindergarten thr         1     +40  0.05  107,770
+11-2022  Sales Managers                                     1     +30  0.04  182,190
+13-2081  Tax Examiners and Collectors, and Revenue          1     +30  0.03   62,560
+
+Distinct destinations: 18. Unduplicated capacity added: +4,470 jobs against 14,050 lost.

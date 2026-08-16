@@ -1,0 +1,20 @@
+naics,industry,county_set,emp_2019,emp_2020,emp_2021,emp_2022,emp_2023,emp_2024,emp_2025,suppressed_county_year_cells,emp_legacy,emp_current,difference
+10,"Total, all industries",current_17,640950.0,606259.0,617353.0,637756.0,648239.0,658878.0,667860.0,0.0,,,
+52,Finance and insurance,current_17,31207.0,30974.0,29359.0,28970.0,27263.0,25919.0,25110.0,23.0,,,
+522,Credit intermediation and related activities,current_17,12936.0,12969.0,12527.0,11588.0,8364.0,7336.0,6910.0,31.0,,,
+5241,Insurance carriers,current_17,6627.0,6367.0,5408.0,5720.0,5893.0,5847.0,5955.0,58.0,,,
+5242,Insurance agencies and brokerages,current_17,6280.0,6057.0,5683.0,5976.0,7049.0,6779.0,6709.0,64.0,,,
+54,"Professional, scientific, technical services",current_17,39927.0,39814.0,40929.0,42298.0,42909.0,42441.0,43922.0,38.0,,,
+5412,"Accounting, tax prep, bookkeeping, payroll",current_17,5596.0,6464.0,7137.0,7506.0,7735.0,7378.0,7271.0,29.0,,,
+56,Administrative and waste services,current_17,43368.0,40545.0,41419.0,43610.0,41222.0,42971.0,43263.0,16.0,,,
+561,Administrative and support services,current_17,39802.0,36429.0,37972.0,40720.0,38176.0,38642.0,38046.0,56.0,,,
+5614,Business support services (incl. call centers),current_17,6011.0,6131.0,6518.0,6528.0,4712.0,5432.0,5231.0,52.0,,,
+51,Information,current_17,6478.0,5893.0,5571.0,5825.0,6075.0,5614.0,3083.0,50.0,,,
+62,Health care and social assistance,current_17,79050.0,75316.0,77681.0,80487.0,83627.0,86271.0,85584.0,44.0,,,
+10,geography comparison,legacy_vs_current_2019,,,,,,,,,645798.0,640950.0,-4848.0
+10,geography comparison,legacy_vs_current_2020,,,,,,,,,610767.0,606259.0,-4508.0
+10,geography comparison,legacy_vs_current_2021,,,,,,,,,621761.0,617353.0,-4408.0
+10,geography comparison,legacy_vs_current_2022,,,,,,,,,642179.0,637756.0,-4423.0
+10,geography comparison,legacy_vs_current_2023,,,,,,,,,653262.0,648239.0,-5023.0
+10,geography comparison,legacy_vs_current_2024,,,,,,,,,664349.0,658878.0,-5471.0
+10,geography comparison,legacy_vs_current_2025,,,,,,,,,673709.0,667860.0,-5849.0
