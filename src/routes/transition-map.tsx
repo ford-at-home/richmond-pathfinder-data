@@ -10,7 +10,12 @@ import {
   VisualizationStagePlaceholder,
 } from "@/components/data";
 import { EvidencePanel, LimitationNote, PlaceholderBadge } from "@/components/editorial";
-import { PageHeader, PageSection, ProseContainer, SectionIntro } from "@/components/page/PageHeader";
+import {
+  PageHeader,
+  PageSection,
+  ProseContainer,
+  SectionIntro,
+} from "@/components/page/PageHeader";
 import { occupationTitle, occupations, transitionBands, transitions } from "@/content/transitions";
 
 export const Route = createFileRoute("/transition-map")({
@@ -25,7 +30,8 @@ export const Route = createFileRoute("/transition-map")({
       { property: "og:title", content: "Transition Map — Richmond Workforce Transition" },
       {
         property: "og:description",
-        content: "Occupation-to-occupation moves, transition distance, transferable skills, and skill gaps.",
+        content:
+          "Occupation-to-occupation moves, transition distance, transferable skills, and skill gaps.",
       },
     ],
   }),
@@ -100,7 +106,12 @@ function TransitionMapPage() {
                 value={query}
                 onValueChange={setQuery}
                 filters={
-                  <FilterGroup label="Cluster" options={clusters} value={cluster} onChange={setCluster} />
+                  <FilterGroup
+                    label="Cluster"
+                    options={clusters}
+                    value={cluster}
+                    onChange={setCluster}
+                  />
                 }
                 disabledNote="Filters operate on placeholder records only."
               />
@@ -147,7 +158,10 @@ function TransitionMapPage() {
           </VisualizationFrame>
 
           <div className="space-y-6">
-            <EvidencePanel title="Select a role" note="Placeholder roles stand in for the migrated occupation list.">
+            <EvidencePanel
+              title="Select a role"
+              note="Placeholder roles stand in for the migrated occupation list."
+            >
               <ul className="space-y-1">
                 {visible.map((o) => (
                   <li key={o.id}>
@@ -167,7 +181,9 @@ function TransitionMapPage() {
                   </li>
                 ))}
                 {visible.length === 0 ? (
-                  <li className="px-3 py-4 text-sm text-muted-foreground">No placeholder roles match.</li>
+                  <li className="px-3 py-4 text-sm text-muted-foreground">
+                    No placeholder roles match.
+                  </li>
                 ) : null}
               </ul>
             </EvidencePanel>
@@ -184,7 +200,10 @@ function TransitionMapPage() {
               ) : (
                 <dl className="mt-4 space-y-4">
                   {selectedEdges.map((edge) => (
-                    <div key={`${edge.fromId}-${edge.toId}`} className="border-t border-border pt-3">
+                    <div
+                      key={`${edge.fromId}-${edge.toId}`}
+                      className="border-t border-border pt-3"
+                    >
                       <dt className="text-sm font-medium text-foreground">
                         → {occupationTitle(edge.toId)}
                       </dt>

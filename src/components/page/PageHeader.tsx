@@ -82,7 +82,9 @@ export function SectionIntro({
       <As className="mt-2 font-display text-2xl leading-tight text-foreground md:text-[1.75rem]">
         {title}
       </As>
-      {lead ? <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{lead}</p> : null}
+      {lead ? (
+        <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{lead}</p>
+      ) : null}
       {children}
     </div>
   );

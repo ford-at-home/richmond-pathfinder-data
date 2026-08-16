@@ -33,19 +33,15 @@ export const sources: Source[] = [
   },
 ];
 
-export const researchTopics = [
-  "Transitions",
-  "Capacity",
-  "Regional data",
-  "Training",
-] as const;
+export const researchTopics = ["Transitions", "Capacity", "Regional data", "Training"] as const;
 
 export const researchStories: ResearchStory[] = [
   {
     slug: "placeholder-story-one",
     title: "Placeholder research story one",
     topic: "Transitions",
-    thesis: "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
+    thesis:
+      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
     publishedAt: "2026-01-01",
     updatedAt: "2026-01-01",
     readingMinutes: 7,
@@ -82,7 +78,8 @@ export const researchStories: ResearchStory[] = [
     slug: "placeholder-story-two",
     title: "Placeholder research story two",
     topic: "Capacity",
-    thesis: "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
+    thesis:
+      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
     publishedAt: "2026-01-01",
     readingMinutes: 5,
     sourceIds: ["placeholder-source-b"],
@@ -109,7 +106,8 @@ export const researchStories: ResearchStory[] = [
     slug: "placeholder-story-three",
     title: "Placeholder research story three",
     topic: "Regional data",
-    thesis: "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
+    thesis:
+      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
     publishedAt: "2026-01-01",
     readingMinutes: 9,
     sourceIds: ["placeholder-source-a", "placeholder-source-c"],
@@ -133,7 +131,8 @@ export const researchStories: ResearchStory[] = [
     slug: "placeholder-story-four",
     title: "Placeholder research story four",
     topic: "Training",
-    thesis: "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
+    thesis:
+      "Placeholder thesis sentence — the migrated story states its answer here in one sentence.",
     publishedAt: "2026-01-01",
     readingMinutes: 4,
     sourceIds: ["placeholder-source-c"],
@@ -156,7 +155,5 @@ export function getStory(slug: string): ResearchStory | undefined {
 }
 
 export function getSources(ids: string[]): Source[] {
-  return ids
-    .map((id) => sources.find((s) => s.id === id))
-    .filter((s): s is Source => Boolean(s));
+  return ids.map((id) => sources.find((s) => s.id === id)).filter((s): s is Source => Boolean(s));
 }

@@ -1,8 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DataTable, VisualizationFrame, VisualizationLegend, VisualizationStagePlaceholder } from "@/components/data";
+import {
+  DataTable,
+  VisualizationFrame,
+  VisualizationLegend,
+  VisualizationStagePlaceholder,
+} from "@/components/data";
 import { EvidencePanel, LimitationNote, MetricCallout } from "@/components/editorial";
-import { PageHeader, PageSection, ProseContainer, SectionIntro } from "@/components/page/PageHeader";
+import {
+  PageHeader,
+  PageSection,
+  ProseContainer,
+  SectionIntro,
+} from "@/components/page/PageHeader";
 import { localities, regionLimitations, regionMeasures } from "@/content/region";
 
 export const Route = createFileRoute("/richmond-region")({
@@ -17,7 +27,8 @@ export const Route = createFileRoute("/richmond-region")({
       { property: "og:title", content: "Richmond Region Data — Richmond Workforce Transition" },
       {
         property: "og:description",
-        content: "Locality-level labor-market conditions and constraints across the Richmond region.",
+        content:
+          "Locality-level labor-market conditions and constraints across the Richmond region.",
       },
     ],
   }),
@@ -87,9 +98,7 @@ function RichmondRegionPage() {
               note="Each map symbol is distinguished by shape as well as color."
             />
           }
-          tableView={
-            <LocalityTable />
-          }
+          tableView={<LocalityTable />}
         >
           <VisualizationStagePlaceholder
             library="a MapLibre GL JS map"

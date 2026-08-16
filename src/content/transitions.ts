@@ -60,9 +60,19 @@ export const transitions: TransitionEdge[] = [
 /** Legend bands pair a color token with a shape/label so meaning is never color-only. */
 export const transitionBands = [
   { band: "near", label: "Near transition", shape: "circle", note: "Placeholder band definition." },
-  { band: "moderate", label: "Moderate transition", shape: "square", note: "Placeholder band definition." },
+  {
+    band: "moderate",
+    label: "Moderate transition",
+    shape: "square",
+    note: "Placeholder band definition.",
+  },
   { band: "far", label: "Far transition", shape: "triangle", note: "Placeholder band definition." },
-  { band: "unknown", label: "Not yet migrated", shape: "diamond", note: "Distance values arrive with the data migration." },
+  {
+    band: "unknown",
+    label: "Not yet migrated",
+    shape: "diamond",
+    note: "Distance values arrive with the data migration.",
+  },
 ] as const;
 
 export function occupationTitle(id: string): string {

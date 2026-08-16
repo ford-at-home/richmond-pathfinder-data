@@ -64,11 +64,23 @@ export const capacityStages: CapacityStage[] = [
 
 export const evidenceSections = [
   { id: "supply", label: "Workforce supply", note: "Who is available to move, and from where." },
-  { id: "demand", label: "Employer demand", note: "What regional employers are actually hiring for." },
-  { id: "training", label: "Training capacity", note: "Providers, programs, seats, and throughput." },
+  {
+    id: "demand",
+    label: "Employer demand",
+    note: "What regional employers are actually hiring for.",
+  },
+  {
+    id: "training",
+    label: "Training capacity",
+    note: "Providers, programs, seats, and throughput.",
+  },
   { id: "time", label: "Time", note: "How long a transition takes end to end." },
   { id: "cost", label: "Cost", note: "Direct cost, forgone wages, and who bears them." },
-  { id: "institutional", label: "Institutional readiness", note: "Coordination, funding rules, and delivery capacity." },
+  {
+    id: "institutional",
+    label: "Institutional readiness",
+    note: "Coordination, funding rules, and delivery capacity.",
+  },
 ] as const;
 
 export const scenarioControls = [

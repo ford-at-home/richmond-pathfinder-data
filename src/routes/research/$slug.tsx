@@ -74,7 +74,9 @@ function ResearchStoryPage() {
         ]}
       >
         {story.isPlaceholder ? (
-          <PlaceholderBadge className="mt-5">Placeholder story — not real research</PlaceholderBadge>
+          <PlaceholderBadge className="mt-5">
+            Placeholder story — not real research
+          </PlaceholderBadge>
         ) : null}
       </PageHeader>
 

@@ -112,7 +112,8 @@ export function VisualizationStagePlaceholder({
       <p className="mt-4 font-display text-lg text-foreground">Reserved for {library}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{purpose}</p>
       <p className="mt-4 annotation">
-        The table fallback below carries the same information for readers who cannot use the graphic.
+        The table fallback below carries the same information for readers who cannot use the
+        graphic.
       </p>
     </div>
   );
@@ -122,7 +123,12 @@ export function VisualizationLegend({
   items,
   note,
 }: {
-  items: { label: string; shape: string; note?: string | undefined; colorClass?: string | undefined }[];
+  items: {
+    label: string;
+    shape: string;
+    note?: string | undefined;
+    colorClass?: string | undefined;
+  }[];
   note?: string | undefined;
 }) {
   return (
@@ -269,7 +275,11 @@ export function DataTable({
                   <span className="text-muted-foreground">{emptyLabel}</span>
                 );
                 return ci === 0 ? (
-                  <th key={c.key} scope="row" className="px-3 py-2.5 text-left font-medium text-foreground">
+                  <th
+                    key={c.key}
+                    scope="row"
+                    className="px-3 py-2.5 text-left font-medium text-foreground"
+                  >
                     {content}
                   </th>
                 ) : (
@@ -309,7 +319,11 @@ export function EmptyState({
 
 export function LoadingState({ label = "Loading" }: { label?: string | undefined }) {
   return (
-    <div role="status" aria-live="polite" className="flex items-center gap-3 border border-border bg-inset px-4 py-6">
+    <div
+      role="status"
+      aria-live="polite"
+      className="flex items-center gap-3 border border-border bg-inset px-4 py-6"
+    >
       <Loader2 className="size-4 animate-spin text-muted-foreground" aria-hidden="true" />
       <span className="text-sm text-muted-foreground">{label}…</span>
     </div>

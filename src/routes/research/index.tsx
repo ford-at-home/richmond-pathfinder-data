@@ -66,7 +66,9 @@ function ResearchLibrary() {
           searchPlaceholder="Search titles and theses"
           value={query}
           onValueChange={setQuery}
-          filters={<FilterGroup label="Topic" options={topicOptions} value={topic} onChange={setTopic} />}
+          filters={
+            <FilterGroup label="Topic" options={topicOptions} value={topic} onChange={setTopic} />
+          }
           disabledNote="Search and filters run against placeholder entries only."
         />
 

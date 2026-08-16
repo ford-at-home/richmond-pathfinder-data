@@ -8,8 +8,18 @@ import {
   PlaceholderBadge,
   ProgressionSteps,
 } from "@/components/editorial";
-import { PageHeader, PageSection, ProseContainer, SectionIntro } from "@/components/page/PageHeader";
-import { capacityLimitations, capacityStages, evidenceSections, scenarioControls } from "@/content/capacity";
+import {
+  PageHeader,
+  PageSection,
+  ProseContainer,
+  SectionIntro,
+} from "@/components/page/PageHeader";
+import {
+  capacityLimitations,
+  capacityStages,
+  evidenceSections,
+  scenarioControls,
+} from "@/content/capacity";
 
 export const Route = createFileRoute("/transition-capacity")({
   head: () => ({
@@ -23,7 +33,8 @@ export const Route = createFileRoute("/transition-capacity")({
       { property: "og:title", content: "Transition Capacity — Richmond Workforce Transition" },
       {
         property: "og:description",
-        content: "From exposed workers to remaining capacity gap: the region's ability to support transitions.",
+        content:
+          "From exposed workers to remaining capacity gap: the region's ability to support transitions.",
       },
     ],
   }),
@@ -54,7 +65,9 @@ function TransitionCapacityPage() {
             <span id="thesis" className="sr-only">
               Thesis
             </span>
-            <PlaceholderBadge className="mt-5">Framing only — no findings migrated</PlaceholderBadge>
+            <PlaceholderBadge className="mt-5">
+              Framing only — no findings migrated
+            </PlaceholderBadge>
           </SectionIntro>
           <LimitationNote title="No figures are calculated on this page" tone="caution">
             Every stage below is intentionally empty. Values appear only once each input is migrated

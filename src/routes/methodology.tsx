@@ -1,7 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { DefinitionCallout, LimitationNote } from "@/components/editorial";
-import { PageHeader, PageSection, ProseContainer, SectionIntro } from "@/components/page/PageHeader";
+import {
+  PageHeader,
+  PageSection,
+  ProseContainer,
+  SectionIntro,
+} from "@/components/page/PageHeader";
 import { SourceList } from "@/components/sources";
 import { definitions, methodologyLimitations, sourceHandling } from "@/content/methodology";
 import { sources } from "@/content/research";
@@ -18,7 +23,8 @@ export const Route = createFileRoute("/methodology")({
       { property: "og:title", content: "Methodology — Richmond Workforce Transition" },
       {
         property: "og:description",
-        content: "How terms are defined, how sources are handled, and what this project does not claim.",
+        content:
+          "How terms are defined, how sources are handled, and what this project does not claim.",
       },
     ],
   }),

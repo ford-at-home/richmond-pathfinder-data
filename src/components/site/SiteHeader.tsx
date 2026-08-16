@@ -72,7 +72,11 @@ export function SiteHeader() {
           aria-controls="mobile-nav"
           className="ml-auto inline-flex items-center gap-2 self-center rounded-sm border border-rule px-3 py-2 text-sm text-foreground lg:hidden"
         >
-          {open ? <X className="size-4" aria-hidden="true" /> : <Menu className="size-4" aria-hidden="true" />}
+          {open ? (
+            <X className="size-4" aria-hidden="true" />
+          ) : (
+            <Menu className="size-4" aria-hidden="true" />
+          )}
           <span>{open ? "Close" : "Menu"}</span>
         </button>
       </div>

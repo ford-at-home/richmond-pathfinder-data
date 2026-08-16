@@ -2,7 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
 import { LimitationNote, PlaceholderBadge } from "@/components/editorial";
-import { PageHeader, PageSection, ProseContainer, SectionIntro } from "@/components/page/PageHeader";
+import {
+  PageHeader,
+  PageSection,
+  ProseContainer,
+  SectionIntro,
+} from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
 import { siteConfig } from "@/config/site";
 import { researchStories } from "@/content/research";
@@ -82,7 +87,9 @@ function Overview() {
             data, and citations are migrated separately. Nothing here should be read as a finding
             yet.
           </p>
-          <PlaceholderBadge className="mt-5">Scaffold release — content not migrated</PlaceholderBadge>
+          <PlaceholderBadge className="mt-5">
+            Scaffold release — content not migrated
+          </PlaceholderBadge>
         </PageHeader>
       </ProseContainer>
 

@@ -4,7 +4,13 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /** Unmistakable marker for scaffold content. */
-export function PlaceholderBadge({ children = "Placeholder", className }: { children?: ReactNode; className?: string | undefined }) {
+export function PlaceholderBadge({
+  children = "Placeholder",
+  className,
+}: {
+  children?: ReactNode;
+  className?: string | undefined;
+}) {
   return (
     <span
       className={cn(
@@ -36,7 +42,9 @@ export function KeyFinding({
       ) : null}
       <div>
         <p className="font-display text-[1.05rem] leading-snug text-foreground">{children}</p>
-        {isPlaceholder ? <PlaceholderBadge className="mt-2">Placeholder finding</PlaceholderBadge> : null}
+        {isPlaceholder ? (
+          <PlaceholderBadge className="mt-2">Placeholder finding</PlaceholderBadge>
+        ) : null}
       </div>
     </li>
   );
@@ -139,7 +147,9 @@ export function DefinitionCallout({
       <div>
         <p className="text-sm font-semibold text-foreground">
           {term}
-          {isPlaceholder ? <PlaceholderBadge className="ml-2 align-middle">Placeholder</PlaceholderBadge> : null}
+          {isPlaceholder ? (
+            <PlaceholderBadge className="ml-2 align-middle">Placeholder</PlaceholderBadge>
+          ) : null}
         </p>
         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{definition}</p>
       </div>
@@ -165,7 +175,10 @@ export function LimitationNote({
       )}
     >
       <Icon
-        className={cn("mt-0.5 size-4 shrink-0", tone === "caution" ? "text-caution" : "text-muted-foreground")}
+        className={cn(
+          "mt-0.5 size-4 shrink-0",
+          tone === "caution" ? "text-caution" : "text-muted-foreground",
+        )}
         aria-hidden="true"
       />
       <div>

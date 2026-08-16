@@ -10,7 +10,8 @@ export const definitions: Definition[] = [
   },
   {
     term: "Transition distance",
-    definition: "Placeholder definition: a measure of how difficult a given move is expected to be.",
+    definition:
+      "Placeholder definition: a measure of how difficult a given move is expected to be.",
     isPlaceholder: true,
   },
   {
@@ -20,7 +21,8 @@ export const definitions: Definition[] = [
   },
   {
     term: "Exposure",
-    definition: "Placeholder definition: the degree to which an occupation's tasks are affected by change.",
+    definition:
+      "Placeholder definition: the degree to which an occupation's tasks are affected by change.",
     isPlaceholder: true,
   },
 ];
