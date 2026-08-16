@@ -36,7 +36,7 @@ const clusters = ["All clusters", ...Array.from(new Set(occupations.map((o) => o
 
 function TransitionMapPage() {
   const [query, setQuery] = useState("");
-  const [cluster, setCluster] = useState(clusters[0]);
+  const [cluster, setCluster] = useState<string>("All clusters");
   const [selectedId, setSelectedId] = useState(occupations[0]?.id ?? "");
 
   const visible = occupations.filter(
