@@ -107,6 +107,15 @@ export function numberedFindings(markdown: string): string[] {
   return parts.map((p) => p.trim()).filter(Boolean);
 }
 
+/**
+ * Inline HTML for a numbered finding. Emphasis from the source markdown is
+ * kept; wording is not rewritten.
+ */
+export function findingHtml(markdown: string): string {
+  const collapsed = markdown.replace(/\s+/g, " ").trim();
+  return marked.parseInline(collapsed, { async: false }) as string;
+}
+
 export function readingMinutes(raw: string): number {
   const words = raw.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 200));

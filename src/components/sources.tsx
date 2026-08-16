@@ -38,10 +38,7 @@ export function SourceList({
               </p>
               {s.url ? (
                 <p className="mt-1">
-                  <a
-                    href={s.url}
-                    className="text-xs text-primary underline-offset-4 hover:underline"
-                  >
+                  <a href={s.url} className="editorial-link text-xs">
                     {s.url}
                   </a>
                 </p>

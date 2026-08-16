@@ -16,6 +16,7 @@ export function VisualizationFrame({
   description,
   provenance,
   height = "tall",
+  stage = "placeholder",
   toolbar,
   legend,
   tableView,
@@ -25,6 +26,8 @@ export function VisualizationFrame({
   description?: string | undefined;
   provenance: Provenance;
   height?: "short" | "tall" | undefined;
+  /** Placeholder stages keep the hatch; data stages sit on the surface. */
+  stage?: "placeholder" | "data" | undefined;
   toolbar?: ReactNode | undefined;
   legend?: ReactNode | undefined;
   tableView?: ReactNode | undefined;
@@ -75,7 +78,8 @@ export function VisualizationFrame({
 
       <div
         className={cn(
-          "relative flex items-center justify-center hatch",
+          "relative",
+          stage === "placeholder" ? "flex items-center justify-center hatch" : "plot",
           height === "tall" ? "min-h-[22rem] md:min-h-[30rem]" : "min-h-[14rem]",
         )}
       >
@@ -226,7 +230,7 @@ export function FilterGroup({
               className={cn(
                 "border px-2.5 py-1.5 text-xs font-medium transition-colors",
                 active
-                  ? "border-primary bg-primary text-primary-foreground"
+                  ? "border-foreground bg-background text-foreground"
                   : "border-input bg-background text-muted-foreground hover:text-foreground",
               )}
             >

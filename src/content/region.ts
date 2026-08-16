@@ -10,6 +10,10 @@ function num(v: string | undefined): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
+export const QCEW_YEARS = [2019, 2020, 2021, 2022, 2023, 2024, 2025] as const;
+
+export type QcewYear = (typeof QCEW_YEARS)[number];
+
 export type QcewRow = {
   naics: string;
   industry: string;
@@ -17,7 +21,11 @@ export type QcewRow = {
   emp2019: number | null;
   emp2023: number | null;
   emp2025: number | null;
+  series: { year: QcewYear; emp: number | null }[];
   suppressedCells: number | null;
+  empLegacy: number | null;
+  empCurrent: number | null;
+  difference: number | null;
 };
 
 export const qcewSeries: QcewRow[] = csvParse(qcewCsv).map((row) => ({
@@ -27,8 +35,23 @@ export const qcewSeries: QcewRow[] = csvParse(qcewCsv).map((row) => ({
   emp2019: num(row["emp_2019"]),
   emp2023: num(row["emp_2023"]),
   emp2025: num(row["emp_2025"]),
+  series: QCEW_YEARS.map((year) => ({
+    year,
+    emp: num(row[`emp_${year}`]),
+  })),
   suppressedCells: num(row["suppressed_county_year_cells"]),
+  empLegacy: num(row["emp_legacy"]),
+  empCurrent: num(row["emp_current"]),
+  difference: num(row["difference"]),
 }));
+
+/** Industry rows on the constant 17-county geography. */
+export const qcewCurrent = qcewSeries.filter((r) => r.countySet === "current_17");
+
+/** Legacy vs current county-set comparison; not an industry series. */
+export const qcewGeographyComparison = qcewSeries.filter((r) =>
+  r.countySet.startsWith("legacy_vs_current_"),
+);
 
 const totalCurrent = qcewSeries.find((r) => r.naics === "10" && r.countySet === "current_17");
 

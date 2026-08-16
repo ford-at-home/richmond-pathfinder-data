@@ -18,14 +18,14 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-rule bg-background/95 backdrop-blur-[2px]">
+    <header className="sticky top-0 z-40 border-b border-foreground bg-background">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:text-primary-foreground"
       >
         Skip to content
       </a>
-      <div className="mx-auto flex max-w-[80rem] items-stretch gap-6 px-5 lg:px-8">
+      <div className="mx-auto flex max-w-[1280px] items-stretch gap-6 px-8">
         <Link
           to="/"
           className="flex flex-col justify-center py-3 pr-6 no-underline"
@@ -56,7 +56,7 @@ export function SiteHeader() {
                     aria-hidden="true"
                     className={cn(
                       "absolute inset-x-3 bottom-0 h-[2px] transition-colors",
-                      isActive ? "bg-highlight" : "bg-transparent",
+                      isActive ? "bg-foreground" : "bg-transparent",
                     )}
                   />
                 </>
@@ -70,7 +70,7 @@ export function SiteHeader() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-nav"
-          className="ml-auto inline-flex items-center gap-2 self-center rounded-sm border border-rule px-3 py-2 text-sm text-foreground lg:hidden"
+          className="ml-auto inline-flex items-center gap-2 self-center border border-foreground px-3 py-2 text-sm text-foreground lg:hidden"
         >
           {open ? (
             <X className="size-4" aria-hidden="true" />
@@ -87,7 +87,7 @@ export function SiteHeader() {
           aria-label="Primary mobile"
           className="border-t border-rule bg-surface lg:hidden"
         >
-          <ul className="mx-auto max-w-[80rem] px-5 py-2">
+          <ul className="mx-auto max-w-[1280px] px-8 py-2">
             {primaryNav.map((item) => (
               <li key={item.to} className="border-b border-border last:border-b-0">
                 <Link
@@ -95,7 +95,7 @@ export function SiteHeader() {
                   activeOptions={{ exact: item.to === "/" }}
                   onClick={() => setOpen(false)}
                   className="block py-3 text-sm text-foreground"
-                  activeProps={{ className: "text-primary", "aria-current": "page" }}
+                  activeProps={{ className: "text-foreground", "aria-current": "page" }}
                 >
                   <span className="font-medium">{item.label}</span>
                   <span className="mt-0.5 block annotation">{item.description}</span>

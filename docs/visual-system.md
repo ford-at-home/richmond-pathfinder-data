@@ -10,11 +10,11 @@ the point in ten seconds, the findings in two minutes, and the evidence in
 twenty. It should not read as a PDF in a layout, a dashboard of tiles, or a
 consulting deck.
 
-Lovable tokens already match the requested family: warm off-white
-(`--background`), near-black ink (`--foreground`), civic navy-teal primary,
-warm ochre highlight, Source Serif 4 / Public Sans / IBM Plex Mono. **Do not
-replace the token file with a second palette.** Extend utilities; don’t invent
-a parallel grey system for the chrome.
+Lovable chrome now follows **Instrument Editorial** (the look-and-feel
+guide in the career-transition-map repo: paper/ink stacks, one orange
+signal, Inter Tight / Newsreader / IBM Plex Mono, radius 0, no elevation).
+Do not reintroduce a navy-teal/ochre second palette or a 24–29px marketing
+subhead.
 
 Source D3 figures keep scoped `.source-figure` tokens so claim encodings
 (fill vs outline for employment direction; empty marks for unmeasured

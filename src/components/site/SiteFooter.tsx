@@ -5,8 +5,8 @@ import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-rule bg-inset">
-      <div className="mx-auto grid max-w-[80rem] gap-10 px-5 py-12 md:grid-cols-[2fr_1fr_1fr] lg:px-8">
+    <footer className="mt-24 border-t-[5px] border-foreground bg-background">
+      <div className="mx-auto grid max-w-[1280px] gap-10 px-8 py-12 md:grid-cols-[2fr_1fr_1fr]">
         <div>
           <p className="eyebrow">About this site</p>
           <p className="mt-2 max-w-md font-display text-lg leading-snug text-foreground">
@@ -14,7 +14,7 @@ export function SiteFooter() {
           </p>
           <p className="mt-3 annotation max-w-md">
             Reports and figures are reproduced from{" "}
-            <a href={pinCommitUrl} className="underline-offset-4 hover:underline">
+            <a href={pinCommitUrl} className="editorial-link">
               {pinRepo}
             </a>{" "}
             at commit <code>{pinShort}</code>, synced {pinSynced}. Geography is the Richmond VA MSA
@@ -49,7 +49,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border">
-        <p className="mx-auto max-w-[80rem] px-5 py-5 annotation lg:px-8">
+        <p className="mx-auto max-w-[1280px] px-8 py-5 annotation">
           {siteConfig.name} — public-interest information project.
         </p>
       </div>

@@ -6,10 +6,17 @@ import { describe, expect, it } from "vitest";
 
 import { FIGURES } from "@/content/figures";
 import { movement, occupations } from "@/content/occupations";
-import { transitions } from "@/content/transitions";
+import { origins, transitions } from "@/content/transitions";
 import { GEOGRAPHY } from "@/lib/geography";
 import { pinRef, pinRepo, pinShort } from "@/lib/pin";
-import { anchor, numberedFindings, resolveLinks, sectionNumber, splitReport } from "@/lib/reports";
+import {
+  anchor,
+  findingHtml,
+  numberedFindings,
+  resolveLinks,
+  sectionNumber,
+  splitReport,
+} from "@/lib/reports";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -101,6 +108,13 @@ describe("pathways_reachable.csv", () => {
       expect(t.isPlaceholder).toBe(false);
     }
   });
+
+  it("derives origins from fromId only, covering every pair", () => {
+    const fromIds = new Set(transitions.map((t) => t.fromId));
+    expect(origins.map((o) => o.id).sort()).toEqual([...fromIds].sort());
+    const destCount = origins.reduce((n, o) => n + o.destinationCount, 0);
+    expect(destCount).toBe(transitions.length);
+  });
 });
 
 describe("report splitter", () => {
@@ -147,6 +161,14 @@ describe("report splitter", () => {
     const items = numberedFindings(summary?.markdown ?? "");
     expect(items.length).toBe(6);
     expect(items[0]).toContain("2.3% above it");
+  });
+
+  it("renders finding emphasis without rewriting the numbers", () => {
+    const html = findingHtml(
+      "**Richmond's overall AI exposure is close to the national average — 2.3% above it.**",
+    );
+    expect(html).toContain("<strong>");
+    expect(html).toContain("2.3% above it");
   });
 });
 

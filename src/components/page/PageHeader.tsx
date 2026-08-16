@@ -18,16 +18,16 @@ export function PageHeader({
   className?: string | undefined;
 }) {
   return (
-    <header className={cn("border-b border-rule pb-8 pt-10 md:pt-14", className)}>
+    <header className={cn("border-b-[5px] border-foreground pb-8 pt-10 md:pt-14", className)}>
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <h1 className="mt-3 page-title max-w-4xl text-balance">{title}</h1>
-      {lead ? <p className="mt-5 section-lead max-w-2xl">{lead}</p> : null}
+      <h1 className="mt-3 page-title">{title}</h1>
+      {lead ? <p className="mt-5 section-lead max-w-[66ch]">{lead}</p> : null}
       {meta && meta.length > 0 ? (
-        <dl className="mt-7 flex flex-wrap gap-x-10 gap-y-3">
+        <dl className="mt-8 grid grid-cols-2 border-t border-border md:grid-cols-4">
           {meta.map((m) => (
-            <div key={m.label}>
+            <div key={m.label} className="border-r border-border px-4 py-3 last:border-r-0">
               <dt className="label-sm">{m.label}</dt>
-              <dd className="mt-1 text-sm text-foreground">{m.value}</dd>
+              <dd className="mt-1.5 text-sm text-foreground">{m.value}</dd>
             </div>
           ))}
         </dl>
@@ -49,10 +49,10 @@ export function ProseContainer({
   return (
     <div
       className={cn(
-        "mx-auto w-full px-5 lg:px-8",
+        "mx-auto w-full px-8",
         width === "narrow" && "max-w-[46rem]",
-        width === "default" && "max-w-[80rem]",
-        width === "wide" && "max-w-[92rem]",
+        width === "default" && "max-w-[1280px]",
+        width === "wide" && "max-w-[1280px]",
         className,
       )}
     >
@@ -79,11 +79,11 @@ export function SectionIntro({
   return (
     <div className={cn("max-w-2xl", className)}>
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <As className="mt-2 font-display text-2xl leading-tight text-foreground md:text-[1.75rem]">
+      <As className="mt-2 font-serif text-[20px] font-normal leading-[1.55] tracking-normal text-foreground">
         {title}
       </As>
       {lead ? (
-        <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{lead}</p>
+        <p className="mt-3 font-serif text-[17px] leading-6 text-muted-foreground">{lead}</p>
       ) : null}
       {children}
     </div>

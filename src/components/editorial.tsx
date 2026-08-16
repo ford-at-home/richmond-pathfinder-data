@@ -14,11 +14,10 @@ export function PlaceholderBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 border border-caution/45 bg-caution/10 px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-caution",
+        "inline-flex items-center border border-input px-2 py-0.5 font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-muted-foreground",
         className,
       )}
     >
-      <span aria-hidden="true" className="size-1.5 rounded-full bg-caution" />
       {children}
     </span>
   );
@@ -34,14 +33,14 @@ export function KeyFinding({
   isPlaceholder?: boolean | undefined;
 }) {
   return (
-    <li className="flex gap-4 border-t border-border py-4 first:border-t-0">
+    <li className="flex gap-4 border-t border-border py-5 first:border-t-0">
       {typeof index === "number" ? (
-        <span className="numeric mt-1 text-sm text-highlight" aria-hidden="true">
+        <span className="numeric mt-1 w-8 shrink-0 text-sm text-foreground" aria-hidden="true">
           {String(index).padStart(2, "0")}
         </span>
       ) : null}
-      <div>
-        <p className="font-display text-[1.05rem] leading-snug text-foreground">{children}</p>
+      <div className="min-w-0">
+        <div className="editorial-body">{children}</div>
         {isPlaceholder ? (
           <PlaceholderBadge className="mt-2">Placeholder finding</PlaceholderBadge>
         ) : null}
@@ -64,9 +63,9 @@ export function MetricCallout({
   isPlaceholder?: boolean | undefined;
 }) {
   return (
-    <div className="border-t-2 border-primary/70 bg-surface p-4">
+    <div className="border-t border-foreground bg-surface p-4">
       <p className="label-sm">{label}</p>
-      <p className="numeric mt-2 text-2xl text-foreground">
+      <p className="numeric mt-2 text-[22px] text-foreground">
         {value ?? <span className="text-muted-foreground">Not yet migrated</span>}
       </p>
       {unit ? <p className="mt-1 annotation">{unit}</p> : null}
@@ -115,7 +114,7 @@ export function ProgressionSteps({
       {steps.map((step, i) => (
         <li key={step.id} className="bg-surface p-5">
           <div className="flex items-baseline gap-3">
-            <span className="numeric text-xs text-highlight" aria-hidden="true">
+            <span className="numeric text-xs text-foreground" aria-hidden="true">
               {String(i + 1).padStart(2, "0")}
             </span>
             <h3 className="font-display text-base text-foreground">{step.label}</h3>
@@ -142,8 +141,8 @@ export function DefinitionCallout({
   isPlaceholder?: boolean | undefined;
 }) {
   return (
-    <div className="flex gap-3 border-l-2 border-primary bg-inset px-4 py-3">
-      <BookOpen className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+    <div className="flex gap-3 border-l-2 border-foreground bg-inset px-4 py-3">
+      <BookOpen className="mt-0.5 size-4 shrink-0 text-foreground" aria-hidden="true" />
       <div>
         <p className="text-sm font-semibold text-foreground">
           {term}
@@ -171,16 +170,10 @@ export function LimitationNote({
     <div
       className={cn(
         "flex gap-3 border px-4 py-3",
-        tone === "caution" ? "border-caution/45 bg-caution/8" : "border-border bg-inset",
+        tone === "caution" ? "border-foreground bg-inset" : "border-border bg-inset",
       )}
     >
-      <Icon
-        className={cn(
-          "mt-0.5 size-4 shrink-0",
-          tone === "caution" ? "text-caution" : "text-muted-foreground",
-        )}
-        aria-hidden="true"
-      />
+      <Icon className={cn("mt-0.5 size-4 shrink-0 text-muted-foreground")} aria-hidden="true" />
       <div>
         <p className="text-sm font-semibold text-foreground">
           <span className="sr-only">{tone === "caution" ? "Caution: " : "Note: "}</span>

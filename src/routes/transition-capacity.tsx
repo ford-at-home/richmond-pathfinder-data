@@ -14,6 +14,7 @@ import {
   ProseContainer,
   SectionIntro,
 } from "@/components/page/PageHeader";
+import { DepthLabel, FindingList, ReservedDisclosure } from "@/components/story";
 import {
   capacityLimitations,
   capacityStages,
@@ -73,7 +74,7 @@ function TransitionCapacityPage() {
             <Link
               to="/research/$slug"
               params={{ slug: "transition-capacity" }}
-              className="mt-5 inline-block text-sm text-primary underline-offset-4 hover:underline"
+              className="mt-5 inline-block editorial-link text-sm"
             >
               Read the full Transition Capacity report
             </Link>
@@ -88,7 +89,9 @@ function TransitionCapacityPage() {
 
       {findings.length > 0 ? (
         <PageSection labelledBy="findings" className="rule-t">
+          <DepthLabel>In two minutes</DepthLabel>
           <SectionIntro
+            className="mt-2"
             eyebrow="Summary of findings"
             title="From the published report"
             lead="Numbered items below are the report's own summary, not a rewrite."
@@ -97,16 +100,7 @@ function TransitionCapacityPage() {
               Summary of findings
             </span>
           </SectionIntro>
-          <ol className="mt-6 max-w-3xl space-y-4">
-            {findings.map((finding, i) => (
-              <li key={i} className="text-sm leading-relaxed text-foreground">
-                <span className="numeric text-xs text-highlight">
-                  {String(i + 1).padStart(2, "0")}{" "}
-                </span>
-                {finding}
-              </li>
-            ))}
-          </ol>
+          <FindingList findings={findings} className="mt-6" />
         </PageSection>
       ) : null}
 
@@ -125,98 +119,6 @@ function TransitionCapacityPage() {
         </div>
       </PageSection>
 
-      <PageSection labelledBy="progression" className="rule-t">
-        <SectionIntro
-          eyebrow="Reserved calculator"
-          title="From exposed workers to the remaining gap"
-          lead="Each step would narrow the previous one. The published report does not compute this chain, so every value stays empty."
-        >
-          <span id="progression" className="sr-only">
-            Reserved calculator
-          </span>
-        </SectionIntro>
-        <div className="mt-8 border border-rule">
-          <ProgressionSteps
-            steps={capacityStages.map((s) => ({
-              id: s.id,
-              label: s.label,
-              question: s.question,
-              value: s.value === null ? null : String(s.value),
-              unit: s.unit,
-              note: s.note,
-            }))}
-          />
-        </div>
-        <div className="mt-6">
-          <DataTable
-            caption="Stage inputs as a table — empty because the chain is not in the source."
-            columns={[
-              { key: "stage", label: "Stage" },
-              { key: "question", label: "Question" },
-              { key: "value", label: "Value", numeric: true },
-              { key: "unit", label: "Unit" },
-            ]}
-            rows={capacityStages.map((s) => ({
-              stage: s.label,
-              question: s.question,
-              value: s.value === null ? null : String(s.value),
-              unit: s.unit ?? null,
-            }))}
-          />
-        </div>
-      </PageSection>
-
-      <PageSection labelledBy="evidence" className="rule-t">
-        <SectionIntro
-          eyebrow="Evidence not in the source files"
-          title="Demand, seats, funding"
-          lead="These panels stay empty. Inventing openings or training seats would be a new analysis (U4)."
-        >
-          <span id="evidence" className="sr-only">
-            Unsourced dimensions
-          </span>
-        </SectionIntro>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {evidenceSections.map((section) => (
-            <div key={section.id} className="border border-border bg-surface p-4">
-              <p className="label-sm">{section.label}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{section.note}</p>
-              <MetricCallout
-                label="Headline measure"
-                value={null}
-                note="No sourced file."
-                isPlaceholder
-              />
-            </div>
-          ))}
-        </div>
-      </PageSection>
-
-      <PageSection labelledBy="scenarios" className="rule-t">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <SectionIntro
-            eyebrow="Scenarios"
-            title="Scenario controls"
-            lead="Controls stay inert. The source report does not expose horizon, cohort, or throughput sliders."
-          >
-            <span id="scenarios" className="sr-only">
-              Scenarios
-            </span>
-          </SectionIntro>
-          <div className="border border-border bg-surface p-5">
-            <PlaceholderBadge>Controls not in the source</PlaceholderBadge>
-            <ul className="mt-4 divide-y divide-border">
-              {scenarioControls.map((c) => (
-                <li key={c.id} className="flex items-center justify-between gap-4 py-3">
-                  <span className="text-sm text-foreground">{c.label}</span>
-                  <span className="annotation">{c.state}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </PageSection>
-
       <PageSection labelledBy="limits" className="rule-t">
         <span id="limits" className="sr-only">
           Limitations
@@ -227,6 +129,76 @@ function TransitionCapacityPage() {
               {l.body}
             </LimitationNote>
           ))}
+        </div>
+      </PageSection>
+
+      <PageSection labelledBy="reserved" className="rule-t">
+        <DepthLabel>Not in the source</DepthLabel>
+        <h2 id="reserved" className="mt-2 section-lead">
+          Reserved calculator
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          The published report does not compute exposed workers minus openings minus seats. Opening
+          the panel below shows the empty scaffold. Nothing in it is a finding.
+        </p>
+        <div className="mt-6">
+          <ReservedDisclosure
+            title="Six-stage gap calculator (empty)"
+            summary="Not in the published analysis. Values stay empty until a sourced file exists."
+          >
+            <ProgressionSteps
+              steps={capacityStages.map((s) => ({
+                id: s.id,
+                label: s.label,
+                question: s.question,
+                value: s.value === null ? null : String(s.value),
+                unit: s.unit,
+                note: s.note,
+              }))}
+            />
+            <div className="mt-6">
+              <DataTable
+                caption="Stage inputs as a table — empty because the chain is not in the source."
+                columns={[
+                  { key: "stage", label: "Stage" },
+                  { key: "question", label: "Question" },
+                  { key: "value", label: "Value", numeric: true },
+                  { key: "unit", label: "Unit" },
+                ]}
+                rows={capacityStages.map((s) => ({
+                  stage: s.label,
+                  question: s.question,
+                  value: s.value === null ? null : String(s.value),
+                  unit: s.unit ?? null,
+                }))}
+              />
+            </div>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              {evidenceSections.map((section) => (
+                <div key={section.id} className="border border-border bg-surface p-4">
+                  <p className="label-sm">{section.label}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{section.note}</p>
+                  <MetricCallout
+                    label="Headline measure"
+                    value={null}
+                    note="No sourced file."
+                    isPlaceholder
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 border border-border bg-surface p-5">
+              <PlaceholderBadge>Controls not in the source</PlaceholderBadge>
+              <ul className="mt-4 divide-y divide-border">
+                {scenarioControls.map((c) => (
+                  <li key={c.id} className="flex items-center justify-between gap-4 py-3">
+                    <span className="text-sm text-foreground">{c.label}</span>
+                    <span className="annotation">{c.state}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ReservedDisclosure>
         </div>
       </PageSection>
     </ProseContainer>

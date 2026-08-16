@@ -98,7 +98,7 @@ export const capacityLimitations: Limitation[] = [
   {
     id: "no-calculator",
     title: "This page does not calculate a regional capacity gap",
-    body: "The published Transition Capacity report screens adjacent destinations for occupations that lost employment. It does not compute exposed workers minus openings minus seats. The six stages below are the scaffold's reserved calculator and remain empty.",
+    body: "The published Transition Capacity report screens adjacent destinations for occupations that lost employment. It does not compute exposed workers minus openings minus seats. The six-stage calculator is reserved and remains empty.",
     isPlaceholder: false,
   },
   {

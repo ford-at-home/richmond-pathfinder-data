@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { getStory, researchStories } from "@/content/research";
 import { capacityStages } from "@/content/capacity";
-import { localities } from "@/content/region";
+import { localities, qcewCurrent, qcewGeographyComparison, QCEW_YEARS } from "@/content/region";
 
 describe("navigation content", () => {
   it("exposes the three published reports and no placeholder stories", () => {
@@ -29,5 +29,17 @@ describe("navigation content", () => {
 
   it("does not invent occupation × locality rows", () => {
     expect(localities).toEqual([]);
+  });
+
+  it("keeps QCEW industry series on the current 17-county set", () => {
+    expect(QCEW_YEARS).toEqual([2019, 2020, 2021, 2022, 2023, 2024, 2025]);
+    expect(qcewCurrent.length).toBeGreaterThan(0);
+    for (const row of qcewCurrent) {
+      expect(row.countySet).toBe("current_17");
+      expect(row.series).toHaveLength(7);
+    }
+    expect(qcewGeographyComparison.length).toBe(7);
+    const latest = qcewGeographyComparison.find((r) => r.countySet === "legacy_vs_current_2025");
+    expect(latest?.difference).not.toBeNull();
   });
 });

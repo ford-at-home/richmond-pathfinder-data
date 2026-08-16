@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-import { EmptyState, FilterBar, FilterGroup } from "@/components/data";
+import { EmptyState, FilterBar } from "@/components/data";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
-import { researchStories, researchTopics } from "@/content/research";
+import { DepthLabel } from "@/components/story";
+import { PLACEMENT } from "@/content/figures";
+import { researchStories } from "@/content/research";
 
 export const Route = createFileRoute("/research/")({
   head: () => ({
@@ -26,20 +28,23 @@ export const Route = createFileRoute("/research/")({
   component: ResearchLibrary,
 });
 
-const topicOptions = ["All topics", ...researchTopics] as const;
+function liveCount(slug: string): number {
+  const placement = PLACEMENT[slug] ?? {};
+  return Object.values(placement).reduce((n, ids) => n + ids.length, 0);
+}
 
 function ResearchLibrary() {
   const [query, setQuery] = useState("");
-  const [topic, setTopic] = useState<string>("All topics");
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return researchStories.filter(
-      (s) =>
-        (topic === "All topics" || s.topic === topic) &&
-        (q === "" || s.title.toLowerCase().includes(q) || s.thesis.toLowerCase().includes(q)),
+      (s) => q === "" || s.title.toLowerCase().includes(q) || s.thesis.toLowerCase().includes(q),
     );
-  }, [query, topic]);
+  }, [query]);
+
+  const argumentative = results.filter((s) => s.slug !== "technical-appendix");
+  const appendix = results.filter((s) => s.slug === "technical-appendix");
 
   return (
     <ProseContainer>
@@ -54,6 +59,7 @@ function ResearchLibrary() {
       />
 
       <PageSection labelledBy="library">
+        <DepthLabel>Choose a document</DepthLabel>
         <span id="library" className="sr-only">
           Research entries
         </span>
@@ -62,9 +68,6 @@ function ResearchLibrary() {
           searchPlaceholder="Search titles"
           value={query}
           onValueChange={setQuery}
-          filters={
-            <FilterGroup label="Topic" options={topicOptions} value={topic} onChange={setTopic} />
-          }
         />
 
         <p className="mt-4 annotation" role="status" aria-live="polite">
@@ -75,17 +78,40 @@ function ResearchLibrary() {
           <div className="mt-6">
             <EmptyState
               title="No entries match"
-              body="Clear the search or choose a different topic."
+              body="Clear the search or try a different phrase."
             />
           </div>
         ) : (
-          <ul className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {results.map((story) => (
-              <li key={story.slug}>
-                <ResearchCard story={story} />
-              </li>
+          <>
+            {argumentative.length > 0 ? (
+              <ul className="mt-6 grid gap-5 md:grid-cols-2">
+                {argumentative.map((story) => {
+                  const n = liveCount(story.slug);
+                  return (
+                    <li key={story.slug}>
+                      <ResearchCard story={story} />
+                      <p className="mt-2 annotation">
+                        {n > 0
+                          ? `${n} interactive figure${n === 1 ? "" : "s"}`
+                          : "Generated tables"}
+                        {story.keyFindings.length > 0
+                          ? ` · ${story.keyFindings.length} numbered findings`
+                          : ""}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : null}
+            {appendix.map((story) => (
+              <div key={story.slug} className="mt-8 border-t border-rule pt-8">
+                <p className="eyebrow">Companion tables</p>
+                <div className="mt-4 max-w-xl">
+                  <ResearchCard story={story} />
+                </div>
+              </div>
             ))}
-          </ul>
+          </>
         )}
       </PageSection>
     </ProseContainer>

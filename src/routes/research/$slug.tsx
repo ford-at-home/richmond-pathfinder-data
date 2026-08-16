@@ -4,7 +4,9 @@ import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageH
 import { RelatedResearch } from "@/components/research";
 import { ReportDocument } from "@/components/research/ReportDocument";
 import { SourceList } from "@/components/sources";
+import { DepthLabel, FindingList, SkipToDocument } from "@/components/story";
 import { getSources, getStory, researchStories } from "@/content/research";
+import { GEOGRAPHY_SHORT } from "@/lib/geography";
 import { pinShort, pinSynced } from "@/lib/pin";
 
 export const Route = createFileRoute("/research/$slug")({
@@ -46,7 +48,7 @@ function StoryNotFound() {
         lead="The entry may have been renamed. Source URLs under /report/:slug redirect here."
       />
       <PageSection>
-        <Link to="/research" className="text-sm text-primary underline-offset-4 hover:underline">
+        <Link to="/research" className="editorial-link text-sm">
           Back to the research library
         </Link>
       </PageSection>
@@ -60,12 +62,14 @@ function ResearchStoryPage() {
   const related = story.relatedSlugs
     .map((slug) => researchStories.find((s) => s.slug === slug))
     .filter((s): s is (typeof researchStories)[number] => Boolean(s));
+  const hasFindings = story.keyFindings.length > 0;
 
   return (
     <ProseContainer width="wide">
       <PageHeader
-        eyebrow={story.topic}
+        eyebrow={`${story.topic} · ${GEOGRAPHY_SHORT}`}
         title={story.title}
+        lead={story.thesis}
         meta={[
           { label: "Published", value: story.publishedAt },
           { label: "Analysis pin", value: pinShort },
@@ -74,11 +78,41 @@ function ResearchStoryPage() {
         ]}
       />
 
-      <PageSection labelledBy="report">
-        <h2 id="report" className="sr-only">
-          Report
+      {hasFindings ? (
+        <PageSection labelledBy="findings">
+          <DepthLabel>In two minutes</DepthLabel>
+          <h2 id="findings" className="mt-2 section-lead">
+            Summary of findings
+          </h2>
+          <p className="mt-2 max-w-2xl annotation">
+            Numbered items are the report&apos;s own summary, not a rewrite. Interactive figures sit
+            in the sections that make the claims.
+          </p>
+          <FindingList findings={story.keyFindings} className="mt-6" />
+          <SkipToDocument />
+        </PageSection>
+      ) : (
+        <PageSection labelledBy="orientation">
+          <DepthLabel>Companion document</DepthLabel>
+          <h2 id="orientation" className="mt-2 section-lead">
+            Tables, not a numbered summary
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            This document has no Summary of findings section. The occupation-level tables below are
+            the evidence.
+          </p>
+          <SkipToDocument />
+        </PageSection>
+      )}
+
+      <PageSection labelledBy="document" className="rule-t">
+        <DepthLabel>The document</DepthLabel>
+        <h2 id="document" className="mt-2 section-lead">
+          Full report
         </h2>
-        <ReportDocument story={story} />
+        <div className="mt-8">
+          <ReportDocument story={story} />
+        </div>
       </PageSection>
 
       <PageSection labelledBy="provenance" className="rule-t">

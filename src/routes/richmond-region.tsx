@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DataTable, VisualizationFrame, VisualizationStagePlaceholder } from "@/components/data";
+import { DataTable, VisualizationFrame } from "@/components/data";
 import { LimitationNote, MetricCallout } from "@/components/editorial";
 import {
   PageHeader,
@@ -8,7 +8,10 @@ import {
   ProseContainer,
   SectionIntro,
 } from "@/components/page/PageHeader";
-import { qcewSeries, regionLimitations, regionMeasures } from "@/content/region";
+import { DelineationSchematic } from "@/components/region/DelineationSchematic";
+import { QcewSeries } from "@/components/region/QcewSeries";
+import { DepthLabel, ReservedDisclosure } from "@/components/story";
+import { qcewCurrent, regionLimitations, regionMeasures } from "@/content/region";
 import { GEOGRAPHY } from "@/lib/geography";
 
 export const Route = createFileRoute("/richmond-region")({
@@ -36,7 +39,8 @@ function fmt(n: number | null): string | null {
 }
 
 function RichmondRegionPage() {
-  const current = qcewSeries.filter((r) => r.countySet === "current_17");
+  const published = regionMeasures.filter((m) => !m.isPlaceholder);
+  const unpublished = regionMeasures.filter((m) => m.isPlaceholder);
 
   return (
     <ProseContainer width="wide">
@@ -52,17 +56,19 @@ function RichmondRegionPage() {
       />
 
       <PageSection labelledBy="measures">
+        <DepthLabel>In two minutes</DepthLabel>
         <SectionIntro
+          className="mt-2"
           eyebrow="Regional overview"
           title="Key measures"
-          lead="Headline counts taken from the codebook and the QCEW fixed-geography table. Hiring demand and training providers have no source file and stay empty."
+          lead="Headline counts taken from the codebook and the QCEW fixed-geography table."
         >
           <span id="measures" className="sr-only">
             Key measures
           </span>
         </SectionIntro>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {regionMeasures.map((m) => (
+          {published.map((m) => (
             <MetricCallout
               key={m.id}
               label={m.label}
@@ -75,19 +81,35 @@ function RichmondRegionPage() {
         </div>
       </PageSection>
 
-      <PageSection labelledBy="map" className="rule-t">
-        <span id="map" className="sr-only">
-          Regional map
+      <PageSection labelledBy="delineation" className="rule-t">
+        <span id="delineation" className="sr-only">
+          Delineation
+        </span>
+        <DelineationSchematic />
+        <div className="mt-6 max-w-2xl">
+          <LimitationNote title="QCEW cannot confirm occupation change" tone="caution">
+            QCEW has no occupational dimension, so it cannot confirm or refute the OEWS clerical
+            employment change directly; it can only show whether the industries that employ the most
+            clerical workers moved in a consistent direction.
+          </LimitationNote>
+        </div>
+      </PageSection>
+
+      <PageSection labelledBy="series" className="rule-t">
+        <span id="series" className="sr-only">
+          QCEW series
         </span>
         <VisualizationFrame
-          title="MapLibre choropleth — not in the source"
-          description="The source site has no map library. A locality choropleth of AI exposure cannot be built from these files (U5)."
+          title="QCEW employment, current 17-county set"
+          description="Annual-average industry employment on constant geography. Empty cells are not published, never zero. A suppressed-cell count means the summed series understates the true level."
+          stage="data"
+          height="tall"
           provenance={{
-            source: "None — no geographic occupation layer in the pinned analysis",
-            geography: GEOGRAPHY,
-            unit: "Not applicable",
-            period: "Not applicable",
-            note: "QCEW is industry × county-set, not occupation × locality.",
+            source: "BLS QCEW county files, aggregated in qcew_fixed_geography.csv",
+            geography: "Richmond MSA, 2020-standards 17-county set (constant geography)",
+            unit: "jobs (annual average)",
+            period: "2019–2025",
+            note: "QCEW is industry × county-set, not occupation × locality. Do not read this as an exposure map.",
           }}
           tableView={
             <DataTable
@@ -100,7 +122,7 @@ function RichmondRegionPage() {
                 { key: "emp2025", label: "2025", numeric: true },
                 { key: "supp", label: "Suppressed cells", numeric: true },
               ]}
-              rows={current.map((r) => ({
+              rows={qcewCurrent.map((r) => ({
                 naics: r.naics,
                 industry: r.industry,
                 emp2019: fmt(r.emp2019),
@@ -111,30 +133,8 @@ function RichmondRegionPage() {
             />
           }
         >
-          <VisualizationStagePlaceholder
-            library="MapLibre GL JS (not in the source)"
-            purpose="Reserved for a future geographic layer. The table is the migrated regional series."
-          />
+          <QcewSeries rows={qcewCurrent} />
         </VisualizationFrame>
-      </PageSection>
-
-      <PageSection labelledBy="delineation" className="rule-t">
-        <div className="grid gap-8 lg:grid-cols-2">
-          <SectionIntro
-            eyebrow="Delineation"
-            title="The metro changed between May 2023 and May 2024"
-            lead="Caroline County left and King and Queen County entered. QCEW tables hold a 17-county current set so industry series can be compared on constant geography."
-          >
-            <span id="delineation" className="sr-only">
-              Delineation
-            </span>
-          </SectionIntro>
-          <LimitationNote title="QCEW cannot confirm occupation change" tone="caution">
-            QCEW has no occupational dimension, so it cannot confirm or refute the OEWS clerical
-            employment change directly; it can only show whether the industries that employ the most
-            clerical workers moved in a consistent direction.
-          </LimitationNote>
-        </div>
       </PageSection>
 
       <PageSection labelledBy="limits" className="rule-t">
@@ -148,6 +148,27 @@ function RichmondRegionPage() {
             </LimitationNote>
           ))}
         </div>
+        {unpublished.length > 0 ? (
+          <div className="mt-8">
+            <ReservedDisclosure
+              title="Hiring demand and training providers (no file)"
+              summary="Unresolved (U4). No postings or seat-count dataset was migrated. A locality choropleth of AI exposure cannot be built from these files (U5)."
+            >
+              <div className="grid gap-5 sm:grid-cols-2">
+                {unpublished.map((m) => (
+                  <MetricCallout
+                    key={m.id}
+                    label={m.label}
+                    value={m.value}
+                    unit={m.unit}
+                    note={m.provenance.note}
+                    isPlaceholder={m.isPlaceholder}
+                  />
+                ))}
+              </div>
+            </ReservedDisclosure>
+          </div>
+        ) : null}
       </PageSection>
     </ProseContainer>
   );

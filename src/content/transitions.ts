@@ -69,3 +69,43 @@ export const transitionBands = [
 export function occupationTitle(id: string): string {
   return occupations.find((o) => o.id === id)?.title ?? id;
 }
+
+export type OriginOption = {
+  id: string;
+  title: string;
+  cluster: string;
+  lost: number | null;
+  destinationCount: number;
+};
+
+function uniqueOrigins(): OriginOption[] {
+  const byId = new Map<string, OriginOption>();
+  for (const t of transitions) {
+    const existing = byId.get(t.fromId);
+    if (existing) {
+      existing.destinationCount += 1;
+      continue;
+    }
+    const node = occupations.find((o) => o.id === t.fromId);
+    byId.set(t.fromId, {
+      id: t.fromId,
+      title: t.fromTitle,
+      cluster: node?.cluster ?? "Not in the 523-occupation join",
+      lost: t.originLost,
+      destinationCount: 1,
+    });
+  }
+  return [...byId.values()].sort((a, b) => {
+    const lostA = a.lost ?? Number.NEGATIVE_INFINITY;
+    const lostB = b.lost ?? Number.NEGATIVE_INFINITY;
+    if (lostA !== lostB) return lostB - lostA;
+    return a.title.localeCompare(b.title);
+  });
+}
+
+/** Occupations that appear as an origin in pathways_reachable.csv. */
+export const origins: OriginOption[] = uniqueOrigins();
+
+export function destinationsFrom(fromId: string): TransitionEdge[] {
+  return transitions.filter((t) => t.fromId === fromId);
+}

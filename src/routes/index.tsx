@@ -9,6 +9,7 @@ import {
   SectionIntro,
 } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
+import { DepthLabel } from "@/components/story";
 import { PLACEMENT, REPORTS } from "@/content/figures";
 import { researchStories } from "@/content/research";
 import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
@@ -44,6 +45,11 @@ function liveCount(slug: string): number {
 }
 
 function Overview() {
+  const reports = REPORTS.map((r) => researchStories.find((s) => s.slug === r.slug)).filter(
+    (s): s is (typeof researchStories)[number] => Boolean(s),
+  );
+  const [lead, companion] = [reports.slice(0, 2), reports.slice(2)];
+
   return (
     <>
       <ProseContainer>
@@ -63,87 +69,101 @@ function Overview() {
 
       <ProseContainer>
         <PageSection labelledBy="reports">
+          <DepthLabel>In two minutes</DepthLabel>
           <SectionIntro
+            className="mt-2"
             eyebrow="The reports"
-            title="The evidence base, reproduced in full"
-            lead="Where a claim has an interactive figure, the figure sits in the section that makes the claim."
+            title="Start with the evidence base"
+            lead="Two argumentative reports, then the tables. Where a claim has an interactive figure, the figure sits in the section that makes the claim."
           >
             <span id="reports" className="sr-only">
               The reports
             </span>
           </SectionIntro>
-          <ul className="mt-8 grid gap-5 md:grid-cols-3">
-            {REPORTS.map((r) => {
-              const story = researchStories.find((s) => s.slug === r.slug);
-              const n = liveCount(r.slug);
+          <ul className="mt-8 grid gap-5 md:grid-cols-2">
+            {lead.map((story) => {
+              const n = liveCount(story.slug);
               return (
-                <li key={r.slug}>
-                  {story ? <ResearchCard story={story} /> : null}
+                <li key={story.slug}>
+                  <ResearchCard story={story} />
                   <p className="mt-2 annotation">
                     {n > 0 ? `${n} interactive figure${n === 1 ? "" : "s"}` : "Generated tables"}
+                    {story.keyFindings.length > 0
+                      ? ` · ${story.keyFindings.length} numbered findings`
+                      : ""}
                   </p>
                 </li>
               );
             })}
           </ul>
+          {companion.map((story) => (
+            <p
+              key={story.slug}
+              className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground"
+            >
+              Companion:{" "}
+              <Link
+                to="/research/$slug"
+                params={{ slug: story.slug }}
+                className="text-foreground editorial-link"
+              >
+                {story.title}
+              </Link>
+              . {story.thesis}
+            </p>
+          ))}
         </PageSection>
 
         <PageSection labelledBy="other-views" className="rule-t">
           <SectionIntro
             eyebrow="Other views of the same tables"
             title="Map, capacity, and region"
-            lead="These routes keep the Lovable information architecture. They present the published pairs, the capacity report, and the MSA / QCEW geography — they do not add a network graph, a gap calculator, or a city map the source did not have."
+            lead="These routes keep the Lovable information architecture. They present the published pairs, the capacity report, and the MSA / QCEW geography."
           >
             <span id="other-views" className="sr-only">
               Other views
             </span>
           </SectionIntro>
-          <ul className="mt-8 grid gap-px bg-rule md:grid-cols-3">
-            <li className="bg-background p-6">
-              <h3 className="font-display text-2xl leading-tight text-foreground">
-                Transition Map
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Screened origin–destination pairs from pathways_reachable.csv. Not a Cytoscape
-                network; the source has none.
-              </p>
-              <Link
-                to="/transition-map"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
-              >
-                Open section
+          <ul className="mt-8 divide-y divide-border border-t border-border">
+            <li className="flex flex-col gap-2 py-4 sm:flex-row sm:items-baseline sm:justify-between">
+              <div className="max-w-xl">
+                <h3 className="font-display text-lg text-foreground">Transition Map</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Origin-first view of the 28 screened pairs. Zone gap and wage replacement from the
+                  CSV; no invented distance.
+                </p>
+              </div>
+              <Link to="/transition-map" className="editorial-link shrink-0 text-sm font-medium">
+                Open
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </li>
-            <li className="bg-background p-6">
-              <h3 className="font-display text-2xl leading-tight text-foreground">
-                Transition Capacity
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                The published findings and the pathways figure. The six-stage gap calculator stays
-                empty because that chain is not in the source.
-              </p>
+            <li className="flex flex-col gap-2 py-4 sm:flex-row sm:items-baseline sm:justify-between">
+              <div className="max-w-xl">
+                <h3 className="font-display text-lg text-foreground">Transition Capacity</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Published findings and the pathways figure. The six-stage gap calculator stays
+                  empty because that chain is not in the source.
+                </p>
+              </div>
               <Link
                 to="/transition-capacity"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+                className="editorial-link shrink-0 text-sm font-medium"
               >
-                Open section
+                Open
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </li>
-            <li className="bg-background p-6">
-              <h3 className="font-display text-2xl leading-tight text-foreground">
-                Richmond Region Data
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                MSA definition (BLS 40060) and QCEW industry series on the current 17-county set.
-                Not a city choropleth.
-              </p>
-              <Link
-                to="/richmond-region"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
-              >
-                Open section
+            <li className="flex flex-col gap-2 py-4 sm:flex-row sm:items-baseline sm:justify-between">
+              <div className="max-w-xl">
+                <h3 className="font-display text-lg text-foreground">Richmond Region Data</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  MSA definition (BLS 40060), the 2023/24 county swap, and QCEW industry series on
+                  the current 17-county set.
+                </p>
+              </div>
+              <Link to="/richmond-region" className="editorial-link shrink-0 text-sm font-medium">
+                Open
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </li>
@@ -162,7 +182,7 @@ function Overview() {
               </span>
               <Link
                 to="/methodology"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm text-primary underline-offset-4 hover:underline"
+                className="mt-5 inline-flex items-center gap-1.5 editorial-link text-sm"
               >
                 Read the methodology
                 <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -181,7 +201,7 @@ function Overview() {
         <PageSection labelledBy="pin" className="rule-t">
           <p id="pin" className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
             Reports and figures are reproduced from{" "}
-            <a href={pinCommitUrl} className="text-primary underline-offset-4 hover:underline">
+            <a href={pinCommitUrl} className="editorial-link">
               {pinRepo}
             </a>{" "}
             at commit <code>{pinShort}</code>, synced {pinSynced}.

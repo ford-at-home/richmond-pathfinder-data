@@ -124,8 +124,9 @@
   }
 
   .prose {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-family: var(--font-family-serif, Newsreader, Georgia, serif);
+    font-size: 17px;
+    line-height: 24px;
   }
 
   .prose h3 {

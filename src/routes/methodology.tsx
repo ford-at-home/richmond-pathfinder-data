@@ -8,6 +8,7 @@ import {
   SectionIntro,
 } from "@/components/page/PageHeader";
 import { SourceList } from "@/components/sources";
+import { DepthLabel, SkipToDocument } from "@/components/story";
 import {
   definitions,
   methodologyHtml,
@@ -55,7 +56,33 @@ function MethodologyPage() {
         ]}
       />
 
-      <PageSection labelledBy="definitions">
+      <PageSection labelledBy="handling">
+        <DepthLabel>In two minutes</DepthLabel>
+        <SectionIntro
+          className="mt-2"
+          eyebrow="Source handling"
+          title="How evidence is presented"
+          lead="These rules apply to every page, chart, and table on the site."
+        >
+          <span id="handling" className="sr-only">
+            Source handling
+          </span>
+        </SectionIntro>
+        <ol className="mt-8 grid gap-px bg-rule md:grid-cols-2">
+          {sourceHandling.map((rule, i) => (
+            <li key={rule.id} className="bg-background p-5">
+              <span className="numeric text-xs text-foreground" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 font-display text-lg text-foreground">{rule.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{rule.body}</p>
+            </li>
+          ))}
+        </ol>
+        <SkipToDocument href="#document" />
+      </PageSection>
+
+      <PageSection labelledBy="definitions" className="rule-t">
         <SectionIntro eyebrow="Definitions" title="Terms used across the site">
           <span id="definitions" className="sr-only">
             Definitions
@@ -74,7 +101,9 @@ function MethodologyPage() {
       </PageSection>
 
       <PageSection labelledBy="document" className="rule-t">
+        <DepthLabel>The documents</DepthLabel>
         <SectionIntro
+          className="mt-2"
           eyebrow="Pinned document"
           title="Methodology"
           lead="Reproduced from data/source/docs/methodology.md."
@@ -103,29 +132,6 @@ function MethodologyPage() {
           className="source-report source-figure prose mt-8 max-w-3xl"
           dangerouslySetInnerHTML={{ __html: robustnessHtml }}
         />
-      </PageSection>
-
-      <PageSection labelledBy="handling" className="rule-t">
-        <SectionIntro
-          eyebrow="Source handling"
-          title="How evidence is presented"
-          lead="These rules apply to every page, chart, and table on the site."
-        >
-          <span id="handling" className="sr-only">
-            Source handling
-          </span>
-        </SectionIntro>
-        <ol className="mt-8 grid gap-px bg-rule md:grid-cols-2">
-          {sourceHandling.map((rule, i) => (
-            <li key={rule.id} className="bg-background p-5">
-              <span className="numeric text-xs text-highlight" aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-3 font-display text-lg text-foreground">{rule.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{rule.body}</p>
-            </li>
-          ))}
-        </ol>
       </PageSection>
 
       <PageSection labelledBy="limits" className="rule-t">
