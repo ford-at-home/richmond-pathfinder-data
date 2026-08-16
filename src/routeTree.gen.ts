@@ -10,11 +10,31 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as RichmondRegionRouteImport } from './routes/richmond-region'
+import { Route as TransitionCapacityRouteImport } from './routes/transition-capacity'
 import { Route as TransitionMapRouteImport } from './routes/transition-map'
+import { Route as ResearchIndexRouteImport } from './routes/research/index'
+import { Route as ResearchSlugRouteImport } from './routes/research/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RichmondRegionRoute = RichmondRegionRouteImport.update({
+  id: '/richmond-region',
+  path: '/richmond-region',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransitionCapacityRoute = TransitionCapacityRouteImport.update({
+  id: '/transition-capacity',
+  path: '/transition-capacity',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TransitionMapRoute = TransitionMapRouteImport.update({
@@ -22,31 +42,83 @@ const TransitionMapRoute = TransitionMapRouteImport.update({
   path: '/transition-map',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResearchIndexRoute = ResearchIndexRouteImport.update({
+  id: '/research/',
+  path: '/research/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchSlugRoute = ResearchSlugRouteImport.update({
+  id: '/research/$slug',
+  path: '/research/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/methodology': typeof MethodologyRoute
+  '/richmond-region': typeof RichmondRegionRoute
+  '/transition-capacity': typeof TransitionCapacityRoute
   '/transition-map': typeof TransitionMapRoute
+  '/research/$slug': typeof ResearchSlugRoute
+  '/research/': typeof ResearchIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/methodology': typeof MethodologyRoute
+  '/richmond-region': typeof RichmondRegionRoute
+  '/transition-capacity': typeof TransitionCapacityRoute
   '/transition-map': typeof TransitionMapRoute
+  '/research/$slug': typeof ResearchSlugRoute
+  '/research': typeof ResearchIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/methodology': typeof MethodologyRoute
+  '/richmond-region': typeof RichmondRegionRoute
+  '/transition-capacity': typeof TransitionCapacityRoute
   '/transition-map': typeof TransitionMapRoute
+  '/research/$slug': typeof ResearchSlugRoute
+  '/research/': typeof ResearchIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/transition-map'
+  fullPaths:
+    | '/'
+    | '/methodology'
+    | '/richmond-region'
+    | '/transition-capacity'
+    | '/transition-map'
+    | '/research/$slug'
+    | '/research/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/transition-map'
-  id: '__root__' | '/' | '/transition-map'
+  to:
+    | '/'
+    | '/methodology'
+    | '/richmond-region'
+    | '/transition-capacity'
+    | '/transition-map'
+    | '/research/$slug'
+    | '/research'
+  id:
+    | '__root__'
+    | '/'
+    | '/methodology'
+    | '/richmond-region'
+    | '/transition-capacity'
+    | '/transition-map'
+    | '/research/$slug'
+    | '/research/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MethodologyRoute: typeof MethodologyRoute
+  RichmondRegionRoute: typeof RichmondRegionRoute
+  TransitionCapacityRoute: typeof TransitionCapacityRoute
   TransitionMapRoute: typeof TransitionMapRoute
+  ResearchSlugRoute: typeof ResearchSlugRoute
+  ResearchIndexRoute: typeof ResearchIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +130,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/richmond-region': {
+      id: '/richmond-region'
+      path: '/richmond-region'
+      fullPath: '/richmond-region'
+      preLoaderRoute: typeof RichmondRegionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transition-capacity': {
+      id: '/transition-capacity'
+      path: '/transition-capacity'
+      fullPath: '/transition-capacity'
+      preLoaderRoute: typeof TransitionCapacityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transition-map': {
       id: '/transition-map'
       path: '/transition-map'
@@ -65,12 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransitionMapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/research/': {
+      id: '/research/'
+      path: '/research'
+      fullPath: '/research/'
+      preLoaderRoute: typeof ResearchIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research/$slug': {
+      id: '/research/$slug'
+      path: '/research/$slug'
+      fullPath: '/research/$slug'
+      preLoaderRoute: typeof ResearchSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MethodologyRoute: MethodologyRoute,
+  RichmondRegionRoute: RichmondRegionRoute,
+  TransitionCapacityRoute: TransitionCapacityRoute,
   TransitionMapRoute: TransitionMapRoute,
+  ResearchSlugRoute: ResearchSlugRoute,
+  ResearchIndexRoute: ResearchIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

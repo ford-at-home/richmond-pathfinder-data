@@ -12,13 +12,13 @@ export type Provenance = {
   /** Geography the value describes, e.g. "Richmond MSA". */
   geography: string;
   /** Unit of measure, e.g. "workers", "percent of employment". */
-  unit?: string;
+  unit?: string | undefined;
   /** ISO date or period label for the underlying data. */
-  period?: string;
+  period?: string | undefined;
   /** Link to the source, when one exists. */
-  url?: string;
+  url?: string | undefined;
   /** Notes about collection, revision, or comparability. */
-  note?: string;
+  note?: string | undefined;
 };
 
 export type Source = {
@@ -26,8 +26,8 @@ export type Source = {
   title: string;
   publisher: string;
   /** ISO 8601 date string. */
-  date?: string;
-  url?: string;
+  date?: string | undefined;
+  url?: string | undefined;
   kind: "dataset" | "report" | "article" | "interview" | "administrative" | "other";
   isPlaceholder: boolean;
 };
@@ -48,7 +48,7 @@ export type Definition = {
 export type Occupation = {
   id: string;
   /** SOC code or other stable identifier once migrated. */
-  code?: string;
+  code?: string | undefined;
   title: string;
   cluster: string;
   isPlaceholder: boolean;
@@ -73,7 +73,7 @@ export type CapacityStage = {
   question: string;
   /** Intentionally null in the scaffold — no fabricated calculations. */
   value: number | null;
-  unit?: string;
+  unit?: string | undefined;
   note: string;
   isPlaceholder: boolean;
 };
@@ -82,7 +82,7 @@ export type RegionMeasure = {
   id: string;
   label: string;
   value: string | null;
-  unit?: string;
+  unit?: string | undefined;
   provenance: Provenance;
   isPlaceholder: boolean;
 };
@@ -103,7 +103,7 @@ export type ResearchStory = {
   /** One-sentence answer or thesis. */
   thesis: string;
   publishedAt: string;
-  updatedAt?: string;
+  updatedAt?: string | undefined;
   readingMinutes: number;
   sourceIds: string[];
   keyFindings: string[];

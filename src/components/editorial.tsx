@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /** Unmistakable marker for scaffold content. */
-export function PlaceholderBadge({ children = "Placeholder", className }: { children?: ReactNode; className?: string }) {
+export function PlaceholderBadge({ children = "Placeholder", className }: { children?: ReactNode; className?: string | undefined }) {
   return (
     <span
       className={cn(
@@ -25,7 +25,7 @@ export function KeyFinding({
 }: {
   index?: number;
   children: ReactNode;
-  isPlaceholder?: boolean;
+  isPlaceholder?: boolean | undefined;
 }) {
   return (
     <li className="flex gap-4 border-t border-border py-4 first:border-t-0">
@@ -51,9 +51,9 @@ export function MetricCallout({
 }: {
   label: string;
   value: string | null;
-  unit?: string;
-  note?: string;
-  isPlaceholder?: boolean;
+  unit?: string | undefined;
+  note?: string | undefined;
+  isPlaceholder?: boolean | undefined;
 }) {
   return (
     <div className="border-t-2 border-primary/70 bg-surface p-4">
@@ -75,9 +75,9 @@ export function EvidencePanel({
   className,
 }: {
   title: string;
-  note?: string;
+  note?: string | undefined;
   children?: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <section className={cn("border border-border bg-surface", className)}>
@@ -93,7 +93,14 @@ export function EvidencePanel({
 export function ProgressionSteps({
   steps,
 }: {
-  steps: { id: string; label: string; question: string; value: string | null; unit?: string; note?: string }[];
+  steps: {
+    id: string;
+    label: string;
+    question: string;
+    value: string | null;
+    unit?: string | undefined;
+    note?: string | undefined;
+  }[];
 }) {
   return (
     <ol className="grid gap-px bg-rule md:grid-cols-2 lg:grid-cols-3">
@@ -124,7 +131,7 @@ export function DefinitionCallout({
 }: {
   term: string;
   definition: string;
-  isPlaceholder?: boolean;
+  isPlaceholder?: boolean | undefined;
 }) {
   return (
     <div className="flex gap-3 border-l-2 border-primary bg-inset px-4 py-3">
