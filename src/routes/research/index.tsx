@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { EmptyState, FilterBar } from "@/components/data";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
-import { DepthLabel, HowTheNumbersRelate } from "@/components/story";
+import { DepthLabel } from "@/components/story";
 import { PLACEMENT } from "@/content/figures";
 import { researchStories } from "@/content/research";
 
@@ -54,13 +54,6 @@ function ResearchLibrary() {
         lead="Same reports. Same jobs. Find a job is a shorter starting list."
       />
 
-      <PageSection labelledBy="how-to-read">
-        <DepthLabel>In two minutes</DepthLabel>
-        <h2 id="how-to-read" className="sr-only">
-          What the numbers are
-        </h2>
-        <HowTheNumbersRelate variant="evidence" />
-      </PageSection>
 
       <PageSection labelledBy="library">
         <DepthLabel>Choose a document</DepthLabel>
