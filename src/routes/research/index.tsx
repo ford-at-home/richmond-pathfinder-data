@@ -51,7 +51,7 @@ function ResearchLibrary() {
       <PageHeader
         eyebrow="Evidence"
         title="How we know"
-        lead="Same reports. Same jobs. Find a job is a shorter starting list."
+        lead="Explore the data underlying these mappings"
       />
 
 
