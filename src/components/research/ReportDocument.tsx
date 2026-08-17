@@ -1,7 +1,7 @@
 import type { ResearchStory } from "@/content/types";
 import { isFigureId } from "@/content/figures";
 import { LiveFigure } from "@/components/research/LiveFigure";
-import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
+import { pinRepoUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
 
 import "@/visualizations/source-report.css";
 
@@ -39,7 +39,7 @@ export function ReportDocument({ story }: { story: ResearchStory }) {
       </div>
 
       <p className="colophon">
-        This document is reproduced from <a href={pinCommitUrl}>{pinRepo}</a> at commit{" "}
+        This document is reproduced from <a href={pinRepoUrl}>{pinRepo}</a> at commit{" "}
         <code>{pinShort}</code>, synced {pinSynced}, and is verified against a recorded hash. The
         interactive figures set into it are recomputed from the same published tables.
       </p>

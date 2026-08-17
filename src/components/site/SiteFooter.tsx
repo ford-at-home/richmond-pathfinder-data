@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { primaryNav, siteConfig } from "@/config/site";
-import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
+import { pinRepoUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
 
 export function SiteFooter() {
   return (
@@ -14,7 +14,7 @@ export function SiteFooter() {
           </p>
           <p className="mt-3 annotation max-w-md">
             Reports are the evidence behind Find a job, reproduced from{" "}
-            <a href={pinCommitUrl} className="editorial-link">
+            <a href={pinRepoUrl} className="editorial-link">
               {pinRepo}
             </a>{" "}
             at commit <code>{pinShort}</code>, synced {pinSynced}. Geography is the Richmond VA MSA
