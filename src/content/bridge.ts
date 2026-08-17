@@ -180,9 +180,18 @@ const HANDS_ON = new Set([
  * O*NET skill is a judgement made here by topic, which is why the caveat below
  * travels with the list.
  */
-const RPL_ONLINE = "https://rvalibrary.org/services/online-resources/";
-const HENRICO_CAREER = "https://www.henricolibrary.org/jobs-career-resources";
-
+/**
+ * Each URL is the resource itself, taken from the link the library publishes on
+ * its own page and confirmed to answer 200. Pointing several of these at the
+ * library's resource index instead would land the reader on a wall of forty
+ * databases, which is the same as not linking them. A test keeps them distinct
+ * so that regression cannot creep back.
+ *
+ * The library entry points carry an institutional token in the query string.
+ * They are published openly and are how the library intends patrons to arrive,
+ * but a rotated token would break the link silently — hence FREE_LOCAL_HELP,
+ * which always names the library itself.
+ */
 const KHAN_MATH: SelfStudyOption = {
   name: "Mathematics, arithmetic through statistics",
   provider: "Khan Academy",
@@ -194,10 +203,10 @@ const KHAN_MATH: SelfStudyOption = {
 
 const LEARNING_EXPRESS: SelfStudyOption = {
   name: "EBSCO Learning Express",
-  provider: "Richmond Public Library and Henrico County Public Library",
+  provider: "Richmond Public Library",
   access: "Free with a library card",
   covers: "Maths, reading and writing tutorials, plus practice tests and skill-building exercises",
-  url: RPL_ONLINE,
+  url: "https://learningexpresshub.com/?Authtoken=A4E8DAD5-B884-47C9-894E-7E2960880642",
 };
 
 const ACCEL: SelfStudyOption = {
@@ -205,7 +214,7 @@ const ACCEL: SelfStudyOption = {
   provider: "Richmond Public Library",
   access: "Free with a library card",
   covers: "Videos, book summaries and articles for building personal and professional skills",
-  url: RPL_ONLINE,
+  url: "https://accel.ebscolearning.com/register/fvtbhjGa",
 };
 
 const UNIVERSAL_CLASS: SelfStudyOption = {
@@ -213,7 +222,7 @@ const UNIVERSAL_CLASS: SelfStudyOption = {
   provider: "Richmond Public Library",
   access: "Free with a library card",
   covers: "Over 500 courses with an instructor, most ending in a certificate of completion",
-  url: RPL_ONLINE,
+  url: "https://richmondva.universalclass.com/promo.htm",
 };
 
 const BRAINFUSE: SelfStudyOption = {
@@ -221,7 +230,7 @@ const BRAINFUSE: SelfStudyOption = {
   provider: "Richmond Public Library",
   access: "Free with a library card",
   covers: "Live tutoring and written feedback on your writing",
-  url: RPL_ONLINE,
+  url: "https://landing.brainfuse.com/authenticate.asp?u=main.richmondpubliclibrary.virginialibrarieshn.va.brainfuse.com",
 };
 
 const HENRICO_COMPUTER: SelfStudyOption = {
@@ -229,7 +238,7 @@ const HENRICO_COMPUTER: SelfStudyOption = {
   provider: "Henrico County Public Library",
   access: "Free, in person",
   covers: "Basic computer skills, Microsoft Word, Excel and other Office apps",
-  url: HENRICO_CAREER,
+  url: "https://www.henricolibrary.org/computer-classes",
 };
 
 /** Travels with every free list. Free study is real learning and not a key. */
@@ -321,10 +330,19 @@ const TRAINING: Record<string, Training> = {
  */
 export const FREE_LOCAL_HELP = {
   card: {
-    text: "A library card from Richmond, Henrico or Chesterfield is free and unlocks most of the study listed on this page.",
+    // Chesterfield's own library does not carry these platforms, so naming a
+    // Chesterfield card here would send a reader somewhere that cannot serve
+    // them. A free Henrico card can, and Chesterfield residents qualify for one.
+    text: "A free library card unlocks most of the study listed on this page. Henrico gives free cards to residents of Henrico, Chesterfield and the City of Richmond, and to Goochland and Hanover residents through a reciprocal agreement. Both libraries need a photo ID and proof of address.",
     links: [
-      { label: "Richmond Public Library", url: RPL_ONLINE },
-      { label: "Henrico County Public Library", url: HENRICO_CAREER },
+      {
+        label: "Get a Richmond Public Library card",
+        url: "https://rvalibrary.org/services/get-card/",
+      },
+      {
+        label: "Get a Henrico County Public Library card",
+        url: "https://henricolibrary.org/library-card-registration",
+      },
     ],
   },
   board: {

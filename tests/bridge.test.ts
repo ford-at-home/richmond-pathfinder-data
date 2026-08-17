@@ -92,7 +92,20 @@ describe("training honesty", () => {
     }
     const maths = trainingForSkill("Mathematics").selfStudy;
     expect(maths.map((o) => o.provider)).toContain("Khan Academy");
-    expect(maths.every((o) => o.url.startsWith("https://"))).toBe(true);
+  });
+
+  it("links each resource to itself, not to a page listing forty of them", () => {
+    const all = [...new Set(skillNames.flatMap((s) => trainingForSkill(s).selfStudy))];
+    const urls = all.map((o) => o.url);
+    // Two resources sharing a URL means at least one is pointing at an index.
+    expect(new Set(urls).size).toBe(urls.length);
+    for (const o of all) {
+      expect(o.url).toMatch(/^https:\/\//);
+      expect(o.url).not.toMatch(/\/services\/online-resources|jobs-career-resources/);
+    }
+    for (const link of [...FREE_LOCAL_HELP.card.links, ...FREE_LOCAL_HELP.board.links]) {
+      expect(link.url).toMatch(/^https:\/\//);
+    }
   });
 
   it("keeps the two honest blanks blank", () => {
