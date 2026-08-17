@@ -7,7 +7,7 @@ export const siteConfig = {
   name: "Richmond Workforce Transition",
   shortName: "RWT",
   tagline:
-    "These are the Greater Richmond jobs where people already use AI a lot. Pick one to see nearby jobs that pay more and use AI less.",
+    "Explore Greater Richmond jobs where workers already use AI and discover nearby occupations that pay more with less AI exposure.",
   region: "Richmond, VA metropolitan statistical area (BLS 40060)",
   /** Remaining gaps (employer/worker demos, capacity calculator, locality map) stay labelled. */
   isScaffold: false,

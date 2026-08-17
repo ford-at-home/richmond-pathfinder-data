@@ -9,9 +9,9 @@ import { workforceOccupations } from "@/content/workforce";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Find a job — Richmond Workforce Transition" },
+      { title: "Find AI-exposed jobs in Richmond — Richmond Workforce Transition" },
       { name: "description", content: siteConfig.tagline },
-      { property: "og:title", content: "Find a job — Richmond Workforce Transition" },
+      { property: "og:title", content: "Find AI-exposed jobs in Richmond — Richmond Workforce Transition" },
       { property: "og:description", content: siteConfig.tagline },
     ],
   }),
