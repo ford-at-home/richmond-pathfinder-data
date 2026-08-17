@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { EmptyState, FilterBar } from "@/components/data";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
+import { DepthLabel } from "@/components/story";
 import { PLACEMENT } from "@/content/figures";
 import { researchStories } from "@/content/research";
 
