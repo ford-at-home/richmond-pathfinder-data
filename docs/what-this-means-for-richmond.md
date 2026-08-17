@@ -18,10 +18,24 @@ behind it), three computer jobs into Software Developers (CCWA's Python PCAP),
 and Insurance Sales Agents into Insurance Underwriters (The Institutes' AINS).
 
 Those nine sit inside nine starting jobs holding **11,870 people — about 10% of
-the 119,630 on the map**. For the other 90%, the honest answer on the row is
-that Greater Richmond does not sell the thing the move needs.
+the 119,630 on the map**.
 
-That is not a failure of the lookup. It is the finding.
+For the other 90% the row says no course in this data names the job, which is a
+narrower claim than it first appears, and the narrowing is not cosmetic. **The
+upstream generator knows 28 courses and attaches only 14 to any job at all.**
+The fourteen it never attaches include CCWA's CompTIA Tech+, A+, Network+ and
+Security+ and its AWS Cloud Practitioner — $433 to $1,250, all FastForward
+eligible. Five rows on this map point at Computer Network Architects and
+Computer Network Support Specialists with no course named, and Network+
+plausibly serves every one of them.
+
+So on the computer side, "no course" is a gap in the join rather than a gap in
+the region, and no screen may say otherwise until an eligible-training-provider
+sweep settles which of the fourteen serve which destination.
+
+Two claims below are not affected, because they rest on a catalog search rather
+than on the join, and this 28-course list corroborates both: nothing in it is a
+supervisory credential, and nothing in it teaches business analysis.
 
 ## The gap is two gaps, and neither is exotic
 
@@ -102,7 +116,15 @@ destination is reachable and the training simply is not sold here.
 The test that would move any of these from "gap" to "course": it appears on the
 Virginia eligible training provider list with a published price.
 
-## Two corrections to carry back to the generator
+## Three corrections to carry back to the generator
+
+The first is the largest and is not a typo: **fourteen of the twenty-eight
+courses in the generated file are attached to no job**, so the map cannot offer
+them even where they obviously fit. Attaching the CompTIA and AWS credentials to
+the network destinations is the single change that would most increase the number
+of moves this map can answer.
+
+The other two are field-level:
 
 Both are in the frozen upstream generator, and neither is visible today because
 no screen renders a course price:

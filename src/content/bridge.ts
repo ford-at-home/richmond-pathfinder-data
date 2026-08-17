@@ -258,6 +258,27 @@ export type Bridge = {
 
 const GROUP_ORDER = ["supervising", "analysing", "mathematics", "handsOn", "working"];
 
+/**
+ * Says how much is inside, so a row can be skipped without being opened.
+ *
+ * The absence half is deliberately about *this data*, not about the region. The
+ * upstream generator knows 28 courses and attaches only 14 to any job at all —
+ * the unattached ones include CCWA's CompTIA and AWS credentials, which plainly
+ * serve the network destinations here. So a missing course means none is named
+ * here, and saying "no local course" would assert an absence nobody measured.
+ */
+export function bridgeSummary(bridge: Bridge, skillCount: number): string {
+  const skills =
+    skillCount === 0
+      ? "No skill gap measured"
+      : `${skillCount} skill${skillCount === 1 ? "" : "s"} to build`;
+  return `${skills} · ${bridge.course ? "a course names this job" : "no course in this data names it"}`;
+}
+
+/** Why a missing course is not a statement about Greater Richmond. */
+export const PARTIAL_COURSE_LIST =
+  "Courses appear here only where this data links one to a job. The region sells others that are not linked, so “no course” means none is named here — not that none exists.";
+
 export function bridgeFor(d: Destination): Bridge {
   const skills = d.build.map((s) => s.name);
   const byGroup = new Map<string, string[]>();

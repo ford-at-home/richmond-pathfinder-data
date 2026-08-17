@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { bridgeFor, gateFor, ROUTED_SKILLS, trainingForSkill } from "@/content/bridge";
+import {
+  bridgeFor,
+  bridgeSummary,
+  gateFor,
+  PARTIAL_COURSE_LIST,
+  ROUTED_SKILLS,
+  trainingForSkill,
+} from "@/content/bridge";
 import { routesOf, workforceOccupations } from "@/content/workforce";
 
 const destinations = workforceOccupations.flatMap((o) => routesOf(o));
@@ -75,6 +82,17 @@ describe("training honesty", () => {
         expect(option.cost.length).toBeGreaterThan(0);
       }
     }
+  });
+
+  it("reports a missing course as absent from the data, not from the region", () => {
+    const withoutCourse = destinations.filter((d) => bridgeFor(d).course === undefined);
+    expect(withoutCourse).toHaveLength(101);
+    for (const d of withoutCourse) {
+      const line = bridgeSummary(bridgeFor(d), d.build.length);
+      expect(line).toContain("no course in this data names it");
+      expect(line).not.toMatch(/no local course|none in the region|nothing available/i);
+    }
+    expect(PARTIAL_COURSE_LIST).toMatch(/not that none exists/i);
   });
 
   it("separates a named course from the skills it does not teach", () => {

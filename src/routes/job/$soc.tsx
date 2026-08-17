@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { DestinationList } from "@/components/job/DestinationList";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
+import { PARTIAL_COURSE_LIST } from "@/content/bridge";
 import { occupations as analysisOccupations } from "@/content/occupations";
 import {
   occupationBySoc,
@@ -148,6 +149,7 @@ function JobPage() {
             </li>
             <li>Similar jobs come from national judgements of similarity.</li>
             <li>Mean pay is the regional midpoint. Half the people doing the job earn less.</li>
+            <li>{PARTIAL_COURSE_LIST}</li>
             <li>
               Check any course with the provider before you commit. Prices and who qualifies change.
             </li>

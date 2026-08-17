@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { bridgeFor, EVIDENCE_LABEL, type Bridge } from "@/content/bridge";
+import { bridgeFor, bridgeSummary, EVIDENCE_LABEL } from "@/content/bridge";
 import { sortDestinations, type Destination } from "@/content/workforce";
 import { BAND_MEANING, exposureBand, hasSignal } from "@/lib/exposureBand";
 
@@ -16,15 +16,6 @@ function percent(exposure: number): string {
   return `${Math.round(exposure * 100)}%`;
 }
 
-/** Says how much is inside, so the row can be skipped without being opened. */
-function summary(bridge: Bridge, skillCount: number): string {
-  const skills =
-    skillCount === 0
-      ? "No skill gap measured"
-      : `${skillCount} skill${skillCount === 1 ? "" : "s"} to build`;
-  return `${skills} · ${bridge.course ? "a course names this job" : "no local course"}`;
-}
-
 function WhatItTakes({ destination }: { destination: Destination }) {
   const bridge = bridgeFor(destination);
   const skillCount = destination.build.length;
@@ -33,7 +24,9 @@ function WhatItTakes({ destination }: { destination: Destination }) {
     <details className="mt-3">
       <summary className="cursor-pointer text-sm font-medium text-foreground">
         What it takes
-        <span className="mt-1 block font-normal annotation">{summary(bridge, skillCount)}</span>
+        <span className="mt-1 block font-normal annotation">
+          {bridgeSummary(bridge, skillCount)}
+        </span>
       </summary>
 
       <div className="mt-4 border-l-2 border-border pl-4">
