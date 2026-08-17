@@ -73,7 +73,11 @@ export function JobSearch() {
               <p className="mt-1 annotation">
                 {g.jobs.length} {g.jobs.length === 1 ? "job" : "jobs"}
               </p>
-              <ul className="mt-3 grid grid-cols-1">
+              <div className="mt-4 hidden flex-row items-baseline justify-between border-b border-border pb-2 text-sm text-muted-foreground sm:flex">
+                <span className="font-medium">Job</span>
+                <span className="numeric shrink-0 font-medium">AI exposure</span>
+              </div>
+              <ul className="mt-2 grid grid-cols-1 sm:mt-0">
                 {g.jobs.map((job) => (
                   <JobRow key={job.soc} job={job} />
                 ))}
