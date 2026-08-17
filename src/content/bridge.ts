@@ -38,6 +38,21 @@ export type TrainingOption = {
   scope: "Greater Richmond" | "National";
 };
 
+/**
+ * Something free a person can start today. Kept apart from TrainingOption
+ * because it costs nothing, carries no credential, and opens no gate — three
+ * differences that collapse if both are printed in one list.
+ */
+export type SelfStudyOption = {
+  name: string;
+  provider: string;
+  /** How you get to it. A library card is a real precondition, so it is stated. */
+  access: string;
+  /** What the provider says it covers, in their words as far as possible. */
+  covers: string;
+  url: string;
+};
+
 export type Training = {
   /** Plain name for this family of skills. */
   group: string;
@@ -45,6 +60,12 @@ export type Training = {
   detail: string;
   /** Named courses. Empty is a finding, not a lookup failure. */
   options: TrainingOption[];
+  /**
+   * Free study. Empty where nothing credible matched — see ANALYSING and
+   * HANDS_ON, whose emptiness a test pins so it cannot be filled with a
+   * near-enough resource later.
+   */
+  selfStudy: SelfStudyOption[];
   evidence: Evidence;
 };
 
@@ -147,6 +168,74 @@ const HANDS_ON = new Set([
   "Operation and Control",
 ]);
 
+/**
+ * Free resources, each confirmed on the provider's own Virginia site on
+ * 2026-08-17. Two near-misses are recorded so nobody re-finds them and assumes
+ * they belong: "Richmond Public Library" offering LinkedIn Learning is Richmond,
+ * British Columbia (yourlibrary.ca), and the SkillUp "Capital Region" portal
+ * with 7,000 free courses serves Albany and Schenectady, New York. Neither
+ * serves this region.
+ *
+ * What each provider covers is quoted from them. Whether that builds a given
+ * O*NET skill is a judgement made here by topic, which is why the caveat below
+ * travels with the list.
+ */
+const RPL_ONLINE = "https://rvalibrary.org/services/online-resources/";
+const HENRICO_CAREER = "https://www.henricolibrary.org/jobs-career-resources";
+
+const KHAN_MATH: SelfStudyOption = {
+  name: "Mathematics, arithmetic through statistics",
+  provider: "Khan Academy",
+  access: "Free, no library card, no sign-up fee",
+  covers:
+    "A full curriculum with practice problems, including “Get ready for” courses for brushing up rather than starting over",
+  url: "https://www.khanacademy.org/math",
+};
+
+const LEARNING_EXPRESS: SelfStudyOption = {
+  name: "EBSCO Learning Express",
+  provider: "Richmond Public Library and Henrico County Public Library",
+  access: "Free with a library card",
+  covers: "Maths, reading and writing tutorials, plus practice tests and skill-building exercises",
+  url: RPL_ONLINE,
+};
+
+const ACCEL: SelfStudyOption = {
+  name: "EBSCOlearning ACCEL",
+  provider: "Richmond Public Library",
+  access: "Free with a library card",
+  covers: "Videos, book summaries and articles for building personal and professional skills",
+  url: RPL_ONLINE,
+};
+
+const UNIVERSAL_CLASS: SelfStudyOption = {
+  name: "Universal Class",
+  provider: "Richmond Public Library",
+  access: "Free with a library card",
+  covers: "Over 500 courses with an instructor, most ending in a certificate of completion",
+  url: RPL_ONLINE,
+};
+
+const BRAINFUSE: SelfStudyOption = {
+  name: "Brainfuse E-Learning",
+  provider: "Richmond Public Library",
+  access: "Free with a library card",
+  covers: "Live tutoring and written feedback on your writing",
+  url: RPL_ONLINE,
+};
+
+const HENRICO_COMPUTER: SelfStudyOption = {
+  name: "Computer classes",
+  provider: "Henrico County Public Library",
+  access: "Free, in person",
+  covers: "Basic computer skills, Microsoft Word, Excel and other Office apps",
+  url: HENRICO_CAREER,
+};
+
+/** Travels with every free list. Free study is real learning and not a key. */
+export const SELF_STUDY_CAVEAT =
+  "These are free and you can start today. None of them is a credential an employer screens on, a certificate of completion is only a record that you finished, and none of them changes the requirement above. They were matched to these skills by what the provider says they cover, not against the skill ratings.";
+
 const TRAINING: Record<string, Training> = {
   supervising: {
     group: "Running a team or a budget",
@@ -172,6 +261,7 @@ const TRAINING: Record<string, Training> = {
         scope: "Greater Richmond",
       },
     ],
+    selfStudy: [UNIVERSAL_CLASS, ACCEL],
     evidence: "reported",
   },
   analysing: {
@@ -186,6 +276,9 @@ const TRAINING: Record<string, Training> = {
         scope: "National",
       },
     ],
+    // Deliberately empty. Nothing free that was checked teaches these, and a
+    // near-enough substitute would erase the largest training gap on the map.
+    selfStudy: [],
     evidence: "reported",
   },
   mathematics: {
@@ -200,6 +293,7 @@ const TRAINING: Record<string, Training> = {
         scope: "Greater Richmond",
       },
     ],
+    selfStudy: [KHAN_MATH, LEARNING_EXPRESS],
     evidence: "modelled",
   },
   handsOn: {
@@ -207,16 +301,37 @@ const TRAINING: Record<string, Training> = {
     detail:
       "Learned in an apprenticeship or a community-college technician programme. There is no short version, and no certificate stands in for the hours.",
     options: [],
+    // Deliberately empty. Nothing read online substitutes for hours on the tools.
+    selfStudy: [],
     evidence: "modelled",
   },
   working: {
     group: "Everyday working skills",
     detail:
-      "These are built by doing the work, by being coached, and in short workshops. No certificate covers them, so nobody should be sold one for this.",
+      "These are built by doing the work, by being coached, and in short workshops. No certificate covers them, so nobody should be sold one for this. What is free is practice and coaching, which is worth more here than any course.",
     options: [],
+    selfStudy: [ACCEL, LEARNING_EXPRESS, BRAINFUSE, HENRICO_COMPUTER],
     evidence: "modelled",
   },
 };
+
+/**
+ * Free, local, and true of every row, so it belongs on the page once rather
+ * than inside each skill group. Confirmed 2026-08-17.
+ */
+export const FREE_LOCAL_HELP = {
+  card: {
+    text: "A library card from Richmond, Henrico or Chesterfield is free and unlocks most of the study listed on this page.",
+    links: [
+      { label: "Richmond Public Library", url: RPL_ONLINE },
+      { label: "Henrico County Public Library", url: HENRICO_CAREER },
+    ],
+  },
+  board: {
+    text: "Virginia Career Works Capital Region is the regional workforce board, federally funded and free, with centres in Chesterfield, Henrico and Richmond West. Where this page says the region sells no course, or sells one at a price, they are who to ask about paying for it. Training there is not automatic: they assess eligibility over one to two weeks, give priority by need, and fund training for in-demand work.",
+    links: [{ label: "Virginia Career Works Capital Region", url: "https://vcwcapital.com/" }],
+  },
+} as const;
 
 /**
  * Every skill this file routes by name. A test asserts each one still appears in
@@ -272,7 +387,13 @@ export function bridgeSummary(bridge: Bridge, skillCount: number): string {
     skillCount === 0
       ? "No skill gap measured"
       : `${skillCount} skill${skillCount === 1 ? "" : "s"} to build`;
-  return `${skills} · ${bridge.course ? "a course names this job" : "no course in this data names it"}`;
+  const course = bridge.course ? "a course names this job" : "no course in this data names it";
+  // Worth a third clause only because it is the half of the row a reader can act
+  // on today, and it is otherwise hidden behind the toggle.
+  const free = bridge.training.some((t) => t.training.selfStudy.length > 0)
+    ? "free study listed"
+    : undefined;
+  return [skills, course, free].filter(Boolean).join(" · ");
 }
 
 /** Why a missing course is not a statement about Greater Richmond. */

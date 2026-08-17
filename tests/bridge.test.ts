@@ -3,9 +3,11 @@ import { describe, expect, it } from "vitest";
 import {
   bridgeFor,
   bridgeSummary,
+  FREE_LOCAL_HELP,
   gateFor,
   PARTIAL_COURSE_LIST,
   ROUTED_SKILLS,
+  SELF_STUDY_CAVEAT,
   trainingForSkill,
 } from "@/content/bridge";
 import { routesOf, workforceOccupations } from "@/content/workforce";
@@ -82,6 +84,52 @@ describe("training honesty", () => {
         expect(option.cost.length).toBeGreaterThan(0);
       }
     }
+  });
+
+  it("offers something free for the skills where free study is real", () => {
+    for (const skill of ["Mathematics", "Monitoring", "Writing", "Negotiation"]) {
+      expect(trainingForSkill(skill).selfStudy.length).toBeGreaterThan(0);
+    }
+    const maths = trainingForSkill("Mathematics").selfStudy;
+    expect(maths.map((o) => o.provider)).toContain("Khan Academy");
+    expect(maths.every((o) => o.url.startsWith("https://"))).toBe(true);
+  });
+
+  it("keeps the two honest blanks blank", () => {
+    // Filling either of these with a near-enough resource would erase a finding:
+    // that the region sells no business-analysis course, and that nothing
+    // substitutes for apprentice hours.
+    for (const skill of ["Systems Analysis", "Systems Evaluation", "Operations Analysis"]) {
+      expect(trainingForSkill(skill).selfStudy).toHaveLength(0);
+    }
+    for (const skill of ["Installation", "Repairing", "Troubleshooting"]) {
+      expect(trainingForSkill(skill).selfStudy).toHaveLength(0);
+    }
+  });
+
+  it("never lets free study read as a credential or as a way past the gate", () => {
+    expect(SELF_STUDY_CAVEAT).toMatch(/credential an employer screens on/i);
+    expect(SELF_STUDY_CAVEAT).toMatch(/none of them changes the requirement/i);
+    const every = [...new Set(skillNames.flatMap((s) => trainingForSkill(s).selfStudy))];
+    expect(every.length).toBeGreaterThan(0);
+    for (const o of every) {
+      expect(o.access).toMatch(/free/i);
+      expect(`${o.name} ${o.covers}`).not.toMatch(/qualif|licen[cs]e|degree|guarantee/i);
+    }
+  });
+
+  it("points at Virginia's Richmond, not at the two places that share its names", () => {
+    const urls = [
+      ...FREE_LOCAL_HELP.card.links.map((l) => l.url),
+      ...FREE_LOCAL_HELP.board.links.map((l) => l.url),
+      ...[...new Set(skillNames.flatMap((s) => trainingForSkill(s).selfStudy))].map((o) => o.url),
+    ];
+    for (const url of urls) {
+      // yourlibrary.ca is Richmond, British Columbia; skillupamerica's Capital
+      // Region portal is Albany and Schenectady, New York.
+      expect(url).not.toMatch(/yourlibrary\.ca|skillupamerica/i);
+    }
+    expect(FREE_LOCAL_HELP.board.text).toMatch(/assess eligibility|not automatic/i);
   });
 
   it("reports a missing course as absent from the data, not from the region", () => {

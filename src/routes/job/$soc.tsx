@@ -2,7 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { DestinationList } from "@/components/job/DestinationList";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
-import { PARTIAL_COURSE_LIST } from "@/content/bridge";
+import { FREE_LOCAL_HELP, PARTIAL_COURSE_LIST } from "@/content/bridge";
 import { occupations as analysisOccupations } from "@/content/occupations";
 import {
   occupationBySoc,
@@ -115,6 +115,32 @@ function JobPage() {
             {EMPTY_ROUTES}
           </p>
         )}
+      </PageSection>
+
+      <PageSection labelledBy="free-help">
+        <h2 id="free-help" className="font-display text-lg font-semibold text-foreground">
+          Free help in Greater Richmond
+        </h2>
+        <dl className="mt-4 max-w-2xl space-y-4 text-sm">
+          {[FREE_LOCAL_HELP.card, FREE_LOCAL_HELP.board].map((item) => (
+            <div key={item.text}>
+              <dt className="leading-relaxed text-foreground">{item.text}</dt>
+              <dd className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
+                {item.links.map((l) => (
+                  <a
+                    key={l.url}
+                    href={l.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block py-1 annotation text-foreground"
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </PageSection>
 
       <PageSection>

@@ -37,6 +37,46 @@ Two claims below are not affected, because they rest on a catalog search rather
 than on the join, and this 28-course list corroborates both: nothing in it is a
 supervisory credential, and nothing in it teaches business analysis.
 
+## What a person can do when no course is named
+
+"No course" was leaving the reader nowhere, so each skill family now carries free
+study where free study is genuine, confirmed on each provider's own site on
+2026-08-17.
+
+**Mathematics** — 21 mappings, 45,180 people — has the cleanest answer on the
+map. Khan Academy teaches arithmetic through statistics for nothing, with no
+library card and no sign-up fee, and its "Get ready for" tracks are built for
+brushing up rather than starting over. The library's EBSCO Learning Express adds
+maths practice.
+
+**The 21 everyday working skills** — 205 of the 333 skill mentions, and until now
+the emptiest part of the map — are served by a Richmond or Henrico library card:
+EBSCOlearning ACCEL for professional skills, Universal Class for courses with an
+instructor, Brainfuse for live feedback on writing, and free in-person Word and
+Excel classes at Henrico.
+
+**Virginia Career Works Capital Region** is the answer to the harder half. It is
+the regional workforce board, federally funded and free, with centres in
+Chesterfield, Henrico and Richmond West, and it is who to ask about *paying* for
+a course this map prices at four figures. It is not a giveaway: eligibility is
+assessed over one to two weeks, priority goes by need, and funded training has to
+be for in-demand work.
+
+Two families are deliberately left with nothing, because inventing a resource
+would erase a finding. Nothing free that was checked teaches **Systems Analysis
+or Systems Evaluation**, which is the same gap the investment agenda below asks
+the region to fill. And nothing read online substitutes for hours on the tools in
+the **equipment** skills. A test pins both blanks.
+
+Two traps are recorded here so nobody re-finds them and assumes they belong. A
+"Richmond Public Library" offering LinkedIn Learning is Richmond, **British
+Columbia**. A SkillUp "Capital Region" portal with 7,000 free courses serves
+**Albany and Schenectady, New York**. Both names collide with this region's and
+neither serves it.
+
+None of this free study is a credential, and none of it changes a gate. It is
+labelled that way on every row.
+
 ## The gap is two gaps, and neither is exotic
 
 Counting mappings that name at least one skill in each family:
@@ -156,6 +196,12 @@ is settled.
   describe preparation gathered while employed.
 
 ## Sources
+
+Free study, each confirmed on the provider's own site 2026-08-17: Khan Academy
+(khanacademy.org/math); Richmond Public Library online resources, covering
+EBSCOlearning ACCEL, Universal Class, EBSCO Learning Express and Brainfuse
+(rvalibrary.org); Henrico County Public Library jobs and career resources
+(henricolibrary.org); Virginia Career Works Capital Region (vcwcapital.com).
 
 The regional training findings, retrieved 2026-08-17: CCWA Summer/Fall 2026
 catalog (ccwatraining.org); Reynolds Payroll and Taxation certificate

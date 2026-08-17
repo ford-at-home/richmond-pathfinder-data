@@ -1,6 +1,12 @@
 import { Link } from "@tanstack/react-router";
 
-import { bridgeFor, bridgeSummary, EVIDENCE_LABEL } from "@/content/bridge";
+import {
+  bridgeFor,
+  bridgeSummary,
+  EVIDENCE_LABEL,
+  SELF_STUDY_CAVEAT,
+  type SelfStudyOption,
+} from "@/content/bridge";
 import { sortDestinations, type Destination } from "@/content/workforce";
 import { BAND_MEANING, exposureBand, hasSignal } from "@/lib/exposureBand";
 
@@ -14,6 +20,34 @@ function usd(n: number): string {
 
 function percent(exposure: number): string {
   return `${Math.round(exposure * 100)}%`;
+}
+
+function FreeToStart({ options }: { options: SelfStudyOption[] }) {
+  return (
+    <div className="mt-3">
+      <p className="label-sm">Free, and you can start today</p>
+      <ul className="mt-2 space-y-2">
+        {options.map((o) => (
+          <li key={o.name}>
+            {/* Name and provider are one target so the tap area clears 24px. */}
+            <a
+              href={o.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block py-1 text-sm font-medium text-foreground"
+            >
+              {o.name}
+              <span className="font-normal text-muted-foreground"> — {o.provider}</span>
+            </a>
+            <span className="block annotation">
+              {o.access}. {o.covers}.
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-2 annotation">{SELF_STUDY_CAVEAT}</p>
+    </div>
+  );
 }
 
 function WhatItTakes({ destination }: { destination: Destination }) {
@@ -63,6 +97,7 @@ function WhatItTakes({ destination }: { destination: Destination }) {
               </ul>
             ) : null}
             <p className="mt-1 annotation">{EVIDENCE_LABEL[training.evidence]}</p>
+            {training.selfStudy.length > 0 ? <FreeToStart options={training.selfStudy} /> : null}
           </div>
         ))}
       </div>
