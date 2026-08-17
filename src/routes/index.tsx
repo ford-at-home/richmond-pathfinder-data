@@ -11,7 +11,10 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Find AI-exposed jobs in Richmond — Richmond Workforce Transition" },
       { name: "description", content: siteConfig.tagline },
-      { property: "og:title", content: "Find AI-exposed jobs in Richmond — Richmond Workforce Transition" },
+      {
+        property: "og:title",
+        content: "Find AI-exposed jobs in Richmond — Richmond Workforce Transition",
+      },
       { property: "og:description", content: siteConfig.tagline },
     ],
   }),
