@@ -84,7 +84,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: siteConfig.tagline },
       { property: "og:site_name", content: siteConfig.name },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/thumbnail.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/thumbnail.png" },
     ],
     links: [
       {
