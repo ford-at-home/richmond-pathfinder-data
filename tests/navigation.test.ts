@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { primaryNav, siteConfig } from "@/config/site";
 import { capacityStages } from "@/content/capacity";
+import { countSteps, listCounts } from "@/content/listCounts";
 import { getStory, researchStories } from "@/content/research";
 import { localities, qcewCurrent, qcewGeographyComparison, QCEW_YEARS } from "@/content/region";
 
@@ -18,6 +19,18 @@ describe("navigation content", () => {
     expect(siteConfig.tagline.toLowerCase()).toContain("ai");
     expect(siteConfig.tagline).not.toMatch(/occupation-level evidence/i);
   });
+  it("keeps the map as a cut of the reports, not a rewrite of them", () => {
+    const n = listCounts();
+    expect(n.measured).toBe(523);
+    expect(n.exposed).toBe(71);
+    expect(n.mapOrigins).toBe(39);
+    expect(n.families).toBe(4);
+    expect(n.publishedPairs).toBe(28);
+    expect(n.mapOrigins).toBeLessThan(n.exposed);
+    expect(n.exposed).toBeLessThan(n.measured);
+    expect(countSteps(n).map((s) => s.value)).toEqual(["523", "71", "39", "28"]);
+  });
+
   it("exposes the three published reports and no placeholder stories", () => {
     expect(researchStories.map((s) => s.slug)).toEqual([
       "ai-exposure-and-employment-change",

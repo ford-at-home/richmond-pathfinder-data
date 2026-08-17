@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { KeyFinding } from "@/components/editorial";
+import { countSteps, listCounts } from "@/content/listCounts";
 import { findingHtml } from "@/lib/reports";
 import { cn } from "@/lib/utils";
 
@@ -66,5 +67,45 @@ export function ReservedDisclosure({
       </summary>
       <div className="border-t border-border px-4 py-4">{children}</div>
     </details>
+  );
+}
+
+/**
+ * One explanation of 523 / 71 / 39 / 28 so Evidence and the appendix cannot
+ * silently disagree with Find a job. Numbers come from listCounts().
+ */
+export function HowTheNumbersRelate({ variant }: { variant: "evidence" | "appendix" }) {
+  const n = listCounts();
+  const steps = countSteps(n);
+
+  if (variant === "appendix") {
+    return (
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        The 25% table has {n.exposed} rows. Find a job starts from {n.mapOrigins} of them. The other
+        rows stay in this document. They are not on the starting list.
+      </p>
+    );
+  }
+
+  return (
+    <div>
+      <p className="max-w-2xl text-sm leading-relaxed text-foreground">
+        Pick a job. See a next job that pays more and uses AI less. These documents are how we know.
+      </p>
+      <dl className="mt-6 grid grid-cols-2 border-t border-border md:grid-cols-4">
+        {steps.map((step) => (
+          <div key={step.label} className="border-r border-border px-4 py-3 last:border-r-0">
+            <dt className="label-sm">{step.label}</dt>
+            <dd className="mt-1.5 font-serif text-2xl leading-none text-foreground">
+              {step.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        Find a job is the {n.mapOrigins}, not the {n.measured}. The {n.publishedPairs} pairs are
+        for jobs that already shrank — a different cut, not a second map.
+      </p>
+    </div>
   );
 }

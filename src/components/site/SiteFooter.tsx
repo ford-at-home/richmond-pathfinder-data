@@ -13,7 +13,7 @@ export function SiteFooter() {
             {siteConfig.tagline}
           </p>
           <p className="mt-3 annotation max-w-md">
-            Reports and figures are reproduced from{" "}
+            Reports are the evidence behind Find a job, reproduced from{" "}
             <a href={pinCommitUrl} className="editorial-link">
               {pinRepo}
             </a>{" "}

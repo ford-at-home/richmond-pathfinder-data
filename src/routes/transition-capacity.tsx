@@ -53,7 +53,7 @@ function TransitionCapacityPage() {
       <PageHeader
         eyebrow="Section 02"
         title="Transition Capacity"
-        lead="What the occupation-level evidence implies for the AI workforce pilot. This page quotes the published summary and hosts the pathways figure. The full document is the research report."
+        lead="The published report on whether shrinking jobs have a next step. The live map is Find a job."
         meta={[
           { label: "Geography", value: GEOGRAPHY },
           { label: "Period", value: REPORT_PERIOD },

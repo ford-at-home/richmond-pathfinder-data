@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { JobSearch } from "@/components/job/JobSearch";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
 import { siteConfig } from "@/config/site";
+import { listCounts } from "@/content/listCounts";
 import { workforceOccupations } from "@/content/workforce";
 
 export const Route = createFileRoute("/")({
@@ -18,6 +19,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const n = listCounts();
+
   return (
     <ProseContainer>
       <PageHeader
@@ -26,7 +29,7 @@ function Home() {
         lead={siteConfig.tagline}
         meta={[
           { label: "Starting jobs", value: String(workforceOccupations.length) },
-          { label: "Job families", value: "4" },
+          { label: "Job families", value: String(n.families) },
           { label: "Geography", value: "Richmond VA MSA" },
         ]}
       />
@@ -37,8 +40,8 @@ function Home() {
         </span>
         <JobSearch />
         <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Four job families hold three-quarters of the region’s measured AI use. This list is those
-          families, at the report’s 25% exposure cut. It is not every job in Richmond.
+          {n.mapOrigins} starting jobs, not all {n.measured}. Office, sales, business, and computer
+          work where people already use AI a lot.
         </p>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           This is not a ranking of people, and it is not a list of jobs to cut.

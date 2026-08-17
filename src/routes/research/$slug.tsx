@@ -4,7 +4,7 @@ import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageH
 import { RelatedResearch } from "@/components/research";
 import { ReportDocument } from "@/components/research/ReportDocument";
 import { SourceList } from "@/components/sources";
-import { DepthLabel, FindingList, SkipToDocument } from "@/components/story";
+import { DepthLabel, FindingList, HowTheNumbersRelate, SkipToDocument } from "@/components/story";
 import { getSources, getStory, researchStories } from "@/content/research";
 import { GEOGRAPHY_SHORT } from "@/lib/geography";
 import { pinShort, pinSynced } from "@/lib/pin";
@@ -89,18 +89,24 @@ function ResearchStoryPage() {
             in the sections that make the claims.
           </p>
           <FindingList findings={story.keyFindings} className="mt-6" />
+          {story.slug === "ai-exposure-and-employment-change" ? (
+            <HowTheNumbersRelate variant="appendix" />
+          ) : null}
+          {story.slug === "transition-capacity" ? (
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              The pair table in this report is jobs that already shrank. Find a job is a different
+              starting list.
+            </p>
+          ) : null}
           <SkipToDocument />
         </PageSection>
       ) : (
         <PageSection labelledBy="orientation">
           <DepthLabel>Companion document</DepthLabel>
           <h2 id="orientation" className="mt-2 section-lead">
-            Tables, not a numbered summary
+            Same tables. Different starting list.
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            This document has no Summary of findings section. The occupation-level tables below are
-            the evidence.
-          </p>
+          <HowTheNumbersRelate variant="appendix" />
           <SkipToDocument />
         </PageSection>
       )}

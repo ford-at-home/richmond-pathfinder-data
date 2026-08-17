@@ -4,20 +4,20 @@ import { useMemo, useState } from "react";
 import { EmptyState, FilterBar } from "@/components/data";
 import { PageHeader, PageSection, ProseContainer } from "@/components/page/PageHeader";
 import { ResearchCard } from "@/components/research";
-import { DepthLabel } from "@/components/story";
+import { DepthLabel, HowTheNumbersRelate } from "@/components/story";
 import { PLACEMENT } from "@/content/figures";
 import { researchStories } from "@/content/research";
 
 export const Route = createFileRoute("/research/")({
   head: () => ({
     meta: [
-      { title: "Research Library — Richmond Workforce Transition" },
+      { title: "Evidence — Richmond Workforce Transition" },
       {
         name: "description",
         content:
           "The published reports on AI exposure, employment change, and transition capacity in the Richmond VA MSA, with sources and limits in view.",
       },
-      { property: "og:title", content: "Research Library — Richmond Workforce Transition" },
+      { property: "og:title", content: "Evidence — Richmond Workforce Transition" },
       {
         property: "og:description",
         content:
@@ -49,14 +49,18 @@ function ResearchLibrary() {
   return (
     <ProseContainer>
       <PageHeader
-        eyebrow="Research"
-        title="The reports"
-        lead="These reports are the evidence behind the job map, not a second product."
-        meta={[
-          { label: "Entries", value: String(researchStories.length) },
-          { label: "Geography", value: "Richmond VA MSA (BLS 40060)" },
-        ]}
+        eyebrow="Evidence"
+        title="How we know"
+        lead="Same reports. Same jobs. Find a job is a shorter starting list."
       />
+
+      <PageSection labelledBy="how-to-read">
+        <DepthLabel>In two minutes</DepthLabel>
+        <h2 id="how-to-read" className="sr-only">
+          What the numbers are
+        </h2>
+        <HowTheNumbersRelate variant="evidence" />
+      </PageSection>
 
       <PageSection labelledBy="library">
         <DepthLabel>Choose a document</DepthLabel>
@@ -119,7 +123,7 @@ function ResearchLibrary() {
             <Link to="/transition-map" className="editorial-link">
               Transition map
             </Link>
-            <span className="text-muted-foreground"> — 28 published pairs for declining jobs</span>
+            <span className="text-muted-foreground"> — jobs that already shrank, not the map</span>
           </li>
           <li>
             <Link to="/transition-capacity" className="editorial-link">
