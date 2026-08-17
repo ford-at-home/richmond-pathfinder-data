@@ -36,6 +36,14 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                to="/feedback"
+                className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+              >
+                Feedback
+              </Link>
+            </li>
           </ul>
         </nav>
 
