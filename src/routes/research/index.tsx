@@ -54,13 +54,6 @@ function ResearchLibrary() {
         lead="Same reports. Same jobs. Find a job is a shorter starting list."
       />
 
-      <PageSection labelledBy="how-to-read">
-        <DepthLabel>In two minutes</DepthLabel>
-        <h2 id="how-to-read" className="sr-only">
-          What the numbers are
-        </h2>
-        <HowTheNumbersRelate variant="evidence" />
-      </PageSection>
 
       <PageSection labelledBy="library">
         <DepthLabel>Choose a document</DepthLabel>
