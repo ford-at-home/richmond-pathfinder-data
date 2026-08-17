@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { primaryNav, siteConfig } from "@/config/site";
-import { pinCommitUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
+import { pinRepoUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
 
 export function SiteFooter() {
   return (
