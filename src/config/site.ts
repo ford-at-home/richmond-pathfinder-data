@@ -31,4 +31,9 @@ export const primaryNav: NavItem[] = [
     to: "/research",
     description: "Reports, the published pair table, geography, and method.",
   },
+  {
+    label: "Feedback",
+    to: "/feedback",
+    description: "Send a correction, question, or comment about this project.",
+  },
 ];
