@@ -1,10 +1,23 @@
 import { describe, expect, it } from "vitest";
 
-import { getStory, researchStories } from "@/content/research";
+import { primaryNav, siteConfig } from "@/config/site";
 import { capacityStages } from "@/content/capacity";
+import { getStory, researchStories } from "@/content/research";
 import { localities, qcewCurrent, qcewGeographyComparison, QCEW_YEARS } from "@/content/region";
 
 describe("navigation content", () => {
+  it("puts one product door and one evidence door in primary nav", () => {
+    expect(primaryNav.map((i) => [i.label, i.to])).toEqual([
+      ["Find a job", "/"],
+      ["Evidence", "/research"],
+    ]);
+  });
+
+  it("states the four-family exposed-job question in the tagline", () => {
+    expect(siteConfig.tagline.toLowerCase()).toContain("job");
+    expect(siteConfig.tagline.toLowerCase()).toContain("ai");
+    expect(siteConfig.tagline).not.toMatch(/occupation-level evidence/i);
+  });
   it("exposes the three published reports and no placeholder stories", () => {
     expect(researchStories.map((s) => s.slug)).toEqual([
       "ai-exposure-and-employment-change",

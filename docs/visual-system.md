@@ -3,7 +3,12 @@
 Companion to `docs/page-audit.md`. This is the language for Prompt 3. It does
 not authorize rewriting pinned reports or filling null measures.
 
-## Effect
+## Front door
+
+`/` is the job map: 39 starting jobs in four families, then `/job/$soc` for one
+job and its next jobs. Research, the 28-pair table, QCEW, and methodology stay
+on their URLs and are reached from Evidence. Do not put six equal section peers
+back in the header.
 
 The site should read as an editorial data story: a reader sees the question and
 the point in ten seconds, the findings in two minutes, and the evidence in

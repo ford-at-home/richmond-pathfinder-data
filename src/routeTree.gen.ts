@@ -14,6 +14,7 @@ import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as RichmondRegionRouteImport } from './routes/richmond-region'
 import { Route as TransitionCapacityRouteImport } from './routes/transition-capacity'
 import { Route as TransitionMapRouteImport } from './routes/transition-map'
+import { Route as JobSocRouteImport } from './routes/job/$soc'
 import { Route as ReportSlugRouteImport } from './routes/report/$slug'
 import { Route as ResearchIndexRouteImport } from './routes/research/index'
 import { Route as ResearchSlugRouteImport } from './routes/research/$slug'
@@ -43,6 +44,11 @@ const TransitionMapRoute = TransitionMapRouteImport.update({
   path: '/transition-map',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JobSocRoute = JobSocRouteImport.update({
+  id: '/job/$soc',
+  path: '/job/$soc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReportSlugRoute = ReportSlugRouteImport.update({
   id: '/report/$slug',
   path: '/report/$slug',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/richmond-region': typeof RichmondRegionRoute
   '/transition-capacity': typeof TransitionCapacityRoute
   '/transition-map': typeof TransitionMapRoute
+  '/job/$soc': typeof JobSocRoute
   '/report/$slug': typeof ReportSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/research/': typeof ResearchIndexRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/richmond-region': typeof RichmondRegionRoute
   '/transition-capacity': typeof TransitionCapacityRoute
   '/transition-map': typeof TransitionMapRoute
+  '/job/$soc': typeof JobSocRoute
   '/report/$slug': typeof ReportSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/research': typeof ResearchIndexRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/richmond-region': typeof RichmondRegionRoute
   '/transition-capacity': typeof TransitionCapacityRoute
   '/transition-map': typeof TransitionMapRoute
+  '/job/$soc': typeof JobSocRoute
   '/report/$slug': typeof ReportSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/research/': typeof ResearchIndexRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/richmond-region'
     | '/transition-capacity'
     | '/transition-map'
+    | '/job/$soc'
     | '/report/$slug'
     | '/research/$slug'
     | '/research/'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/richmond-region'
     | '/transition-capacity'
     | '/transition-map'
+    | '/job/$soc'
     | '/report/$slug'
     | '/research/$slug'
     | '/research'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/richmond-region'
     | '/transition-capacity'
     | '/transition-map'
+    | '/job/$soc'
     | '/report/$slug'
     | '/research/$slug'
     | '/research/'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   RichmondRegionRoute: typeof RichmondRegionRoute
   TransitionCapacityRoute: typeof TransitionCapacityRoute
   TransitionMapRoute: typeof TransitionMapRoute
+  JobSocRoute: typeof JobSocRoute
   ReportSlugRoute: typeof ReportSlugRoute
   ResearchSlugRoute: typeof ResearchSlugRoute
   ResearchIndexRoute: typeof ResearchIndexRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransitionMapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/job/$soc': {
+      id: '/job/$soc'
+      path: '/job/$soc'
+      fullPath: '/job/$soc'
+      preLoaderRoute: typeof JobSocRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/report/$slug': {
       id: '/report/$slug'
       path: '/report/$slug'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   RichmondRegionRoute: RichmondRegionRoute,
   TransitionCapacityRoute: TransitionCapacityRoute,
   TransitionMapRoute: TransitionMapRoute,
+  JobSocRoute: JobSocRoute,
   ReportSlugRoute: ReportSlugRoute,
   ResearchSlugRoute: ResearchSlugRoute,
   ResearchIndexRoute: ResearchIndexRoute,

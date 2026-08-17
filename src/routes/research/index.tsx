@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
 import { EmptyState, FilterBar } from "@/components/data";
@@ -51,7 +51,7 @@ function ResearchLibrary() {
       <PageHeader
         eyebrow="Research"
         title="The reports"
-        lead="The evidence base, reproduced in full. Where a claim has an interactive figure, the figure sits in the section that makes the claim."
+        lead="These reports are the evidence behind the job map, not a second product."
         meta={[
           { label: "Entries", value: String(researchStories.length) },
           { label: "Geography", value: "Richmond VA MSA (BLS 40060)" },
@@ -113,6 +113,30 @@ function ResearchLibrary() {
             ))}
           </>
         )}
+        <p className="mt-8 annotation">Also here</p>
+        <ul className="mt-3 grid grid-cols-1 gap-2 text-sm">
+          <li>
+            <Link to="/transition-map" className="editorial-link">
+              Transition map
+            </Link>
+            <span className="text-muted-foreground"> — 28 published pairs for declining jobs</span>
+          </li>
+          <li>
+            <Link to="/transition-capacity" className="editorial-link">
+              Transition capacity
+            </Link>
+          </li>
+          <li>
+            <Link to="/richmond-region" className="editorial-link">
+              Richmond region
+            </Link>
+          </li>
+          <li>
+            <Link to="/methodology" className="editorial-link">
+              Methodology
+            </Link>
+          </li>
+        </ul>
       </PageSection>
     </ProseContainer>
   );

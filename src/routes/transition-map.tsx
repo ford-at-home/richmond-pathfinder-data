@@ -60,7 +60,7 @@ function TransitionMapPage() {
       <PageHeader
         eyebrow="Section 01"
         title="Transition Map"
-        lead="Screened origin–destination pairs from the published analysis. A pair is in this table because it survived the capacity report's adjacency, exposure, growth, and wage-replacement screen — not because a network layout scored it."
+        lead="This table is the analysis screen for declining jobs. To look up an exposed starting job, use Find a job."
         meta={[
           { label: "Geography", value: GEOGRAPHY },
           { label: "Unit", value: "Occupation pairs" },
