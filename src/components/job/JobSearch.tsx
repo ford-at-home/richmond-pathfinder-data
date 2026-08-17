@@ -3,10 +3,6 @@ import { useMemo, useState } from "react";
 
 import { originsByFamily, searchOccupations, type WorkforceOccupation } from "@/content/workforce";
 
-function percent(exposure: number): string {
-  return `${Math.round(exposure * 100)}%`;
-}
-
 function JobRow({ job }: { job: WorkforceOccupation }) {
   return (
     <li className="border-t border-border">
@@ -17,7 +13,7 @@ function JobRow({ job }: { job: WorkforceOccupation }) {
       >
         <span className="text-sm text-foreground">{job.title}</span>
         <span className="numeric shrink-0 text-sm text-muted-foreground">
-          {percent(job.exposure)}
+          {job.employment.toLocaleString("en-US")} people
         </span>
       </Link>
     </li>
@@ -75,7 +71,7 @@ export function JobSearch() {
               </p>
               <div className="mt-4 hidden flex-row items-baseline justify-between border-b border-border pb-2 text-sm text-muted-foreground sm:flex">
                 <span className="font-medium">Job</span>
-                <span className="numeric shrink-0 font-medium">AI exposure</span>
+                <span className="numeric shrink-0 font-medium">People in this job</span>
               </div>
               <ul className="mt-2 grid grid-cols-1 sm:mt-0">
                 {g.jobs.map((job) => (

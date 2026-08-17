@@ -5,23 +5,34 @@ import {
   bridgeSummary,
   FREE_LOCAL_HELP,
   gateFor,
+  NOT_A_COURSE,
   PARTIAL_COURSE_LIST,
   ROUTED_SKILLS,
+  routeDuration,
   SELF_STUDY_CAVEAT,
   trainingForSkill,
 } from "@/content/bridge";
+import { claimFor } from "@/content/claims";
 import { routesOf, workforceOccupations } from "@/content/workforce";
 
 const destinations = workforceOccupations.flatMap((o) => routesOf(o));
 const skillNames = [...new Set(destinations.flatMap((d) => d.build.map((s) => s.name)))];
+
+const gateText = (soc: string): string =>
+  gateFor(soc)
+    .need.map((b) => b.text)
+    .join(" ");
 
 describe("what it takes", () => {
   it("covers every destination on the map", () => {
     expect(destinations).toHaveLength(110);
     for (const d of destinations) {
       const bridge = bridgeFor(d);
-      expect(bridge.gate.need.endsWith(".")).toBe(true);
-      expect(bridge.gate.need.length).toBeGreaterThan(40);
+      expect(bridge.gate.need.length).toBeGreaterThan(0);
+      for (const block of bridge.gate.need) {
+        expect(block.text.endsWith(".")).toBe(true);
+        expect(block.text.length).toBeGreaterThan(40);
+      }
     }
   });
 
@@ -50,18 +61,29 @@ describe("gates", () => {
     const management = destinations.filter((d) => d.soc.startsWith("11-"));
     expect(management).toHaveLength(28);
     for (const d of management) {
-      expect(gateFor(d.soc).need).toMatch(/no local course opens this door/i);
+      expect(gateText(d.soc)).toMatch(/no certificate that opens this door/i);
+      expect(routeDuration(d)?.text).toBe(NOT_A_COURSE);
     }
+  });
+
+  it("keeps the suspected gate apart from the searched-for one", () => {
+    // "Employers choose supervisors" is inferred from a job-zone difference and
+    // is not in the Skills file; the absent course was looked for. One block
+    // each, so the appendix can label them differently.
+    const blocks = gateFor("11-3012").need;
+    expect(blocks).toHaveLength(2);
+    expect(claimFor(blocks[0]!.claim).label).toBe("UNVERIFIED");
+    expect(claimFor(blocks[1]!.claim).label).toBe("OPEN");
   });
 
   it("states plainly where the map cannot see a credential", () => {
     for (const soc of ["13-2054", "19-3011", "25-1011", "17-2061"]) {
-      expect(gateFor(soc).need).toMatch(/cannot see/i);
+      expect(gateText(soc)).toMatch(/cannot see/i);
     }
   });
 
   it("keeps the selling licence off the underwriting door", () => {
-    expect(gateFor("13-2053").need).toMatch(/applies to selling, not to underwriting/i);
+    expect(gateText("13-2053")).toMatch(/applies to selling, not to underwriting/i);
   });
 });
 
@@ -69,7 +91,7 @@ describe("training honesty", () => {
   it("publishes no Greater Richmond course for business analysis", () => {
     const analysing = trainingForSkill("Systems Analysis");
     expect(analysing.options.every((o) => o.scope === "National")).toBe(true);
-    expect(analysing.detail).toMatch(/no course in this/i);
+    expect(analysing.detail).toMatch(/nothing local that we could find/i);
   });
 
   it("mints no certificate for skills that experience builds", () => {
@@ -121,8 +143,8 @@ describe("training honesty", () => {
   });
 
   it("never lets free study read as a credential or as a way past the gate", () => {
-    expect(SELF_STUDY_CAVEAT).toMatch(/credential an employer screens on/i);
-    expect(SELF_STUDY_CAVEAT).toMatch(/none of them changes the requirement/i);
+    expect(SELF_STUDY_CAVEAT.text).toMatch(/credential an employer screens on/i);
+    expect(SELF_STUDY_CAVEAT.text).toMatch(/none of them changes the requirement/i);
     const every = [...new Set(skillNames.flatMap((s) => trainingForSkill(s).selfStudy))];
     expect(every.length).toBeGreaterThan(0);
     for (const o of every) {
@@ -149,11 +171,13 @@ describe("training honesty", () => {
     const withoutCourse = destinations.filter((d) => bridgeFor(d).course === undefined);
     expect(withoutCourse).toHaveLength(101);
     for (const d of withoutCourse) {
-      const line = bridgeSummary(bridgeFor(d), d.build.length);
+      const line = bridgeSummary(bridgeFor(d), d.build.length)
+        .map((c) => c.text)
+        .join(" · ");
       expect(line).toContain("no course in this data names it");
       expect(line).not.toMatch(/no local course|none in the region|nothing available/i);
     }
-    expect(PARTIAL_COURSE_LIST).toMatch(/not that none exists/i);
+    expect(PARTIAL_COURSE_LIST.text).toMatch(/not that none exists/i);
   });
 
   it("separates a named course from the skills it does not teach", () => {

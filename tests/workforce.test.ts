@@ -43,11 +43,14 @@ describe("exposureBand", () => {
   });
 
   it("keeps BAND_MEANING and EMPTY_ROUTES as full sentences", () => {
-    for (const text of [...Object.values(BAND_MEANING), EMPTY_ROUTES]) {
+    for (const { text } of [...Object.values(BAND_MEANING), EMPTY_ROUTES]) {
       expect(text.endsWith(".")).toBe(true);
       expect(text.length).toBeGreaterThan(20);
     }
-    expect(EMPTY_ROUTES).toMatch(/does not mean the job is at risk/i);
+    // Empty state B has to defuse the reading without reaching for the phrase
+    // that does the frightening.
+    expect(EMPTY_ROUTES.text).toMatch(/that is not a warning/i);
+    expect(EMPTY_ROUTES.text).not.toMatch(/at risk/i);
   });
 });
 

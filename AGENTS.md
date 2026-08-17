@@ -19,3 +19,11 @@ front-door engine. Do not fill the capacity calculator or invent occupation ×
 locality rows. Do not copy mock destinations. Refresh the route slice with
 `node scripts/pin-workforce.mjs` until phase C lands.
 
+Job-screen sentences are built in `src/content/screen/card.ts`, not written into
+JSX, and each one names a claim in `src/content/claims.ts`. A sentence added to a
+component is invisible to `scripts/build-appendix.ts` and has no audit row.
+`tests/screen-copy.test.ts` runs the pre-publish checklist over all 39 cards:
+never print the exposure score, every number gets a noun, every pay figure says
+it is an average, every empty is a written empty state. Regenerate the appendix
+with `bun run appendix` after any copy change.
+

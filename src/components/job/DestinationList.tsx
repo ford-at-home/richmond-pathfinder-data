@@ -1,25 +1,17 @@
 import { Link } from "@tanstack/react-router";
 
-import {
-  bridgeFor,
-  bridgeSummary,
-  EVIDENCE_LABEL,
-  SELF_STUDY_CAVEAT,
-  type SelfStudyOption,
-} from "@/content/bridge";
-import { sortDestinations, type Destination } from "@/content/workforce";
-import { BAND_MEANING, exposureBand, hasSignal } from "@/lib/exposureBand";
+import { SELF_STUDY_CAVEAT, type SelfStudyOption } from "@/content/bridge";
+import { claimFor, LABEL_ON_SCREEN, type Claimed } from "@/content/claims";
+import type { RouteCard } from "@/content/screen/card";
 
-function usd(n: number): string {
-  return n.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  });
+/** The reader-facing weight of a claim. OPEN has none: the empty state carries its own reason. */
+function Weight({ of }: { of: Claimed }) {
+  const label = LABEL_ON_SCREEN[claimFor(of.claim).label];
+  return label ? <p className="mt-1 annotation">{label}</p> : null;
 }
 
-function percent(exposure: number): string {
-  return `${Math.round(exposure * 100)}%`;
+function sentences(list: Claimed[]): string {
+  return list.map((c) => c.text).join(" ");
 }
 
 function FreeToStart({ options }: { options: SelfStudyOption[] }) {
@@ -45,27 +37,30 @@ function FreeToStart({ options }: { options: SelfStudyOption[] }) {
           </li>
         ))}
       </ul>
-      <p className="mt-2 annotation">{SELF_STUDY_CAVEAT}</p>
+      <p className="mt-2 annotation">{SELF_STUDY_CAVEAT.text}</p>
     </div>
   );
 }
 
-function WhatItTakes({ destination }: { destination: Destination }) {
-  const bridge = bridgeFor(destination);
-  const skillCount = destination.build.length;
+function WhatItTakes({ route }: { route: RouteCard }) {
+  const { bridge } = route;
 
   return (
     <details className="mt-3">
       <summary className="cursor-pointer text-sm font-medium text-foreground">
         What it takes
         <span className="mt-1 block font-normal annotation">
-          {bridgeSummary(bridge, skillCount)}
+          {route.summary.map((c) => c.text).join(" · ")}
         </span>
       </summary>
 
       <div className="mt-4 border-l-2 border-border pl-4">
-        <p className="text-sm leading-relaxed text-foreground">{bridge.gate.need}</p>
-        <p className="mt-1 annotation">{EVIDENCE_LABEL[bridge.gate.evidence]}</p>
+        {bridge.gate.need.map((block) => (
+          <div key={block.text} className="mt-3 first:mt-0">
+            <p className="text-sm leading-relaxed text-foreground">{block.text}</p>
+            <Weight of={block} />
+          </div>
+        ))}
 
         {bridge.course ? (
           <div className="mt-5">
@@ -96,7 +91,7 @@ function WhatItTakes({ destination }: { destination: Destination }) {
                 ))}
               </ul>
             ) : null}
-            <p className="mt-1 annotation">{EVIDENCE_LABEL[training.evidence]}</p>
+            <Weight of={{ text: training.detail, claim: training.claim }} />
             {training.selfStudy.length > 0 ? <FreeToStart options={training.selfStudy} /> : null}
           </div>
         ))}
@@ -105,39 +100,30 @@ function WhatItTakes({ destination }: { destination: Destination }) {
   );
 }
 
-export function DestinationList({ destinations }: { destinations: Destination[] }) {
-  const rows = sortDestinations(destinations);
-
+export function DestinationList({ routes }: { routes: RouteCard[] }) {
   return (
     <section aria-labelledby="next-jobs">
       <h2 id="next-jobs" className="font-display text-lg font-semibold text-foreground">
-        Next jobs that pay more and use AI less
+        Next jobs from here
       </h2>
       <ul className="mt-6 grid grid-cols-1">
-        {rows.map((d) => {
-          const band = exposureBand(d.exposure);
-          return (
-            <li key={d.soc} className="border-t border-border py-5">
-              <Link
-                to="/job/$soc"
-                params={{ soc: d.soc }}
-                className="font-medium text-foreground no-underline hover:underline"
-              >
-                {d.title}
-              </Link>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {usd(d.wage)}
-                {d.wageGain > 0 ? ` · +${usd(d.wageGain)}` : ""}
-                {hasSignal(d.exposure) ? ` · ${percent(d.exposure)} AI use` : ""}
-                {d.timeBand ? ` · ${d.timeBand}` : ""}
-              </p>
-              {hasSignal(d.exposure) ? (
-                <p className="mt-1 annotation">{BAND_MEANING[band]}</p>
-              ) : null}
-              <WhatItTakes destination={d} />
-            </li>
-          );
-        })}
+        {routes.map((r) => (
+          <li key={r.soc} className="border-t border-border py-5">
+            <Link
+              to="/job/$soc"
+              params={{ soc: r.soc }}
+              className="font-medium text-foreground no-underline hover:underline"
+            >
+              {r.title}
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">{sentences(r.line)}</p>
+            {r.different ? (
+              <p className="mt-1 text-sm text-foreground">{r.different.text}</p>
+            ) : null}
+            {r.aiUse ? <p className="mt-1 annotation">{r.aiUse.text}</p> : null}
+            <WhatItTakes route={r} />
+          </li>
+        ))}
       </ul>
     </section>
   );
