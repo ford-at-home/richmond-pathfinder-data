@@ -103,8 +103,8 @@ export function HowTheNumbersRelate({ variant }: { variant: "evidence" | "append
         ))}
       </dl>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        Find a job is the {n.mapOrigins}, not the {n.measured}. The {n.publishedPairs} pairs are
-        for jobs that already shrank — a different cut, not a second map.
+        Find a job is the {n.mapOrigins}, not the {n.measured}. The {n.publishedPairs} pairs are for
+        jobs that already shrank — a different cut, not a second map.
       </p>
     </div>
   );

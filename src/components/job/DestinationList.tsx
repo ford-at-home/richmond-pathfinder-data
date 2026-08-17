@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
-import { programById, sortDestinations, type Destination } from "@/content/workforce";
+import { bridgeFor, EVIDENCE_LABEL, type Bridge } from "@/content/bridge";
+import { sortDestinations, type Destination } from "@/content/workforce";
 import { BAND_MEANING, exposureBand, hasSignal } from "@/lib/exposureBand";
 
 function usd(n: number): string {
@@ -15,6 +16,67 @@ function percent(exposure: number): string {
   return `${Math.round(exposure * 100)}%`;
 }
 
+/** Says how much is inside, so the row can be skipped without being opened. */
+function summary(bridge: Bridge, skillCount: number): string {
+  const skills =
+    skillCount === 0
+      ? "No skill gap measured"
+      : `${skillCount} skill${skillCount === 1 ? "" : "s"} to build`;
+  return `${skills} · ${bridge.course ? "a course names this job" : "no local course"}`;
+}
+
+function WhatItTakes({ destination }: { destination: Destination }) {
+  const bridge = bridgeFor(destination);
+  const skillCount = destination.build.length;
+
+  return (
+    <details className="mt-3">
+      <summary className="cursor-pointer text-sm font-medium text-foreground">
+        What it takes
+        <span className="mt-1 block font-normal annotation">{summary(bridge, skillCount)}</span>
+      </summary>
+
+      <div className="mt-4 border-l-2 border-border pl-4">
+        <p className="text-sm leading-relaxed text-foreground">{bridge.gate.need}</p>
+        <p className="mt-1 annotation">{EVIDENCE_LABEL[bridge.gate.evidence]}</p>
+
+        {bridge.course ? (
+          <div className="mt-5">
+            <p className="label-sm">A course names this job</p>
+            <p className="mt-1 text-sm text-foreground">
+              {bridge.course.name} · {bridge.course.provider}
+            </p>
+            {bridge.courseIsNotTheSkills ? (
+              <p className="mt-1 annotation">
+                This course teaches the subject matter of the job. The skills below are measured
+                separately, and the course does not cover them.
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
+        {bridge.training.map(({ training, skills }) => (
+          <div key={training.group} className="mt-5">
+            <p className="label-sm">{training.group}</p>
+            <p className="mt-1 text-sm text-foreground">{skills.join(", ")}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{training.detail}</p>
+            {training.options.length > 0 ? (
+              <ul className="mt-2 list-disc space-y-1 pl-5 annotation">
+                {training.options.map((o) => (
+                  <li key={o.name}>
+                    {o.name} — {o.provider} · {o.cost} · {o.scope}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            <p className="mt-1 annotation">{EVIDENCE_LABEL[training.evidence]}</p>
+          </div>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 export function DestinationList({ destinations }: { destinations: Destination[] }) {
   const rows = sortDestinations(destinations);
 
@@ -26,8 +88,6 @@ export function DestinationList({ destinations }: { destinations: Destination[] 
       <ul className="mt-6 grid grid-cols-1">
         {rows.map((d) => {
           const band = exposureBand(d.exposure);
-          const course = programById(d.leadProgramId);
-          const skills = d.build.map((s) => s.name);
           return (
             <li key={d.soc} className="border-t border-border py-5">
               <Link
@@ -46,14 +106,7 @@ export function DestinationList({ destinations }: { destinations: Destination[] 
               {hasSignal(d.exposure) ? (
                 <p className="mt-1 annotation">{BAND_MEANING[band]}</p>
               ) : null}
-              {skills.length > 0 ? (
-                <p className="mt-2 text-sm text-foreground">To build: {skills.join(", ")}</p>
-              ) : null}
-              {course ? (
-                <p className="mt-2 text-sm text-foreground">
-                  {course.name} · {course.provider}
-                </p>
-              ) : null}
+              <WhatItTakes destination={d} />
             </li>
           );
         })}
