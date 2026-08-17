@@ -39,7 +39,7 @@ export function ReportDocument({ story }: { story: ResearchStory }) {
       </div>
 
       <p className="colophon">
-        This document is reproduced from <a href={pinCommitUrl}>{pinRepo}</a> at commit{" "}
+        This document is reproduced from <a href={pinRepoUrl}>{pinRepo}</a> at commit{" "}
         <code>{pinShort}</code>, synced {pinSynced}, and is verified against a recorded hash. The
         interactive figures set into it are recomputed from the same published tables.
       </p>

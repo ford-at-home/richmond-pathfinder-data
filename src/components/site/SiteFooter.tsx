@@ -14,7 +14,7 @@ export function SiteFooter() {
           </p>
           <p className="mt-3 annotation max-w-md">
             Reports are the evidence behind Find a job, reproduced from{" "}
-            <a href={pinCommitUrl} className="editorial-link">
+            <a href={pinRepoUrl} className="editorial-link">
               {pinRepo}
             </a>{" "}
             at commit <code>{pinShort}</code>, synced {pinSynced}. Geography is the Richmond VA MSA
