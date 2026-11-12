@@ -27,7 +27,7 @@ export const Route = createFileRoute("/richmond-region")({
       {
         property: "og:description",
         content:
-          "MSA definition and QCEW industry series. Not a City of Richmond map and not occupation-by-locality exposure.",
+          "Richmond VA MSA (BLS 40060) geography, join coverage, and QCEW industry employment on the current 17-county set.",
       },
     ],
   }),

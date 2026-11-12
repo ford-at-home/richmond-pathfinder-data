@@ -29,7 +29,7 @@ export const Route = createFileRoute("/research/$slug")({
       meta: [
         { title: `${story.title} — Richmond Workforce Transition` },
         { name: "description", content: story.thesis },
-        { property: "og:title", content: story.title },
+        { property: "og:title", content: `${story.title} — Richmond Workforce Transition` },
         { property: "og:description", content: story.thesis },
         { property: "og:type", content: "article" },
       ],

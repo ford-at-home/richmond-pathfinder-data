@@ -29,7 +29,7 @@ export const Route = createFileRoute("/feedback")({
       { property: "og:title", content: "Feedback — Richmond Workforce Transition" },
       {
         property: "og:description",
-        content: "Send a correction, question, or comment about this public-interest data project.",
+        content: "Send a correction, question, or comment about the Richmond VA MSA workforce transition data.",
       },
     ],
   }),

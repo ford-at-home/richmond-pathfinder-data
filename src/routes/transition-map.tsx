@@ -27,7 +27,7 @@ export const Route = createFileRoute("/transition-map")({
       {
         property: "og:description",
         content:
-          "Adjacent, growing, better-paid destinations that survive the published screen. Not a recommendation and not a network graph.",
+          "Screened origin–destination occupation pairs for the Richmond VA MSA from the published pathways_reachable table.",
       },
     ],
   }),

@@ -35,7 +35,7 @@ export const Route = createFileRoute("/methodology")({
       {
         property: "og:description",
         content:
-          "How exposure is joined to OEWS, what the metrics are, and the limits that travel with any claim.",
+          "Join, metrics, and limits for the Richmond VA MSA analysis of observed-task exposure and OEWS employment.",
       },
     ],
   }),

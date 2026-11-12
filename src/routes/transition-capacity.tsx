@@ -37,7 +37,7 @@ export const Route = createFileRoute("/transition-capacity")({
       {
         property: "og:description",
         content:
-          "Published findings from the Transition Capacity report. The six-stage gap calculator is not in the source and stays empty.",
+          "Whether occupations that contracted in the Richmond VA MSA have adjacent, durable, better-paid destinations, from the published Transition Capacity report.",
       },
     ],
   }),

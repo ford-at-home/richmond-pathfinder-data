@@ -22,7 +22,7 @@ export const Route = createFileRoute("/research/")({
       {
         property: "og:description",
         content:
-          "AI Exposure and Employment Change, Transition Capacity, and the Technical Appendix.",
+          "The published reports on AI exposure, employment change, and transition capacity in the Richmond VA MSA, with sources and limits in view.",
       },
     ],
   }),
