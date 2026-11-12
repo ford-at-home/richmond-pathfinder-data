@@ -119,6 +119,12 @@ export type ResearchSection = {
   figureIds: string[];
 };
 
+export type ReportCitation = {
+  title: string;
+  url: string;
+  reference: string;
+};
+
 export type ResearchStory = {
   slug: string;
   title: string;
@@ -129,6 +135,7 @@ export type ResearchStory = {
   updatedAt?: string | undefined;
   readingMinutes: number;
   sourceIds: string[];
+  citation: ReportCitation;
   keyFindings: string[];
   preambleHtml: string;
   sections: ResearchSection[];

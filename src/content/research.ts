@@ -5,6 +5,7 @@ import appendixMd from "../../data/source/reports/technical-appendix.md?raw";
 import { REPORTS } from "./figures";
 import type { ResearchSection, ResearchStory, Source } from "./types";
 import { numberedFindings, readingMinutes, splitReport } from "@/lib/reports";
+import { pinRef, pinRepoUrl } from "@/lib/pin";
 
 /**
  * Source register. Titles, dates, and retrieval notes are taken from the
@@ -118,6 +119,11 @@ function toStory(slug: string): ResearchStory {
     publishedAt: "2026-07",
     readingMinutes: readingMinutes(raw),
     sourceIds: SOURCE_IDS[slug] ?? [],
+    citation: {
+      title: split.title,
+      url: `${pinRepoUrl}/blob/${pinRef}/reports/${slug}.md`,
+      reference: `${split.title}. hack4rva/richmond-ai-impact-analysis. July 2026. Revision ${pinRef}.`,
+    },
     keyFindings: findings,
     preambleHtml: split.preambleHtml,
     sections,

@@ -4,6 +4,7 @@ import { KeyFinding } from "@/components/editorial";
 import { countSteps, listCounts } from "@/content/listCounts";
 import { findingHtml } from "@/lib/reports";
 import { cn } from "@/lib/utils";
+import type { ReportCitation } from "@/content/types";
 
 /** Reading-depth label. Not a claim. */
 export function DepthLabel({ children }: { children: ReactNode }) {
@@ -32,9 +33,11 @@ export function SkipToDocument({
  */
 export function FindingList({
   findings,
+  citation,
   className,
 }: {
   findings: string[];
+  citation: ReportCitation;
   className?: string | undefined;
 }) {
   if (findings.length === 0) return null;
@@ -43,6 +46,9 @@ export function FindingList({
       {findings.map((finding, i) => (
         <KeyFinding key={i} index={i + 1}>
           <span dangerouslySetInnerHTML={{ __html: findingHtml(finding) }} />
+          <p className="mt-3 text-xs font-sans leading-5 text-muted-foreground">
+            Source: <a href={`${citation.url}#summary-of-findings`} className="editorial-link">{citation.title}</a>
+          </p>
         </KeyFinding>
       ))}
     </ol>

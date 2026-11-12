@@ -87,7 +87,7 @@ function TransitionCapacityPage() {
         </div>
       </PageSection>
 
-      {findings.length > 0 ? (
+      {story && findings.length > 0 ? (
         <PageSection labelledBy="findings" className="rule-t">
           <DepthLabel>In two minutes</DepthLabel>
           <SectionIntro
@@ -100,7 +100,7 @@ function TransitionCapacityPage() {
               Summary of findings
             </span>
           </SectionIntro>
-          <FindingList findings={findings} className="mt-6" />
+          <FindingList findings={findings} citation={story.citation} className="mt-6" />
         </PageSection>
       ) : null}
 

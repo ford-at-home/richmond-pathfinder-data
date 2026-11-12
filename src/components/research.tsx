@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
 import { PlaceholderBadge } from "@/components/editorial";
-import { SourceBadge } from "@/components/sources";
 import type { ResearchStory } from "@/content/types";
 
 export function ResearchCard({ story }: { story: ResearchStory }) {
@@ -19,7 +18,7 @@ export function ResearchCard({ story }: { story: ResearchStory }) {
       <p className="mt-2 font-serif text-[17px] leading-6 text-muted-foreground">{story.thesis}</p>
       <div className="mt-auto pt-5">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border pt-3 annotation">
-          <SourceBadge count={story.sourceIds.length} />
+          <a href={story.citation.url} className="editorial-link">1 source · Report</a>
           <span>
             <span className="sr-only">Published </span>
             {story.updatedAt ? `Updated ${story.updatedAt}` : story.publishedAt}

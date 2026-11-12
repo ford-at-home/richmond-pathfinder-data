@@ -30,3 +30,5 @@ with `bun run appendix` after any copy change.
 The public data explorer reads allowlisted pinned CSVs through a public read-only server function and TanStack Query; keep source columns and blank suppressed cells intact in exports so downloads remain auditable.
 Explorer filters, sorting, and pagination live in validated URL search parameters so shared links reproduce the same view.
 
+Research findings cite one immutable pinned report URL through the required report citation object; keep dataset source registers separate so a single report citation never hides the underlying evidence.
+

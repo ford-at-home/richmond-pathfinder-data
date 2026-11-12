@@ -2,6 +2,7 @@ import type { ResearchStory } from "@/content/types";
 import { isFigureId } from "@/content/figures";
 import { LiveFigure } from "@/components/research/LiveFigure";
 import { pinRepoUrl, pinRepo, pinShort, pinSynced } from "@/lib/pin";
+import { FindingList } from "@/components/story";
 
 import "@/visualizations/source-report.css";
 
@@ -31,7 +32,11 @@ export function ReportDocument({ story }: { story: ResearchStory }) {
           {story.sections.map((s) => (
             <section key={s.anchor} className="report__section" id={s.anchor}>
               <h2>{s.heading}</h2>
-              <div className="prose" dangerouslySetInnerHTML={{ __html: s.html }} />
+              {s.anchor === "summary-of-findings" && story.keyFindings.length > 0 ? (
+                <FindingList findings={story.keyFindings} citation={story.citation} />
+              ) : (
+                <div className="prose" dangerouslySetInnerHTML={{ __html: s.html }} />
+              )}
               {s.figureIds.map((id) => (isFigureId(id) ? <LiveFigure key={id} id={id} /> : null))}
             </section>
           ))}

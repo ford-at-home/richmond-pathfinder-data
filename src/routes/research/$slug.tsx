@@ -88,7 +88,7 @@ function ResearchStoryPage() {
             Numbered items are the report&apos;s own summary, not a rewrite. Interactive figures sit
             in the sections that make the claims.
           </p>
-          <FindingList findings={story.keyFindings} className="mt-6" />
+          <FindingList findings={story.keyFindings} citation={story.citation} className="mt-6" />
           {story.slug === "ai-exposure-and-employment-change" ? (
             <HowTheNumbersRelate variant="appendix" />
           ) : null}
@@ -122,6 +122,11 @@ function ResearchStoryPage() {
       </PageSection>
 
       <PageSection labelledBy="provenance" className="rule-t">
+        <div className="mb-8">
+          <h2 className="text-xl">Cite this report</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 break-words">{story.citation.reference}</p>
+          <a href={story.citation.url} className="mt-3 inline-block editorial-link text-sm">{story.citation.title}</a>
+        </div>
         <h2 id="provenance" className="sr-only">
           Sources
         </h2>
