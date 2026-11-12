@@ -28,6 +28,7 @@ represented by labeled stage placeholders inside `VisualizationFrame`.
 | `/research` | `src/routes/research/index.tsx` | Research library with search + topic filter |
 | `/research/:slug` | `src/routes/research/$slug.tsx` | Editorial story template |
 | `/methodology` | `src/routes/methodology.tsx` | Definitions, source handling, limitations, source register |
+| `/data` | `src/routes/data.tsx` | Public explorer for pinned exposure, workforce history, and coverage exclusions with shareable filters and CSV downloads |
 
 Routing notes for migration:
 
@@ -107,6 +108,17 @@ fallback passed to `tableView`.
 8. Site name and navigation change in `src/config/site.ts` only.
 
 ## Commands
+
+### Public data explorer
+
+Dataset definitions and pure filtering live in `src/content/explorer.ts`. A read-only
+server function parses only the allowlisted pinned CSV outputs, using bundled imports
+rather than runtime filesystem access. The route primes TanStack Query for initial reads.
+The same source files and codebook are served unchanged from `public/downloads/`.
+After refreshing the source pin, copy those four files from `data/source/output/` to
+`public/downloads/` so full-source downloads and the explorer stay in sync.
+Filtered CSVs preserve every source column, raw numeric precision, and empty cells.
+Run `bunx vitest run tests/explorer.test.ts` to check filtering and export behavior.
 
 ```bash
 bun install

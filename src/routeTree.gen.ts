@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DataRouteImport } from './routes/data'
 import { Route as FeedbackRouteImport } from './routes/feedback'
 import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as RichmondRegionRouteImport } from './routes/richmond-region'
@@ -23,6 +24,11 @@ import { Route as ResearchSlugRouteImport } from './routes/research/$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeedbackRoute = FeedbackRouteImport.update({
@@ -73,6 +79,7 @@ const ResearchSlugRoute = ResearchSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/data': typeof DataRoute
   '/feedback': typeof FeedbackRoute
   '/methodology': typeof MethodologyRoute
   '/richmond-region': typeof RichmondRegionRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/data': typeof DataRoute
   '/feedback': typeof FeedbackRoute
   '/methodology': typeof MethodologyRoute
   '/richmond-region': typeof RichmondRegionRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/data': typeof DataRoute
   '/feedback': typeof FeedbackRoute
   '/methodology': typeof MethodologyRoute
   '/richmond-region': typeof RichmondRegionRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/data'
     | '/feedback'
     | '/methodology'
     | '/richmond-region'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/data'
     | '/feedback'
     | '/methodology'
     | '/richmond-region'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/data'
     | '/feedback'
     | '/methodology'
     | '/richmond-region'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DataRoute: typeof DataRoute
   FeedbackRoute: typeof FeedbackRoute
   MethodologyRoute: typeof MethodologyRoute
   RichmondRegionRoute: typeof RichmondRegionRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feedback': {
@@ -237,6 +257,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DataRoute: DataRoute,
   FeedbackRoute: FeedbackRoute,
   MethodologyRoute: MethodologyRoute,
   RichmondRegionRoute: RichmondRegionRoute,

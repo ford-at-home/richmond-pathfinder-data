@@ -7,6 +7,7 @@ import { ResearchCard } from "@/components/research";
 import { DepthLabel } from "@/components/story";
 import { PLACEMENT } from "@/content/figures";
 import { researchStories } from "@/content/research";
+import { defaultFilters } from "@/content/explorer";
 
 export const Route = createFileRoute("/research/")({
   head: () => ({
@@ -53,7 +54,6 @@ function ResearchLibrary() {
         title="How we know"
         lead="Explore the data underlying these mappings"
       />
-
 
       <PageSection labelledBy="library">
         <DepthLabel>Choose a document</DepthLabel>
@@ -112,6 +112,16 @@ function ResearchLibrary() {
         )}
         <p className="mt-8 annotation">Also here</p>
         <ul className="mt-3 grid grid-cols-1 gap-2 text-sm">
+          <li>
+            <Link
+              to="/data"
+              search={{ dataset: "exposure", ...defaultFilters }}
+              className="editorial-link"
+            >
+              Data explorer
+            </Link>
+            <span className="text-muted-foreground"> — published datasets and CSV downloads</span>
+          </li>
           <li>
             <Link to="/transition-map" className="editorial-link">
               Transition map

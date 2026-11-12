@@ -38,6 +38,10 @@ export const Route = createFileRoute("/job/$soc")({
           content:
             "How much of this work people in Greater Richmond already do with AI, and nearby jobs that pay more and use it less.",
         },
+        { property: "og:title", content: `${title} — Richmond Workforce Transition` },
+        { property: "og:description", content: "How much of this work people in Greater Richmond already do with AI, and nearby jobs that pay more and use it less." },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },
