@@ -392,6 +392,23 @@ export const CLAIMS = {
     priceStatus: "published",
     reviewMonths: 6,
   },
+  "help.fastforward-prices": {
+    label: "REPORTED",
+    basis:
+      "CCWA course catalog, July–December 2026 — FastForward student prices (one-third share); JLARC Report 608 on cost sharing",
+    url: "https://ccwatraining.org/resources/docs/ccwa-spr2026-catalog-111025-interactive.pdf",
+    retrieved: "2026-11-12",
+    priceStatus: "published",
+    reviewMonths: 6,
+  },
+  "help.g3": {
+    label: "REPORTED",
+    basis: "Brightpoint and Reynolds G3 pages — eligibility for no-cost tuition",
+    url: "https://www.brightpoint.edu/training-workforce/g3/",
+    retrieved: "2026-11-12",
+    priceStatus: "published",
+    reviewMonths: 6,
+  },
   "help.workforce-board": {
     label: "REPORTED",
     basis:

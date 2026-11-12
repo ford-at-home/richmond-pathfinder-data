@@ -111,6 +111,14 @@ export function rowsForCard(card: Card): AppendixRow[] {
       text: FREE_LOCAL_HELP.card.text,
       claim: FREE_LOCAL_HELP.card.claim,
     }),
+    ...rows(`${soc} / help / fastforward`, {
+      text: FREE_LOCAL_HELP.fastForward.text,
+      claim: FREE_LOCAL_HELP.fastForward.claim,
+    }),
+    ...rows(`${soc} / help / gthree`, {
+      text: FREE_LOCAL_HELP.g3.text,
+      claim: FREE_LOCAL_HELP.g3.claim,
+    }),
     ...rows(`${soc} / help / board`, {
       text: FREE_LOCAL_HELP.board.text,
       claim: FREE_LOCAL_HELP.board.claim,

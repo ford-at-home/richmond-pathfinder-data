@@ -93,6 +93,12 @@ export const REPORTS = [
     blurb:
       "The full occupation-level tables behind both reports, generated directly from the data rather than transcribed.",
   },
+  {
+    slug: "training-bridges-and-career-ladders",
+    short: "Training Bridges and Career Ladders",
+    blurb:
+      "What local training costs and how long it takes, which destinations actually pay more, and where hiring friction, transit, equity and employer evidence is still unmeasured.",
+  },
 ] as const;
 
 export function isFigureId(id: string): id is FigureId {

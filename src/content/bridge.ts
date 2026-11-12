@@ -477,6 +477,24 @@ export const FREE_LOCAL_HELP = {
       },
     ],
   },
+  fastForward: {
+    text: "The Community College Workforce Alliance, run by Reynolds and Brightpoint community colleges, sells short credential courses at a state-subsidised price: the student pays one-third, and only after finishing. In the July–December 2026 catalogue that share is $1,165 for nurse aide, $1,250 for CompTIA A+, $1,500 for pharmacy technician and $2,000 for a truck-driving licence, with most courses taking 3 to 21 weeks.",
+    claim: "help.fastforward-prices",
+    links: [
+      {
+        label: "CCWA course catalogue",
+        url: "https://ccwatraining.org/resources/docs/ccwa-spr2026-catalog-111025-interactive.pdf",
+      },
+      { label: "All programs and prices", url: "/data?dataset=training" },
+    ],
+  },
+  g3: {
+    text: "The state G3 programme can cover the rest, bringing the price to $0 for Virginia residents who meet its income rules and enrol in a listed programme. It is not automatic: ask the college before you pay.",
+    claim: "help.g3",
+    links: [
+      { label: "G3 at Brightpoint", url: "https://www.brightpoint.edu/training-workforce/g3/" },
+    ],
+  },
   board: {
     text: "Virginia Career Works Capital Region is the regional workforce board, federally funded and free, with centres in Chesterfield, Henrico and Richmond West. Where this page says the region sells no course, or sells one at a price, they are who to ask about paying for it. Training there is not automatic: they assess eligibility over one to two weeks, give priority by need, and fund training for the occupations their own published list names.",
     claim: "help.workforce-board",

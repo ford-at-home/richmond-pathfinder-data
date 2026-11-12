@@ -140,7 +140,7 @@ function JobPage() {
           Free help in Greater Richmond
         </h2>
         <dl className="mt-4 max-w-2xl space-y-4 text-sm">
-          {[FREE_LOCAL_HELP.card, FREE_LOCAL_HELP.board].map((item) => (
+          {[FREE_LOCAL_HELP.card, FREE_LOCAL_HELP.fastForward, FREE_LOCAL_HELP.g3, FREE_LOCAL_HELP.board].map((item) => (
             <div key={item.text}>
               <dt className="leading-relaxed text-foreground">{item.text}</dt>
               <dd className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
@@ -148,8 +148,8 @@ function JobPage() {
                   <a
                     key={l.url}
                     href={l.url}
-                    target="_blank"
-                    rel="noreferrer"
+                    target={l.url.startsWith("/") ? undefined : "_blank"}
+                    rel={l.url.startsWith("/") ? undefined : "noreferrer"}
                     className="inline-block py-1 annotation text-foreground"
                   >
                     {l.label}

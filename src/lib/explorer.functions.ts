@@ -11,6 +11,8 @@ export const getExplorerDataset = createServerFn({ method: "GET" })
       raw = (await import("../../data/source/output/richmond_panel_2010_2025.csv?raw")).default;
     } else if (data.dataset === "excluded") {
       raw = (await import("../../data/source/output/coverage_excluded.csv?raw")).default;
+    } else if (data.dataset === "training") {
+      raw = (await import("../../data/source/research/ccwa_training_programs_2026.csv?raw")).default;
     } else {
       raw = (await import("../../data/source/output/richmond_exposure_2025.csv?raw")).default;
     }

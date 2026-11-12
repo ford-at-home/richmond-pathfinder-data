@@ -163,6 +163,54 @@ export const datasets: Dataset[] = [
   },
 ];
 
+datasets.push({
+  id: "training",
+  title: "Local training programs · CCWA 2026",
+  filename: "ccwa_training_programs_2026.csv",
+  description:
+    "Short-term credential programs in the Richmond region from the CCWA July–December 2026 catalog, with student price, length and prerequisites. Accessed 2026-11-12.",
+  code: "target_soc",
+  occupation: "program",
+  columns: [
+    { key: "program", label: "Program", description: "Program name as listed in the catalog." },
+    { key: "provider_location", label: "Provider / location", description: "Provider and campus." },
+    {
+      key: "credential",
+      label: "Credential / exam",
+      description: "Credential or exam the program prepares for.",
+    },
+    {
+      key: "target_soc",
+      label: "Target SOC",
+      description: "Occupation code the program leads toward.",
+    },
+    {
+      key: "student_price",
+      label: "Student price",
+      description:
+        "FastForward student share (one-third). Full price not published; G3 or WIOA may reduce it to $0 for eligible residents.",
+    },
+    {
+      key: "schedule",
+      label: "Schedule / length",
+      description: "Published cohort dates or length.",
+    },
+    { key: "modality", label: "Modality", description: "In-person, hybrid or online." },
+    {
+      key: "prerequisites",
+      label: "Prerequisites / notes",
+      description: "Published prerequisites.",
+    },
+    {
+      key: "licensing",
+      label: "Licensing",
+      description: "State licensing step, where verified; items marked verify are unconfirmed.",
+    },
+    { key: "source_url", label: "Source", description: "Where the row was read." },
+    { key: "accessed", label: "Accessed", description: "Date the source was read." },
+  ],
+});
+
 export function datasetById(id: string): Dataset {
   return datasets.find((d) => d.id === id) ?? (datasets[0] as Dataset);
 }

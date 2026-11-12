@@ -1,6 +1,7 @@
 import exposureMd from "../../data/source/reports/ai-exposure-and-employment-change.md?raw";
 import capacityMd from "../../data/source/reports/transition-capacity.md?raw";
 import appendixMd from "../../data/source/reports/technical-appendix.md?raw";
+import trainingMd from "../../data/source/reports/training-bridges-and-career-ladders.md?raw";
 
 import { REPORTS } from "./figures";
 import type { ResearchSection, ResearchStory, Source } from "./types";
@@ -66,18 +67,57 @@ export const sources: Source[] = [
     pages:
       "Named in the technical appendix source table; not used as occupational evidence on this site",
   },
+  {
+    id: "ccwa-catalog",
+    title: "CCWA course catalog, July–December 2026 (FastForward student prices)",
+    publisher: "Community College Workforce Alliance (Reynolds and Brightpoint)",
+    date: "2026",
+    accessed: "2026-11-12",
+    url: "https://ccwatraining.org/resources/docs/ccwa-spr2026-catalog-111025-interactive.pdf",
+    pages: "Program prices, schedules, locations and prerequisites",
+    kind: "report",
+    isPlaceholder: false,
+  },
+  {
+    id: "jlarc-608",
+    title: "JLARC Report 608 (FastForward cost sharing)",
+    publisher: "Joint Legislative Audit and Review Commission",
+    accessed: "2026-11-12",
+    url: "https://jlarc.virginia.gov/pdfs/reports/Rpt608.pdf",
+    pages: "Student pays one-third of program cost on completion",
+    kind: "report",
+    isPlaceholder: false,
+  },
+  {
+    id: "bls-cps-11",
+    title: "Current Population Survey Table 11 / 11b",
+    publisher: "U.S. Bureau of Labor Statistics",
+    date: "2025",
+    accessed: "2026-11-12",
+    url: "https://www.bls.gov/cps/cpsaat11.htm",
+    pages: "National demographic composition by occupation",
+    kind: "dataset",
+    isPlaceholder: false,
+  },
 ];
 
 const RAW: Record<string, string> = {
   "ai-exposure-and-employment-change": exposureMd,
   "transition-capacity": capacityMd,
   "technical-appendix": appendixMd,
+  "training-bridges-and-career-ladders": trainingMd,
+};
+
+/** Reports researched after the pinned analysis. Cited at their own page, dated, not pinned. */
+const UNPINNED: Record<string, { date: string; label: string }> = {
+  "training-bridges-and-career-ladders": { date: "2026-11", label: "November 2026" },
 };
 
 const RELATED: Record<string, string[]> = {
   "ai-exposure-and-employment-change": ["transition-capacity", "technical-appendix"],
   "transition-capacity": ["ai-exposure-and-employment-change", "technical-appendix"],
   "technical-appendix": ["ai-exposure-and-employment-change", "transition-capacity"],
+  "training-bridges-and-career-ladders": ["transition-capacity", "technical-appendix"],
 };
 
 const SOURCE_IDS: Record<string, string[]> = {
@@ -90,6 +130,7 @@ const SOURCE_IDS: Record<string, string[]> = {
     "bls-qcew",
     "grp-employers",
   ],
+  "training-bridges-and-career-ladders": ["ccwa-catalog", "jlarc-608", "bls-oews", "bls-cps-11"],
 };
 
 function toStory(slug: string): ResearchStory {
@@ -100,7 +141,16 @@ function toStory(slug: string): ResearchStory {
   if (!meta) throw new Error(`No REPORTS entry for ${slug}`);
 
   const summary = split.sections.find((s) => s.heading.toLowerCase().includes("summary"));
-  const findings = summary ? numberedFindings(summary.markdown) : [];
+  const tldr = split.sections.find((s) => s.heading.toLowerCase() === "tl;dr");
+  const findings = summary
+    ? numberedFindings(summary.markdown)
+    : tldr
+      ? tldr.markdown
+          .split(/^-\s+/m)
+          .map((p) => p.trim())
+          .filter(Boolean)
+      : [];
+  const unpinned = UNPINNED[slug];
 
   const sections: ResearchSection[] = split.sections.map((s) => ({
     heading: s.heading,
@@ -116,14 +166,20 @@ function toStory(slug: string): ResearchStory {
     title: split.title,
     topic: meta.short,
     thesis: meta.blurb,
-    publishedAt: "2026-07",
+    publishedAt: unpinned?.date ?? "2026-07",
     readingMinutes: readingMinutes(raw),
     sourceIds: SOURCE_IDS[slug] ?? [],
-    citation: {
-      title: split.title,
-      url: `${pinRepoUrl}/blob/${pinRef}/reports/${slug}.md`,
-      reference: `${split.title}. hack4rva/richmond-ai-impact-analysis. July 2026. Revision ${pinRef}.`,
-    },
+    citation: unpinned
+      ? {
+          title: split.title,
+          url: `https://workforcerichmond.org/research/${slug}`,
+          reference: `${split.title}. Richmond Workforce Transition. ${unpinned.label}. Wages marked provisional are unverified.`,
+        }
+      : {
+          title: split.title,
+          url: `${pinRepoUrl}/blob/${pinRef}/reports/${slug}.md`,
+          reference: `${split.title}. hack4rva/richmond-ai-impact-analysis. July 2026. Revision ${pinRef}.`,
+        },
     keyFindings: findings,
     preambleHtml: split.preambleHtml,
     sections,

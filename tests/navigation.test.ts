@@ -11,6 +11,7 @@ describe("navigation content", () => {
     expect(primaryNav.map((i) => [i.label, i.to])).toEqual([
       ["Find a job", "/"],
       ["Evidence", "/research"],
+      ["Feedback", "/feedback"],
     ]);
   });
 
@@ -31,11 +32,12 @@ describe("navigation content", () => {
     expect(countSteps(n).map((s) => s.value)).toEqual(["523", "71", "39", "28"]);
   });
 
-  it("exposes the three published reports and no placeholder stories", () => {
+  it("exposes the four published reports and no placeholder stories", () => {
     expect(researchStories.map((s) => s.slug)).toEqual([
       "ai-exposure-and-employment-change",
       "transition-capacity",
       "technical-appendix",
+      "training-bridges-and-career-ladders",
     ]);
     for (const story of researchStories) {
       expect(story.isPlaceholder).toBe(false);
